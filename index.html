@@ -289,7 +289,7 @@
             
             <div class="timeline-container max-w-4xl mx-auto">
                 
-                <!-- Timeline Item 1: High School Completion (UPDATED TO BE INTERACTIVE) -->
+                <!-- Timeline Item 1: High School Completion (INTERACTIVE) -->
                 <div class="flex md:contents">
                     <!-- Circle and connector for mobile -->
                     <div class="col-start-2 col-end-4 mr-auto md:mx-auto relative">
@@ -310,7 +310,7 @@
                     </div>
                 </div>
                 
-                <!-- Timeline Item 2: CCV Studies -->
+                <!-- Timeline Item 2: CCV Studies (INTERACTIVE) -->
                 <div class="flex md:contents flex-row-reverse">
                     <!-- Circle and connector for mobile -->
                     <div class="col-start-2 col-end-4 ml-auto md:mx-auto relative">
@@ -319,14 +319,19 @@
                         </div>
                     </div>
                     <!-- Card (Left side on desktop) -->
-                    <div class="col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] md:mr-auto md:text-right rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-right dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
-                        <p class="text-xs font-semibold uppercase text-primary-600 dark:text-primary-400 mb-1">2025 - Present</p>
-                        <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Associate of Arts, Liberal Studies</h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Community College of Vermont (CCV). Focused on foundational coursework in history, education, and humanities.</p>
+                    <div id="ccv-detail-trigger" tabindex="0" role="button" aria-expanded="false" class="studies-trigger col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] md:mr-auto md:text-right rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-right dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 cursor-pointer hover:bg-primary-50 dark:hover:bg-dark-card/50">
+                        <div class="flex justify-end items-start">
+                             <div class="text-right">
+                                <p class="text-xs font-semibold uppercase text-primary-600 dark:text-primary-400 mb-1">2025 - Present</p>
+                                <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Associate of Arts, Liberal Studies</h3>
+                            </div>
+                            <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 ml-3 text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <p class="text-sm text-slate-600 mt-2 dark:text-slate-400 text-right">Community College of Vermont (CCV). Click to view program details and relevant coursework.</p>
                     </div>
                 </div>
                 
-                <!-- Timeline Item 3: UVM Transfer Goal -->
+                <!-- Timeline Item 3: UVM Transfer Goal (INTERACTIVE) -->
                 <div class="flex md:contents">
                     <!-- Circle and connector for mobile -->
                     <div class="col-start-2 col-end-4 mr-auto md:mx-auto relative">
@@ -335,10 +340,15 @@
                         </div>
                     </div>
                     <!-- Card (Right side on desktop) -->
-                    <div class="col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] md:ml-auto md:text-left rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-left dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
-                        <p class="text-xs font-semibold uppercase text-amber-600 dark:text-amber-400 mb-1">Target: Fall 2027</p>
-                        <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">BS in Secondary Education (UVM)</h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Seeking transfer admission to the University of Vermont (UVM) to specialize in History and Social Studies teaching.</p>
+                    <div id="uvm-detail-trigger" tabindex="0" role="button" aria-expanded="false" class="studies-trigger col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] md:ml-auto md:text-left rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-left dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 cursor-pointer hover:bg-primary-50 dark:hover:bg-dark-card/50">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs font-semibold uppercase text-amber-600 dark:text-amber-400 mb-1">Target: Fall 2027</p>
+                                <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">BS in Secondary Education (UVM)</h3>
+                            </div>
+                            <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 ml-3 text-slate-500 dark:text-slate-400"></i>
+                        </div>
+                        <p class="text-sm text-slate-600 mt-2 dark:text-slate-400">Seeking transfer admission to the University of Vermont (UVM). Click to see target degree plan.</p>
                     </div>
                 </div>
                 
@@ -723,9 +733,9 @@
             }
         };
 
-        // --- Academic Path Data Structure (Existing) ---
+        // --- Academic Path Data Structure (Existing - Used for About Section Trigger) ---
         const academicPathContent = {
-            title: "My Academic Path: CCV to UVM",
+            title: "My Academic Path: CCV to UVM (Overview)",
             content: `
                 <div class="space-y-6">
                     <!-- CCV Current Studies -->
@@ -775,7 +785,7 @@
             `
         };
 
-        // --- NEW High School Content Data Structure ---
+        // --- High School Content Data Structure (Existing) ---
         const highSchoolContent = {
             title: "High School Academic Highlights",
             content: `
@@ -798,7 +808,7 @@
                     <div>
                         <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2">
                             \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'folder-open'})}
-                            Academic Files & Records
+                            Files & Records
                         </h4>
                         <p class="ml-8 text-slate-700 dark:text-slate-300 mb-3">
                             You can find links to my High School transcript and key project files below:
@@ -811,6 +821,99 @@
                                 <i data-lucide="award" class="w-5 h-5 mr-2"></i> High School Capstone Project (Summary)
                             </a>
                         </div>
+                    </div>
+                </div>
+            `
+        };
+
+        // --- NEW CCV Studies Content Data Structure (For Timeline Item 2) ---
+        const ccvStudiesContent = {
+            title: "CCV: Associate of Arts, Liberal Studies (Detail)",
+            content: `
+                <div class="space-y-6">
+                    <!-- Program Overview -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'banknote'})}
+                            Program Strategy & Value
+                        </h4>
+                        <p class="ml-8 text-slate-700 dark:text-slate-300">
+                            The A.A. Liberal Studies program at CCV is strategically chosen for its **high transferability** to UVM's education program (via the Vermont State Colleges System). It allows me to complete foundational prerequisites efficiently while focusing my electives on my target major.
+                        </p>
+                    </div>
+
+                    <!-- Coursework -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'file-check'})}
+                            Key Courses & Credits
+                        </h4>
+                        <ul class="ml-8 list-disc list-inside space-y-2 text-slate-700 dark:text-slate-300">
+                            <li>**ENG 101/102 (Composition):** Secured high grades in advanced writing necessary for major research.</li>
+                            <li>**SOC 101 (Intro to Sociology):** Provided frameworks for understanding social structures and inequality, crucial for inclusive education planning.</li>
+                            <li>**EDU 105 (Intro to Special Education):** Direct exposure to foundational concepts of learning disabilities and UDL.</li>
+                            <li>**HIS 201 (American History):** Advanced study of post-1865 history, core subject matter for my licensure.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Documentation -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'folder-open'})}
+                            Files & Documents
+                        </h4>
+                        <div class="ml-8 space-y-2">
+                             <a href="javascript:void(0);" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 transition-colors font-medium">
+                                <i data-lucide="file-text" class="w-5 h-5 mr-2"></i> Unofficial CCV Transcript
+                            </a><br>
+                            <a href="#classes" onclick="closeModal();" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 transition-colors font-medium">
+                                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-2"></i> See Relevant Coursework Examples (below)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        // --- NEW UVM Target Content Data Structure (For Timeline Item 3) ---
+        const uvmTargetContent = {
+            title: "UVM: B.S. Secondary Education Target Plan",
+            content: `
+                <div class="space-y-6">
+                    <!-- Program Overview -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'map'})}
+                            Focus & Licensure Path
+                        </h4>
+                        <p class="ml-8 text-slate-700 dark:text-slate-300">
+                            The UVM College of Education and Social Services (CESS) provides the required 7-12 Secondary Education licensure. My plan emphasizes courses blending historical content with modern pedagogical theory, specifically focusing on the needs of diverse learners.
+                        </p>
+                    </div>
+
+                    <!-- Key Target Coursework -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'microscope'})}
+                            Key Target UVM Courses
+                        </h4>
+                        <ul class="ml-8 list-disc list-inside space-y-2 text-slate-700 dark:text-slate-300">
+                            <li>**EDSC 200: Teaching for Social Justice:** Directly supports my advocacy goal and focus on equitable practices.</li>
+                            <li>**EDSP 205: Secondary Special Education Methods:** Advanced methods in differentiation and accommodation writing.</li>
+                            <li>**HIST 280: Modern Global History:** Provides depth in my subject content specialization.</li>
+                            <li>**Student Teaching Internship:** Capstone professional experience for licensure completion.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Expected Outcomes -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'trending-up'})}
+                            Expected Outcomes
+                        </h4>
+                        <p class="ml-8 text-slate-700 dark:text-slate-300">
+                            Upon graduation, I will hold a B.S. in Secondary Education and be prepared for licensure in History/Social Studies, equipped with a specialized skill set in universally designed teaching environments.
+                        </p>
                     </div>
                 </div>
             `
@@ -982,8 +1085,10 @@
         const modalNoteContent = document.getElementById('modal-note-content');
         const closeModalButton = document.getElementById('close-modal');
         const modalCloseButton = document.getElementById('modal-close-button');
-        const studiesTrigger = document.getElementById('studies-detail-trigger'); // CCV to UVM trigger
-        const hsTrigger = document.getElementById('hs-detail-trigger'); // NEW High School trigger
+        const studiesTrigger = document.getElementById('studies-detail-trigger'); // CCV to UVM overview trigger (in About section)
+        const hsTrigger = document.getElementById('hs-detail-trigger'); // High School trigger (in Timeline)
+        const ccvTrigger = document.getElementById('ccv-detail-trigger'); // NEW CCV Timeline trigger
+        const uvmTrigger = document.getElementById('uvm-detail-trigger'); // NEW UVM Timeline trigger
 
         function openModal(prefix, title, contentHTML) {
             // Set the primary title based on whether it's a Note (prefix="Note: ") or a Pathway (prefix="")
@@ -1019,15 +1124,25 @@
             openModal("Note: ", fullTitle, noteData.content);
         }
 
-        // Handler for the CCV Academic Studies detail
+        // Handler for the CCV Academic Studies detail (About Section Overview)
         function handleStudiesDetail() {
             // The Academic Path title should stand alone, without "Note: " prefix
             openModal("", academicPathContent.title, academicPathContent.content);
         }
 
-        // Handler for the High School detail (NEW)
+        // Handler for the High School detail (Timeline)
         function handleHSDetail() {
             openModal("", highSchoolContent.title, highSchoolContent.content);
+        }
+
+        // Handler for the CCV Liberal Studies timeline entry (NEW)
+        function handleCCVDetail() {
+            openModal("", ccvStudiesContent.title, ccvStudiesContent.content);
+        }
+
+        // Handler for the UVM Target Goal timeline entry (NEW)
+        function handleUVMDetail() {
+            openModal("", uvmTargetContent.title, uvmTargetContent.content);
         }
 
 
@@ -1042,7 +1157,7 @@
             });
         });
         
-        // 5. Attach Academic Studies trigger listener (Existing)
+        // 5. Attach Academic Studies trigger listener (Existing - in About section)
         if (studiesTrigger) {
             studiesTrigger.addEventListener('click', handleStudiesDetail);
             studiesTrigger.addEventListener('keydown', (e) => {
@@ -1053,7 +1168,7 @@
             });
         }
         
-        // 6. Attach High School trigger listener (NEW)
+        // 6. Attach High School trigger listener (Existing - in Timeline section)
         if (hsTrigger) {
             hsTrigger.addEventListener('click', handleHSDetail);
             hsTrigger.addEventListener('keydown', (e) => {
@@ -1063,8 +1178,30 @@
                 }
             });
         }
+        
+        // 7. Attach CCV Timeline trigger listener (NEW)
+        if (ccvTrigger) {
+            ccvTrigger.addEventListener('click', handleCCVDetail);
+            ccvTrigger.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleCCVDetail();
+                }
+            });
+        }
+        
+        // 8. Attach UVM Timeline trigger listener (NEW)
+        if (uvmTrigger) {
+            uvmTrigger.addEventListener('click', handleUVMDetail);
+            uvmTrigger.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleUVMDetail();
+                }
+            });
+        }
 
-        // 7. Modal close listeners
+        // 9. Modal close listeners
         closeModalButton.addEventListener('click', closeModal);
         modalCloseButton.addEventListener('click', closeModal);
         customModal.addEventListener('click', (e) => {
@@ -1079,7 +1216,7 @@
         });
 
 
-        // 8. Attach Load More listener and initialize state
+        // 10. Attach Load More listener and initialize state
         loadMoreButton.addEventListener('click', loadMoreNotes);
         initializeNotesDisplay();
 
