@@ -17,7 +17,6 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Links for ICAN and VidCon (Placeholder links are kept for structure) -->
     <link rel="icon" href="/images/icon.jpg" type="image/x-icon">
-    <!-- VidCon website link for reference -->
     <!-- Removed misplaced <a> tag from head -->
 
     <!-- Custom Tailwind Config -->
@@ -290,7 +289,7 @@
             
             <div class="timeline-container max-w-4xl mx-auto">
                 
-                <!-- Timeline Item 1: High School Completion -->
+                <!-- Timeline Item 1: High School Completion (UPDATED TO BE INTERACTIVE) -->
                 <div class="flex md:contents">
                     <!-- Circle and connector for mobile -->
                     <div class="col-start-2 col-end-4 mr-auto md:mx-auto relative">
@@ -299,10 +298,15 @@
                         </div>
                     </div>
                     <!-- Card (Right side on desktop) -->
-                    <div class="col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] md:ml-auto md:text-left rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-left dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
-                        <p class="text-xs font-semibold uppercase text-slate-500 mb-1 dark:text-slate-400">June 2025</p>
-                        <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">High School Diploma</h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Graduated from Burlington High School, preparing for higher education with a focus on humanities.</p>
+                    <div id="hs-detail-trigger" tabindex="0" role="button" aria-expanded="false" class="studies-trigger col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] md:ml-auto md:text-left rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-left dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 cursor-pointer hover:bg-primary-50 dark:hover:bg-dark-card/50">
+                         <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs font-semibold uppercase text-slate-500 mb-1 dark:text-slate-400">June 2025</p>
+                                <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">High School Diploma</h3>
+                            </div>
+                            <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-slate-500 dark:text-slate-400"></i>
+                        </div>
+                        <p class="text-sm text-slate-600 mt-2 dark:text-slate-400">Graduated from Burlington High School. Click to view key coursework and academic files.</p>
                     </div>
                 </div>
                 
@@ -719,7 +723,7 @@
             }
         };
 
-        // --- NEW Academic Path Data Structure ---
+        // --- Academic Path Data Structure (Existing) ---
         const academicPathContent = {
             title: "My Academic Path: CCV to UVM",
             content: `
@@ -766,6 +770,47 @@
                         <p class="ml-8 text-slate-700 dark:text-slate-300">
                             My final goal is to become an inspiring secondary education teacher in Vermont, specializing in differentiating history and civics instruction. I aim to not just teach content, but to **advocate for student agency** and promote a love of learning through adaptable and inclusive teaching methods.
                         </p>
+                    </div>
+                </div>
+            `
+        };
+
+        // --- NEW High School Content Data Structure ---
+        const highSchoolContent = {
+            title: "High School Academic Highlights",
+            content: `
+                <div class="space-y-6">
+                    <!-- Core Coursework Summary -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'book-open'})}
+                            Selected Coursework Focus
+                        </h4>
+                        <ul class="ml-8 list-disc list-inside space-y-2 text-slate-700 dark:text-slate-300">
+                            <li>**AP U.S. History (Grade A):** Focused on primary source analysis and long-form essay writing (LEQ/DBQ), laying the groundwork for college-level research.</li>
+                            <li>**English Literature (Honors):** Developed critical reading and literary theory application skills.</li>
+                            <li>**Psychology (Elective):** Gained early exposure to cognitive theories, highly relevant to my later interest in Universal Design for Learning (UDL).</li>
+                            <li>**Geometry & Pre-Calculus:** Built a strong foundation in logical reasoning and structured problem-solving.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Academic Files & Transcripts Section -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'folder-open'})}
+                            Academic Files & Records
+                        </h4>
+                        <p class="ml-8 text-slate-700 dark:text-slate-300 mb-3">
+                            You can find links to my High School transcript and key project files below:
+                        </p>
+                        <div class="ml-8 space-y-2">
+                             <a href="javascript:void(0);" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 transition-colors font-medium">
+                                <i data-lucide="file-text" class="w-5 h-5 mr-2"></i> Official Transcript (Available upon request)
+                            </a><br>
+                            <a href="javascript:void(0);" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 transition-colors font-medium">
+                                <i data-lucide="award" class="w-5 h-5 mr-2"></i> High School Capstone Project (Summary)
+                            </a>
+                        </div>
                     </div>
                 </div>
             `
@@ -937,11 +982,12 @@
         const modalNoteContent = document.getElementById('modal-note-content');
         const closeModalButton = document.getElementById('close-modal');
         const modalCloseButton = document.getElementById('modal-close-button');
-        const studiesTrigger = document.getElementById('studies-detail-trigger'); // NEW
+        const studiesTrigger = document.getElementById('studies-detail-trigger'); // CCV to UVM trigger
+        const hsTrigger = document.getElementById('hs-detail-trigger'); // NEW High School trigger
 
         function openModal(prefix, title, contentHTML) {
-            // Set the primary title based on whether it's a Note or the Academic Path
-            modalTitlePrefix.textContent = prefix; // e.g., "Note: " or empty string
+            // Set the primary title based on whether it's a Note (prefix="Note: ") or a Pathway (prefix="")
+            modalTitlePrefix.textContent = prefix; 
             modalDisplayTitle.textContent = title; 
             
             modalNoteContent.innerHTML = contentHTML;
@@ -970,14 +1016,18 @@
             // Clean the title by removing the icon and extra spaces
             const fullTitle = noteElement.querySelector('h4').textContent.replace(/[\u200B\s]/g, '').replace(/.*?>/g, ''); 
             
-            // The existing notes modal HTML structure expects "Note: TITLE"
             openModal("Note: ", fullTitle, noteData.content);
         }
 
-        // Handler for the Academic Studies detail
+        // Handler for the CCV Academic Studies detail
         function handleStudiesDetail() {
             // The Academic Path title should stand alone, without "Note: " prefix
             openModal("", academicPathContent.title, academicPathContent.content);
+        }
+
+        // Handler for the High School detail (NEW)
+        function handleHSDetail() {
+            openModal("", highSchoolContent.title, highSchoolContent.content);
         }
 
 
@@ -992,7 +1042,7 @@
             });
         });
         
-        // 5. Attach Academic Studies trigger listener (NEW)
+        // 5. Attach Academic Studies trigger listener (Existing)
         if (studiesTrigger) {
             studiesTrigger.addEventListener('click', handleStudiesDetail);
             studiesTrigger.addEventListener('keydown', (e) => {
@@ -1003,7 +1053,18 @@
             });
         }
         
-        // 6. Modal close listeners
+        // 6. Attach High School trigger listener (NEW)
+        if (hsTrigger) {
+            hsTrigger.addEventListener('click', handleHSDetail);
+            hsTrigger.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleHSDetail();
+                }
+            });
+        }
+
+        // 7. Modal close listeners
         closeModalButton.addEventListener('click', closeModal);
         modalCloseButton.addEventListener('click', closeModal);
         customModal.addEventListener('click', (e) => {
@@ -1018,7 +1079,7 @@
         });
 
 
-        // 7. Attach Load More listener and initialize state
+        // 8. Attach Load More listener and initialize state
         loadMoreButton.addEventListener('click', loadMoreNotes);
         initializeNotesDisplay();
 
