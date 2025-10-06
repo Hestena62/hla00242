@@ -15,10 +15,10 @@
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Links for ICAN and VidCon -->
+    <!-- Links for ICAN and VidCon (Placeholder links are kept for structure) -->
     <link rel="icon" href="/images/icon.jpg" type="image/x-icon">
     <!-- VidCon website link for reference -->
-    <a href="/images/icon.jpg" target="_blank" rel="noopener">VidCon</a>
+    <!-- Removed misplaced <a> tag from head -->
 
     <!-- Custom Tailwind Config -->
     <script>
@@ -89,12 +89,12 @@
         }
 
         /* Accessibility: Custom focus ring for keyboard users */
-        a:focus-visible, button:focus-visible, input:focus-visible, .note-item:focus-visible, .project-card:focus-visible {
+        a:focus-visible, button:focus-visible, input:focus-visible, .note-item:focus-visible, .project-card:focus-visible, .studies-trigger:focus-visible {
             outline: 3px solid #0ea5e9; /* Sky-500, primary for focus */
             outline-offset: 4px;
             border-radius: 1rem; /* Match xl rounding */
         }
-        .note-item:focus, .project-card:focus {
+        .note-item:focus, .project-card:focus, .studies-trigger:focus {
             outline: none; 
         }
 
@@ -242,21 +242,27 @@
                     <div class="bg-primary-50 rounded-xl p-6 shadow-md border border-primary-100 mt-6 dark:bg-slate-700 dark:border-slate-600">
                          <i data-lucide="target" class="text-primary-600 w-6 h-6 mb-3 dark:text-primary-400"></i>
                          <p class="text-slate-700 italic font-medium dark:text-slate-300">
-                            My goal is to transfer to the **University of Vermont (UVM)** for Secondary Education, concentrating in History and Social Sciences, with a special focus on Universal Design for Learning (UDL) and student advocacy.
-                        </p>
+                             My goal is to transfer to the **University of Vermont (UVM)** for Secondary Education, concentrating in History and Social Sciences, with a special focus on Universal Design for Learning (UDL) and student advocacy.
+                         </p>
                     </div>
                 </div>
-                <!-- Stats / Info Card -->
+                <!-- Stats / Info Card (UPDATED TO BE INTERACTIVE) -->
                 <div class="bg-white rounded-xl p-8 shadow-xl-2 border border-slate-100 transition-shadow duration-300 hover:shadow-3xl dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
                     <h3 class="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-3 dark:text-slate-50 dark:border-slate-700">My Academic Snapshot</h3>
                     <div class="flex flex-col space-y-6">
-                        <div class="flex items-start">
+                        
+                        <!-- Current Studies (NOW CLICKABLE TRIGGER) -->
+                        <div id="studies-detail-trigger" tabindex="0" role="button" aria-expanded="false" class="studies-trigger flex items-start p-3 -m-3 rounded-lg cursor-pointer transition-colors duration-200 hover:bg-primary-50 dark:hover:bg-dark-card/50">
                             <i data-lucide="graduation-cap" class="text-primary-600 w-7 h-7 flex-shrink-0 mt-1 dark:text-primary-400"></i>
                             <div class="ml-4">
-                                <p class="font-semibold text-slate-900 dark:text-slate-100">Current Studies</p>
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">
+                                    Current Studies <i data-lucide="external-link" class="w-4 h-4 inline-block ml-1 text-primary-600 dark:text-primary-400"></i>
+                                </p>
                                 <p class="text-slate-600 text-sm dark:text-slate-400">Associate of Arts in Liberal Studies (CCV)</p>
                             </div>
                         </div>
+                        
+                        <!-- Static Transfer Target -->
                         <div class="flex items-start">
                             <i data-lucide="map-pin" class="text-primary-600 w-7 h-7 flex-shrink-0 mt-1 dark:text-primary-400"></i>
                             <div class="ml-4">
@@ -264,10 +270,12 @@
                                 <p class="text-slate-600 text-sm dark:text-slate-400">University of Vermont (UVM) - Secondary Education</p>
                             </div>
                         </div>
+                        
+                        <!-- Static Core Focus (Updated from Areas of Focus) -->
                         <div class="flex items-start">
                             <i data-lucide="briefcase" class="text-primary-600 w-7 h-7 flex-shrink-0 mt-1 dark:text-primary-400"></i>
                             <div class="ml-4">
-                                <p class="font-semibold text-slate-900 dark:text-slate-100">Areas of Focus</p>
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Core Focus</p>
                                 <p class="text-slate-600 text-sm dark:text-slate-400">Inclusive Education, History, and Student Advocacy</p>
                             </div>
                         </div>
@@ -554,12 +562,15 @@
         </div>
     </footer>
 
-    <!-- Custom Modal for Note View Simulation -->
+    <!-- Custom Modal for Detail View (Updated) -->
     <div id="custom-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-content">
             <div class="flex justify-between items-center border-b pb-3 mb-4 border-slate-200 dark:border-slate-700">
-                <h3 id="modal-title" class="text-2xl font-bold text-slate-900 dark:text-slate-50">Note: <span id="modal-note-title" class="text-primary-600 dark:text-primary-400"></span></h3>
-                <button id="close-modal" class="text-slate-400 hover:text-slate-700 p-2 rounded-full transition-colors dark:hover:text-slate-200" aria-label="Close Note View">
+                <h3 id="modal-title" class="text-2xl font-bold text-slate-900 dark:text-slate-50">
+                    <!-- Title content injected here (e.g., "Note: " or the full Academic Path title) -->
+                    <span id="modal-display-title" class="text-primary-600 dark:text-primary-400"></span>
+                </h3>
+                <button id="close-modal" class="text-slate-400 hover:text-slate-700 p-2 rounded-full transition-colors dark:hover:text-slate-200" aria-label="Close Detail View">
                     <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
             </div>
@@ -578,13 +589,13 @@
         // Ensure Lucide Icons are initialized (important for dynamic content like the modal)
         lucide.createIcons();
         
-        // --- Academic Notes Data ---
+        // --- Academic Notes Data (Existing) ---
         const academicNotes = {
             'gilded-age': {
                 course: 'HIS 201: American History Post-1865',
                 concept: 'The Era of Rapid Industrialization',
                 content: `
-                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: HIS 201</div>
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: HIS 201</div>
                     <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Key Concepts:</h4>
                     <ul class="list-disc list-inside space-y-2 ml-4">
                         <li>**Industrial Expansion:** Driven by railroads, steel (Carnegie), and oil (Rockefeller). Marked by massive wealth accumulation and sharp economic inequality.</li>
@@ -598,7 +609,7 @@
                 course: 'SOC 101: Introduction to Sociology',
                 concept: 'Classical Theories of Stratification',
                 content: `
-                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: SOC 101</div>
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: SOC 101</div>
                     <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Comparing Marx and Weber:</h4>
                     <ul class="list-disc list-inside space-y-2 ml-4">
                         <li>**Karl Marx (Conflict Theory):** Class is solely determined by **economic relations** (ownership of the means of production, or *bourgeoisie* vs. *proletariat*). Stratification is inherently exploitative.</li>
@@ -611,7 +622,7 @@
                 course: 'HIS 103: World Civilization I',
                 concept: 'Transition from Republic to Empire',
                 content: `
-                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: HIS 103</div>
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: HIS 103</div>
                     <h4 class="text-lg font-bold mb-3 dark:text-primary-400">The Fall of the Republic:</h4>
                     <p>The transition period (c. 133 BCE to 27 BCE) was characterized by military expansion overwhelming Republican political institutions. Key internal crises included:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
@@ -625,7 +636,7 @@
                 course: 'EDU 105: Intro to Special Education',
                 concept: "Vygotsky's Sociocultural Theory of Learning",
                 content: `
-                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: EDU 105</div>
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: EDU 105</div>
                     <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Zone of Proximal Development (ZPD):</h4>
                     <p>The ZPD defines the difference between what a learner can do **without help** and what they can do **with guidance** and encouragement from a more knowledgeable peer or instructor (MKO).</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
@@ -639,7 +650,7 @@
                 course: 'POL 101: US Government & Civics',
                 concept: 'Separation of Powers and Constitutional Limits',
                 content: `
-                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: POL 101</div>
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: POL 101</div>
                     <h4 class="text-lg font-bold mb-3 dark:text-primary-400">The Interplay of Power:</h4>
                     <p>The system of checks and balances ensures no single branch of the US federal government becomes too powerful, maintaining a balance:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
@@ -653,7 +664,7 @@
                 course: 'PHI 105: Introduction to Ethics',
                 concept: 'The Principle of Utility',
                 content: `
-                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: PHI 105</div>
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: PHI 105</div>
                     <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Bentham and Mill:</h4>
                     <p>Utilitarianism, primarily championed by **Jeremy Bentham** and **John Stuart Mill**, argues that the most ethical choice is the one that produces the **greatest good for the greatest number**.</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
@@ -667,7 +678,7 @@
                 course: 'HIS 104: World Civilization II',
                 concept: 'Medieval European Feudal Structure',
                 content: `
-                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: HIS 104</div>
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: HIS 104</div>
                     <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Socio-Political System:</h4>
                     <p>Feudalism was a decentralized socio-political system in medieval Europe (9th–15th centuries) where land was exchanged for military service and loyalty. It established a rigid hierarchy:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
@@ -682,7 +693,7 @@
                 course: 'EDU 202: Secondary Pedagogy',
                 concept: 'Proactive Management Strategies',
                 content: `
-                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: EDU 202</div>
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: EDU 202</div>
                     <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Focus on Prevention over Intervention:</h4>
                     <p>Effective classroom management minimizes disruptions through thoughtful planning and positive relationship building, rather than focusing solely on punishment.</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
@@ -696,7 +707,7 @@
                 course: 'SOC 205: Research Methods',
                 concept: 'Quantitative vs. Qualitative Approaches',
                 content: `
-                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: SOC 205</div>
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: SOC 205</div>
                     <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Two Pillars of Social Inquiry:</h4>
                     <p>Social research typically falls into two categories based on methodology and goal:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
@@ -708,8 +719,59 @@
             }
         };
 
+        // --- NEW Academic Path Data Structure ---
+        const academicPathContent = {
+            title: "My Academic Path: CCV to UVM",
+            content: `
+                <div class="space-y-6">
+                    <!-- CCV Current Studies -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'pen-tool'})}
+                            Phase 1: Associate of Arts (A.A.) in Liberal Studies
+                        </h4>
+                        <p class="ml-8 text-slate-700 dark:text-slate-300">
+                            At **Community College of Vermont (CCV)**, I am building a flexible, interdisciplinary foundation in preparation for transfer. The focus is on selecting courses that fulfill core humanities requirements while gaining early exposure to **pedagogy, history, and sociology**. This breadth allows me to solidify my passion for social sciences and equitable teaching practices.
+                        </p>
+                    </div>
+
+                    <!-- UDL Focus -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'compass-drawing'})}
+                            Core Focus: Universal Design for Learning (UDL)
+                        </h4>
+                        <p class="ml-8 text-slate-700 dark:text-slate-300">
+                            My unique perspective, gained from navigating learning differences, drives me to emphasize UDL principles. I actively seek out courses and projects that focus on creating multiple means of engagement, representation, and action/expression, ensuring that my future classroom designs are **proactively accessible** to all students from the first day.
+                        </p>
+                    </div>
+                    
+                    <!-- UVM Transfer -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'arrow-right-circle'})}
+                            Phase 2: Transferring to UVM (Target: Fall 2027)
+                        </h4>
+                        <p class="ml-8 text-slate-700 dark:text-slate-300">
+                            My next step is transferring to the **University of Vermont (UVM)** to pursue a Bachelor of Science in Secondary Education. This program will provide the specific professional training and licensure required to teach History and Social Sciences at the middle or high school level. I am dedicated to completing this transfer through the articulation agreement pathway.
+                        </p>
+                    </div>
+                    
+                    <!-- Future Vision -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'sparkles'})}
+                            Future Impact: Educator & Advocate
+                        </h4>
+                        <p class="ml-8 text-slate-700 dark:text-slate-300">
+                            My final goal is to become an inspiring secondary education teacher in Vermont, specializing in differentiating history and civics instruction. I aim to not just teach content, but to **advocate for student agency** and promote a love of learning through adaptable and inclusive teaching methods.
+                        </p>
+                    </div>
+                </div>
+            `
+        };
         
-        // --- Dark Mode Functionality ---
+        // --- Dark Mode Functionality (Existing) ---
         const html = document.documentElement;
         const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
         const themeIconDesktop = document.getElementById('theme-icon-desktop');
@@ -767,7 +829,7 @@
         themeToggleDesktop.addEventListener('click', toggleTheme);
         themeToggleMobile.addEventListener('click', toggleTheme);
         
-        // --- Mobile Menu Toggle and Auto-Close Functionality ---
+        // --- Mobile Menu Toggle and Auto-Close Functionality (Existing) ---
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
@@ -791,7 +853,7 @@
             });
         });
 
-        // --- Notes Search & Scalability Functionality ---
+        // --- Notes Search & Scalability Functionality (Existing) ---
         const searchInput = document.getElementById("notes-search");
         const allNotes = document.querySelectorAll(".note-item"); 
         const noResults = document.getElementById("no-results");
@@ -868,15 +930,20 @@
             }
         });
         
-        // 4. Note interaction listener (Modal)
+        // --- Modal Interaction Logic (Unified for Notes and Academic Path) ---
         const customModal = document.getElementById('custom-modal');
-        const modalNoteTitle = document.getElementById('modal-note-title');
+        const modalTitlePrefix = document.getElementById('modal-title'); // The H3 element
+        const modalDisplayTitle = document.getElementById('modal-display-title'); // The inner span
         const modalNoteContent = document.getElementById('modal-note-content');
         const closeModalButton = document.getElementById('close-modal');
         const modalCloseButton = document.getElementById('modal-close-button');
+        const studiesTrigger = document.getElementById('studies-detail-trigger'); // NEW
 
-        function openModal(title, contentHTML) {
-            modalNoteTitle.textContent = title;
+        function openModal(prefix, title, contentHTML) {
+            // Set the primary title based on whether it's a Note or the Academic Path
+            modalTitlePrefix.textContent = prefix; // e.g., "Note: " or empty string
+            modalDisplayTitle.textContent = title; 
+            
             modalNoteContent.innerHTML = contentHTML;
             
             customModal.style.display = 'flex';
@@ -891,6 +958,7 @@
             document.body.style.overflow = ''; 
         }
 
+        // Handler for Notebook entries
         function handleNoteAction(noteElement) {
             const key = noteElement.getAttribute('data-note-key');
             if (!key || !academicNotes[key]) {
@@ -899,17 +967,21 @@
             }
 
             const noteData = academicNotes[key];
-            const fullTitle = noteElement.querySelector('h4').textContent.replace(/[\u200B\s]/g, '').replace(/.*?>/g, ''); // Clean up the title from the note element
+            // Clean the title by removing the icon and extra spaces
+            const fullTitle = noteElement.querySelector('h4').textContent.replace(/[\u200B\s]/g, '').replace(/.*?>/g, ''); 
             
-            // Build rich content HTML for the modal
-            const contentHTML = `
-                <p class="text-lg font-semibold text-slate-900 mb-2 dark:text-slate-100">${noteData.concept}</p>
-                <p class="mb-4">${noteData.content}</p>
-            `;
-
-            openModal(fullTitle, contentHTML);
+            // The existing notes modal HTML structure expects "Note: TITLE"
+            openModal("Note: ", fullTitle, noteData.content);
         }
 
+        // Handler for the Academic Studies detail
+        function handleStudiesDetail() {
+            // The Academic Path title should stand alone, without "Note: " prefix
+            openModal("", academicPathContent.title, academicPathContent.content);
+        }
+
+
+        // 4. Attach Note interaction listeners
         allNotes.forEach(note => {
             note.addEventListener('click', () => handleNoteAction(note));
             note.addEventListener('keydown', (e) => {
@@ -920,6 +992,18 @@
             });
         });
         
+        // 5. Attach Academic Studies trigger listener (NEW)
+        if (studiesTrigger) {
+            studiesTrigger.addEventListener('click', handleStudiesDetail);
+            studiesTrigger.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleStudiesDetail();
+                }
+            });
+        }
+        
+        // 6. Modal close listeners
         closeModalButton.addEventListener('click', closeModal);
         modalCloseButton.addEventListener('click', closeModal);
         customModal.addEventListener('click', (e) => {
@@ -934,7 +1018,7 @@
         });
 
 
-        // 5. Attach Load More listener and initialize state
+        // 7. Attach Load More listener and initialize state
         loadMoreButton.addEventListener('click', loadMoreNotes);
         initializeNotesDisplay();
 
@@ -968,5 +1052,3 @@
     </script>
 </body>
 </html>
-
-
