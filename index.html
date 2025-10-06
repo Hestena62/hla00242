@@ -250,7 +250,7 @@
                     <h3 class="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-3 dark:text-slate-50 dark:border-slate-700">My Academic Snapshot</h3>
                     <div class="flex flex-col space-y-6">
                         
-                        <!-- Current Studies (NOW CLICKABLE TRIGGER) -->
+                        <!-- Current Studies (NOW CLICKABLE TRIGGER for an overview) -->
                         <div id="studies-detail-trigger" tabindex="0" role="button" aria-expanded="false" class="studies-trigger flex items-start p-3 -m-3 rounded-lg cursor-pointer transition-colors duration-200 hover:bg-primary-50 dark:hover:bg-dark-card/50">
                             <i data-lucide="graduation-cap" class="text-primary-600 w-7 h-7 flex-shrink-0 mt-1 dark:text-primary-400"></i>
                             <div class="ml-4">
@@ -279,6 +279,14 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- NEW BUTTON FOR FULL OUTLINE -->
+                    <div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-700">
+                        <button id="full-outline-button" class="w-full inline-flex items-center justify-center bg-primary-50 text-primary-700 px-5 py-3 rounded-xl border border-primary-300 hover:bg-primary-100 transition-colors font-semibold shadow-md dark:bg-slate-700 dark:text-primary-400 dark:border-primary-700 dark:hover:bg-slate-600">
+                            <i data-lucide="layout-list" class="w-5 h-5 mr-3"></i> View Full Degree Plan Outline
+                        </button>
+                    </div>
+                    <!-- END NEW BUTTON -->
                 </div>
             </div>
         </section>
@@ -299,14 +307,14 @@
                     </div>
                     <!-- Card (Right side on desktop) -->
                     <div id="hs-detail-trigger" tabindex="0" role="button" aria-expanded="false" class="studies-trigger col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] md:ml-auto md:text-left rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-left dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 cursor-pointer hover:bg-primary-50 dark:hover:bg-dark-card/50">
-                         <div class="flex justify-between items-start">
-                            <div>
-                                <p class="text-xs font-semibold uppercase text-slate-500 mb-1 dark:text-slate-400">June 2025</p>
-                                <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">High School Diploma</h3>
+                             <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-xs font-semibold uppercase text-slate-500 mb-1 dark:text-slate-400">June 2025</p>
+                                    <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">High School Diploma</h3>
+                                </div>
+                                <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-slate-500 dark:text-slate-400"></i>
                             </div>
-                            <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-slate-500 dark:text-slate-400"></i>
-                        </div>
-                        <p class="text-sm text-slate-600 mt-2 dark:text-slate-400">Graduated from Burlington High School. Click to view key coursework and academic files.</p>
+                            <p class="text-sm text-slate-600 mt-2 dark:text-slate-400">Graduated from Burlington High School. Click to view key coursework and academic files.</p>
                     </div>
                 </div>
                 
@@ -380,11 +388,11 @@
                 <!-- Class Card 1: History (Blue) - NOW INTERACTIVE -->
                 <div id="int1050-detail-trigger" tabindex="0" role="button" aria-expanded="false" class="studies-trigger bg-white rounded-xl border border-primary-100 shadow-lg-2 p-6 hover:shadow-xl-2 hover:border-primary-400 hover:scale-[1.01] transition-all duration-300 cursor-pointer dark:bg-dark-card dark:border-primary-700 dark:hover:border-primary-400">
                     <div class="flex justify-between items-center mb-3">
-                         <div class="flex items-center">
-                            <i data-lucide="archive" class="w-6 h-6 text-primary-600 mr-3 dark:text-primary-400"></i>
-                            <span class="text-sm font-semibold text-primary-700 dark:text-primary-400">Fall 2025</span>
-                        </div>
-                        <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-primary-600 dark:text-primary-400"></i>
+                           <div class="flex items-center">
+                                <i data-lucide="archive" class="w-6 h-6 text-primary-600 mr-3 dark:text-primary-400"></i>
+                                <span class="text-sm font-semibold text-primary-700 dark:text-primary-400">Fall 2025</span>
+                            </div>
+                            <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-primary-600 dark:text-primary-400"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-1 dark:text-slate-100">INT-1050: Intro to Self and Society</h3>
                     <p class="text-slate-600 text-sm dark:text-slate-400">Critical examination of societal values, individual beliefs, ways of knowing, and cultural worldviews. **Click for details.**</p>
@@ -781,6 +789,53 @@
             `
         };
 
+        // --- Full Outline Content Data Structure (NEW) ---
+        const fullOutlineContent = {
+            title: "Full CCV A.A. to UVM B.S. Degree Plan",
+            content: `
+                <div class="space-y-8">
+                    <h4 class="text-2xl font-bold text-slate-900 dark:text-slate-50 border-b pb-2">Phase 1: CCV Associate of Arts in Liberal Studies (60 Credits)</h4>
+                    
+                    <div class="p-4 bg-slate-100 rounded-lg dark:bg-slate-700">
+                        <p class="font-bold text-lg text-primary-600 dark:text-primary-400 mb-3 flex items-center"><i data-lucide="building" class="w-5 h-5 mr-2"></i> Core Prerequisites (Required for Transfer)</p>
+                        <ul class="list-disc list-inside space-y-2 text-sm ml-4 text-slate-700 dark:text-slate-300">
+                            <li>ENG 101/102 (College Writing I & II) - 6 Credits</li>
+                            <li>MAT 101/105 (Math Pathway) - 3 Credits</li>
+                            <li>CIS 101 (Intro to IT) - 3 Credits</li>
+                            <li>**INT 1050 (Self and Society) - 3 Credits** (Completed)</li>
+                            <li>Science w/ Lab (E.g., BIO 101) - 4 Credits</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-slate-100 rounded-lg dark:bg-slate-700">
+                        <p class="font-bold text-lg text-primary-600 dark:text-primary-400 mb-3 flex items-center"><i data-lucide="book-open" class="w-5 h-5 mr-2"></i> Concentration for Secondary Education</p>
+                        <ul class="list-disc list-inside space-y-2 text-sm ml-4 text-slate-700 dark:text-slate-300">
+                            <li>**History Concentration (12 Credits):** HIS 103 (World Civ I), HIS 201 (American History), HIS 205 (Modern Europe), HIS 2XX Elective.</li>
+                            <li>**Education/Sociology (9 Credits):** SOC 101, EDU 105 (Special Ed), PSY 101 (General Psych).</li>
+                            <li>**Electives (8 Credits):** Focused on advanced writing and research methods.</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="text-2xl font-bold text-slate-900 dark:text-slate-50 border-b pb-2">Phase 2: UVM B.S. Secondary Education (60+ Credits)</h4>
+                    
+                    <div class="p-4 bg-slate-100 rounded-lg dark:bg-slate-700">
+                        <p class="font-bold text-lg text-primary-600 dark:text-primary-400 mb-3 flex items-center"><i data-lucide="school" class="w-5 h-5 mr-2"></i> Professional Education Sequence</p>
+                        <ul class="list-disc list-inside space-y-2 text-sm ml-4 text-slate-700 dark:text-slate-300">
+                            <li>EDSC 200: Teaching for Social Justice (3 Credits)</li>
+                            <li>EDSC 215: Field Experience (3 Credits)</li>
+                            <li>EDSP 205: Secondary Special Education Methods (3 Credits) - **UDL Focus**</li>
+                            <li>EDSC 225: Content Area Literacy (3 Credits)</li>
+                            <li>**EDSC 300: Student Teaching Internship (12 Credits)** - Capstone</li>
+                        </ul>
+                    </div>
+                    
+                    <p class="text-sm italic text-slate-500 dark:text-slate-400 pt-4">
+                        Note: This outline is an aggressive target plan designed to maximize transfer credits and accelerate the path to licensure in History/Social Studies. Actual sequence is subject to UVM's course availability and advising.
+                    </p>
+                </div>
+            `
+        };
+
         // --- High School Content Data Structure (Existing) ---
         const highSchoolContent = {
             title: "High School Academic Highlights",
@@ -810,7 +865,7 @@
                             You can find links to my High School transcript and key project files below:
                         </p>
                         <div class="ml-8 space-y-2">
-                             <a href="javascript:void(0);" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 transition-colors font-medium">
+                            <a href="javascript:void(0);" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 transition-colors font-medium">
                                 <i data-lucide="file-text" class="w-5 h-5 mr-2"></i> Official Transcript (Available upon request)
                             </a><br>
                             <a href="javascript:void(0);" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 transition-colors font-medium">
@@ -859,7 +914,7 @@
                             Files & Documents
                         </h4>
                         <div class="ml-8 space-y-2">
-                             <a href="javascript:void(0);" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 transition-colors font-medium">
+                            <a href="javascript:void(0);" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 transition-colors font-medium">
                                 <i data-lucide="file-text" class="w-5 h-5 mr-2"></i> Unofficial CCV Transcript
                             </a><br>
                             <a href="#classes" onclick="closeModal();" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 transition-colors font-medium">
@@ -1150,7 +1205,10 @@
         const hsTrigger = document.getElementById('hs-detail-trigger'); // High School trigger (in Timeline)
         const ccvTrigger = document.getElementById('ccv-detail-trigger'); // CCV Timeline trigger
         const uvmTrigger = document.getElementById('uvm-detail-trigger'); // UVM Timeline trigger
-        const int1050Trigger = document.getElementById('int1050-detail-trigger'); // NEW INT-1050 trigger
+        const int1050Trigger = document.getElementById('int1050-detail-trigger'); // Course trigger
+        
+        // NEW BUTTON REFERENCE
+        const fullOutlineButton = document.getElementById('full-outline-button');
 
         function openModal(prefix, title, contentHTML) {
             // Set the primary title based on whether it's a Note (prefix="Note: ") or a Pathway (prefix="")
@@ -1190,6 +1248,11 @@
         function handleStudiesDetail() {
             // The Academic Path title should stand alone, without "Note: " prefix
             openModal("", academicPathContent.title, academicPathContent.content);
+        }
+
+        // Handler for the NEW Full Outline Button
+        function handleFullOutlineDetail() {
+            openModal("", fullOutlineContent.title, fullOutlineContent.content);
         }
 
         // Handler for the High School detail (Timeline)
@@ -1235,7 +1298,18 @@
             });
         }
         
-        // 6. Attach High School trigger listener (Existing - in Timeline section)
+        // 6. Attach NEW Full Outline button listener
+        if (fullOutlineButton) {
+            fullOutlineButton.addEventListener('click', handleFullOutlineDetail);
+            fullOutlineButton.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleFullOutlineDetail();
+                }
+            });
+        }
+
+        // 7. Attach High School trigger listener (Existing - in Timeline section)
         if (hsTrigger) {
             hsTrigger.addEventListener('click', handleHSDetail);
             hsTrigger.addEventListener('keydown', (e) => {
@@ -1246,7 +1320,7 @@
             });
         }
         
-        // 7. Attach CCV Timeline trigger listener (Existing - in Timeline section)
+        // 8. Attach CCV Timeline trigger listener (Existing - in Timeline section)
         if (ccvTrigger) {
             ccvTrigger.addEventListener('click', handleCCVDetail);
             ccvTrigger.addEventListener('keydown', (e) => {
@@ -1257,7 +1331,7 @@
             });
         }
         
-        // 8. Attach UVM Timeline trigger listener (Existing - in Timeline section)
+        // 9. Attach UVM Timeline trigger listener (Existing - in Timeline section)
         if (uvmTrigger) {
             uvmTrigger.addEventListener('click', handleUVMDetail);
             uvmTrigger.addEventListener('keydown', (e) => {
@@ -1268,7 +1342,7 @@
             });
         }
 
-        // 9. Attach INT-1050 trigger listener (NEW - in Classes section)
+        // 10. Attach INT-1050 trigger listener (NEW - in Classes section)
         if (int1050Trigger) {
             int1050Trigger.addEventListener('click', handleInt1050Detail);
             int1050Trigger.addEventListener('keydown', (e) => {
@@ -1280,7 +1354,7 @@
         }
 
 
-        // 10. Modal close listeners
+        // 11. Modal close listeners
         closeModalButton.addEventListener('click', closeModal);
         modalCloseButton.addEventListener('click', closeModal);
         customModal.addEventListener('click', (e) => {
@@ -1295,7 +1369,7 @@
         });
 
 
-        // 11. Attach Load More listener and initialize state
+        // 12. Attach Load More listener and initialize state
         loadMoreButton.addEventListener('click', loadMoreNotes);
         initializeNotesDisplay();
 
@@ -1329,6 +1403,3 @@
     </script>
 </body>
 </html>
-
-
-
