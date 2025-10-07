@@ -7,21 +7,14 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
+    
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!--Class JS Files-->
-    <script src="/classes/int-1050.js"></script>
-    <script src="/classes/int-1050/week1.js"></script>
-    <script src="/notes/notes.js"></script>
-
-
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Custom Tailwind Config -->
     <script>
@@ -610,6 +603,136 @@
     <script>
         // Ensure Lucide Icons are initialized (important for dynamic content like the modal)
         lucide.createIcons();
+        
+        // --- Academic Notes Data (Existing) ---
+        const academicNotes = {
+            'gilded-age': {
+                course: 'HIS 201: American History Post-1865',
+                concept: 'The Era of Rapid Industrialization',
+                content: `
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: HIS 201</div>
+                    <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Key Concepts:</h4>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>**Industrial Expansion:** Driven by railroads, steel (Carnegie), and oil (Rockefeller). Marked by massive wealth accumulation and sharp economic inequality.</li>
+                        <li>**Urbanization & Immigration:** Cities swelled, leading to tenement housing, public health crises, and the rise of political machines (like Tammany Hall).</li>
+                        <li>**Political Corruption:** The period's name, coined by Mark Twain, refers to the superficial glitter hiding deep political graft and corporate influence on government.</li>
+                        <li>**Social Response:** Early labor movements (Knights of Labor, AFL) and reform efforts emerged to combat exploitation.</li>
+                    </ul>
+                `
+            },
+            'social-class': {
+                course: 'SOC 101: Introduction to Sociology',
+                concept: 'Classical Theories of Stratification',
+                content: `
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: SOC 101</div>
+                    <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Comparing Marx and Weber:</h4>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>**Karl Marx (Conflict Theory):** Class is solely determined by **economic relations** (ownership of the means of production, or *bourgeoisie* vs. *proletariat*). Stratification is inherently exploitative.</li>
+                        <li>**Max Weber (Multidimensional View):** Stratification is based on three dimensions: **Class** (economic position), **Status** (social prestige/honor), and **Party** (political power/influence). This offers a more nuanced view than Marx's purely economic focus.</li>
+                        <li>**Relevance:** Weber's model better explains modern stratification where factors like education and job prestige (status) often override simple wealth (class).</li>
+                    </ul>
+                `
+            },
+            'ancient-rome': {
+                course: 'HIS 103: World Civilization I',
+                concept: 'Transition from Republic to Empire',
+                content: `
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: HIS 103</div>
+                    <h4 class="text-lg font-bold mb-3 dark:text-primary-400">The Fall of the Republic:</h4>
+                    <p>The transition period (c. 133 BCE to 27 BCE) was characterized by military expansion overwhelming Republican political institutions. Key internal crises included:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>**Rise of Personal Armies:** Generals (Marius, Sulla, Pompey, Caesar) commanded loyal armies, shifting power away from the Senate.</li>
+                        <li>**Land Reform Conflicts:** Attempts by the Gracchi brothers to redistribute land led to violence and civil strife.</li>
+                        <li>**The Triumvirates:** Alliances of powerful men (like Julius Caesar and Augustus) ultimately centralized power, culminating in Augustus becoming the first Roman Emperor.</li>
+                    </ul>
+                `
+            },
+            'vygotsky-theories': {
+                course: 'EDU 105: Intro to Special Education',
+                concept: "Vygotsky's Sociocultural Theory of Learning",
+                content: `
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: EDU 105</div>
+                    <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Zone of Proximal Development (ZPD):</h4>
+                    <p>The ZPD defines the difference between what a learner can do **without help** and what they can do **with guidance** and encouragement from a more knowledgeable peer or instructor (MKO).</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>**Scaffolding:** The temporary support provided by an MKO to help the student achieve the task within the ZPD. As the student gains competence, the support is gradually withdrawn.</li>
+                        <li>**Sociocultural Context:** Learning is a social process. Language and cultural tools (like calculators, writing systems) are central to cognitive development.</li>
+                        <li>**Implication for UDL:** Requires teachers to structure tasks (scaffolding) and provide multiple means of engagement (MKO interactions) to meet students in their ZPD.</li>
+                    </ul>
+                `
+            },
+            'checks-balances': {
+                course: 'POL 101: US Government & Civics',
+                concept: 'Separation of Powers and Constitutional Limits',
+                content: `
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: POL 101</div>
+                    <h4 class="text-lg font-bold mb-3 dark:text-primary-400">The Interplay of Power:</h4>
+                    <p>The system of checks and balances ensures no single branch of the US federal government becomes too powerful, maintaining a balance:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>**Legislative Branch (Congress) checks Executive:** Can impeach the President, override vetoes, and ratify treaties.</li>
+                        <li>**Executive Branch (President) checks Legislative:** Can veto laws passed by Congress, and calls special sessions.</li>
+                        <li>**Judicial Branch (Supreme Court) checks both:** Can declare laws (Legislative) or executive actions (Executive) unconstitutional (**Judicial Review**).</li>
+                    </ul>
+                `
+            },
+            'utilitarianism': {
+                course: 'PHI 105: Introduction to Ethics',
+                concept: 'The Principle of Utility',
+                content: `
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: PHI 105</div>
+                    <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Bentham and Mill:</h4>
+                    <p>Utilitarianism, primarily championed by **Jeremy Bentham** and **John Stuart Mill**, argues that the most ethical choice is the one that produces the **greatest good for the greatest number**.</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>**Act Utilitarianism:** Considers the consequences of individual acts. *Which action in this specific situation yields the most happiness?*</li>
+                        <li>**Rule Utilitarianism:** Considers the consequences of setting a general rule. *Which rule, if universally followed, yields the most happiness in the long run?*</li>
+                        <li>**Hedonic Calculus:** Bentham's method for calculating the pleasure/pain resulting from an action based on intensity, duration, certainty, and scope.</li>
+                    </ul>
+                `
+            },
+            'feudalism': {
+                course: 'HIS 104: World Civilization II',
+                concept: 'Medieval European Feudal Structure',
+                content: `
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: HIS 104</div>
+                    <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Socio-Political System:</h4>
+                    <p>Feudalism was a decentralized socio-political system in medieval Europe (9th–15th centuries) where land was exchanged for military service and loyalty. It established a rigid hierarchy:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>**King/Monarch:** Owns all land, grants fiefs (land) to nobles (vassals).</li>
+                        <li>**Vassals/Lords:** Receive land and pledge military service and fealty.</li>
+                        <li>**Knights:** Lesser vassals providing military service.</li>
+                        <li>**Peasants/Serfs:** Bound to the land (manorialism), providing labor and agricultural production in exchange for protection.</li>
+                    </ul>
+                `
+            },
+            'classroom-management': {
+                course: 'EDU 202: Secondary Pedagogy',
+                concept: 'Proactive Management Strategies',
+                content: `
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: EDU 202</div>
+                    <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Focus on Prevention over Intervention:</h4>
+                    <p>Effective classroom management minimizes disruptions through thoughtful planning and positive relationship building, rather than focusing solely on punishment.</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>**Establishing Routines:** Clear, rehearsed procedures for non-instructional tasks (e.g., passing out papers, sharpening pencils) save significant instructional time.</li>
+                        <li>**Proximity Control:** Moving around the room to address minor issues non-verbally before they escalate.</li>
+                        <li>**High Expectations & Rapport:** Building positive relationships with students fosters respect and willingness to comply, especially for students with learning differences.</li>
+                    </ul>
+                `
+            },
+            'research-methods': {
+                course: 'SOC 205: Research Methods',
+                concept: 'Quantitative vs. Qualitative Approaches',
+                content: `
+                    <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">\${lucide.createIcons({'attributes': {'class': 'w-4 h-4 inline mr-2'}, 'iconName': 'archive'})} Course: SOC 205</div>
+                    <h4 class="text-lg font-bold mb-3 dark:text-primary-400">Two Pillars of Social Inquiry:</h4>
+                    <p>Social research typically falls into two categories based on methodology and goal:</p>
+                    <ul class="list-disc list-inside space-y-2 ml-4">
+                        <li>**Quantitative:** Focuses on numbers, statistics, and objective measurement. **Goal:** Test hypotheses, establish correlation, and generalize results (e.g., surveys with large, random samples).</li>
+                        <li>**Qualitative:** Focuses on rich, detailed description, context, and meaning. **Goal:** Explore depth, discover meaning, and understand context (e.g., in-depth interviews, ethnography, focus groups).</li>
+                        <li>**Mixed Methods:** Increasingly common approach that combines both methods to leverage the strengths of each.</li>
+                    </ul>
+                `
+            }
+        };
 
         // --- Academic Path Data Structure (Existing - Used for About Section Trigger) ---
         const academicPathContent = {
@@ -846,7 +969,27 @@
         
         // --- NEW DETAIL CONTENT FOR WEEKS 1 - 15 ---
 
-      
+        const week1PLPContent = {
+            title: "Week 1: Personal Learning Plan (PLP)",
+            content: `
+                <div class="space-y-6">
+                    <p class="text-md italic text-slate-700 dark:text-slate-300">
+                        **Context:** A foundational task to align course outcomes with personal academic and career goals (Secondary Education, UDL focus). This document established my purpose for being in the Liberal Studies program.
+                    </p>
+
+                    <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-3">
+                        \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'pen-tool'})}
+                        Key Components
+                    </h4>
+                    <ul class="ml-8 list-disc list-inside space-y-2 text-slate-700 dark:text-slate-300">
+                        <li>**Goal Articulation:** Defined short-term (CCV graduation) and long-term (UVM transfer, teaching licensure) objectives.</li>
+                        <li>**Skills Gap Analysis:** Identified current writing/research strengths and areas for development.</li>
+                        <li>**Resource Strategy:** Outlined use of the Writing Center and faculty mentorship.</li>
+                    </ul>
+                </div>
+            `
+        };
+        
         const week2EthicsContent = {
             title: "Week 2: Ethics in Decision Making",
             content: `
@@ -1162,6 +1305,145 @@
         };
 
 
+        // --- INT-1050 Course Content (Updated for all 15 Weeks) ---
+        const int1050Content = {
+            title: "INT-1050: Intro to Self and Society",
+            content: `
+                <div class="space-y-6">
+                    <p class="text-lg italic text-slate-700 dark:text-slate-300">
+                        This course serves as a critical foundation, examining how individual beliefs and societal structures influence our understanding of ethics, knowledge, and community.
+                    </p>
+
+                    <!-- Weekly Assignments & Related Work -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-3">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'calendar-check'})}
+                            Weekly Assignments & Deliverables
+                        </h4>
+                        <div class="space-y-2 ml-4">
+                            <!-- Week 1: PLP -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 1: Personal Learning Plan (PLP) Draft</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week1-plp" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Detail
+                                </a>
+                            </div>
+                            <!-- Week 2: Ethics -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 2: Ethical Frameworks Analysis</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week2-ethics" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Detail
+                                </a>
+                            </div>
+                            <!-- Week 3: Epistemology (Original) -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 3: Personal Epistemology Paper</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week3-paper" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Paper Details
+                                </a>
+                            </div>
+                            <!-- Week 4: Culture -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 4: Cultural Worldview Reflection</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week4-culture" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Detail
+                                </a>
+                            </div>
+                            <!-- Week 5: Social Institutions -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 5: Social Institutions Micro-Analysis</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week5-institution" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Detail
+                                </a>
+                            </div>
+                            <!-- Week 6: Presentation (Updated to use trigger) -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 6: Social Structure Analysis Presentation</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week6-presentation" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'presentation'})} View Detail
+                                </a>
+                            </div>
+                            <!-- Week 7: Research Proposal -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 7: Capstone Research Proposal & Outline</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week7-research" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Detail
+                                </a>
+                            </div>
+                            <!-- Week 8: Midterm -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 8: Midterm Synthesis Paper</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week8-midterm" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Detail
+                                </a>
+                            </div>
+                            <!-- Week 9: Power/Privilege -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 9: Power & Privilege Advocacy Essay</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week9-power" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Detail
+                                </a>
+                            </div>
+                            <!-- Week 10: Capstone Outline (Updated to use trigger) -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 10: Final Capstone Outline & Draft</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week10-outline" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'edit-3'})} View Detail
+                                </a>
+                            </div>
+                            <!-- Week 11: Global Citizenship -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 11: Global Citizenship Essay</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week11-global" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Detail
+                                </a>
+                            </div>
+                            <!-- Week 12: Theory Case Study -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 12: Theory Application Case Study</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week12-theory" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Detail
+                                </a>
+                            </div>
+                            <!-- Week 13: Community Proposal -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 13: Community Engagement Proposal</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week13-community" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Detail
+                                </a>
+                            </div>
+                            <!-- Week 14: Peer Review -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 14: Final Paper Peer Review Summary</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week14-review" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Detail
+                                </a>
+                            </div>
+                            <!-- Week 15: Final Submission -->
+                            <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 15: Final Capstone Submission</p>
+                                <a href="javascript:void(0);" data-modal-trigger="week15-final" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
+                                    \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Detail
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Overall Learning Objectives -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-3">
+                            \${lucide.createIcons({'attributes': {'class': 'w-5 h-5 inline mr-3'}, 'iconName': 'lightbulb'})}
+                            Core Learning Objectives
+                        </h4>
+                        <ul class="ml-8 list-disc list-inside space-y-2 text-slate-700 dark:text-slate-300">
+                            <li>Differentiate between ethical frameworks (e.g., utilitarianism vs. deontology).</li>
+                            <li>Critically evaluate the role of cultural relativism in global politics.</li>
+                            <li>Apply psychological theories to real-world social problems.</li>
+                        </ul>
+                    </div>
+                </div>
+            `
+        };
         
         // --- Dark Mode Functionality (Existing) ---
         const html = document.documentElement;
@@ -1536,7 +1818,6 @@
                 closeModal();
             }
         });
-
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && customModal.style.display === 'flex') {
                 closeModal();
