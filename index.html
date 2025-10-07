@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hesten's College Portfolio & Journey</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -47,7 +48,7 @@
             }
         }
     </script>
-    
+
     <!-- Custom Style for smooth transitions, background, and accessibility -->
     <style>
         body {
@@ -56,9 +57,11 @@
             /* Subtle blue-ish background gradient (Light Mode) */
             background: linear-gradient(to bottom, #fcfcfc, #f8faff);
         }
+
         /* Dark Mode Body Background */
         .dark body {
-            background: #0f172a; /* Use dark base color */
+            background: #0f172a;
+            /* Use dark base color */
         }
 
         /* Hero section background pattern (slightly modified for better contrast) */
@@ -66,11 +69,13 @@
             background-image: url("data:image/svg+xml;utf8,<svg width='10' height='10' viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'><circle cx='1' cy='1' r='1' fill='%23e5f3ff'/></svg>");
             background-size: 30px 30px;
         }
+
         /* Dark Mode Hero Pattern */
         .dark .hero-bg-pattern {
-             background-image: url("data:image/svg+xml;utf8,<svg width='10' height='10' viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'><circle cx='1' cy='1' r='1' fill='%23334155'/></svg>"); /* Slate-600 dark pattern */
+            background-image: url("data:image/svg+xml;utf8,<svg width='10' height='10' viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'><circle cx='1' cy='1' r='1' fill='%23334155'/></svg>");
+            /* Slate-600 dark pattern */
         }
-        
+
         /* Initial state for scroll animation */
         .section-animate {
             opacity: 0;
@@ -85,34 +90,49 @@
         }
 
         /* Accessibility: Custom focus ring for keyboard users */
-        a:focus-visible, button:focus-visible, input:focus-visible, .note-item:focus-visible, .project-card:focus-visible, .studies-trigger:focus-visible {
-            outline: 3px solid #0ea5e9; /* Sky-500, primary for focus */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        .note-item:focus-visible,
+        .project-card:focus-visible,
+        .studies-trigger:focus-visible {
+            outline: 3px solid #0ea5e9;
+            /* Sky-500, primary for focus */
             outline-offset: 4px;
-            border-radius: 1rem; /* Match xl rounding */
+            border-radius: 1rem;
+            /* Match xl rounding */
         }
-        .note-item:focus, .project-card:focus, .studies-trigger:focus {
-            outline: none; 
+
+        .note-item:focus,
+        .project-card:focus,
+        .studies-trigger:focus {
+            outline: none;
         }
 
         /* Timeline specific custom styles for the vertical line */
         .timeline-container {
             position: relative;
         }
+
         .timeline-container::before {
             content: '';
             position: absolute;
             top: 0;
             bottom: 0;
-            left: 17px; 
+            left: 17px;
             width: 3px;
-            background-color: #e2e8f0; /* Light Mode: Slate-200 */
+            background-color: #e2e8f0;
+            /* Light Mode: Slate-200 */
         }
+
         .dark .timeline-container::before {
-             background-color: #334155; /* Dark Mode: Slate-700 */
+            background-color: #334155;
+            /* Dark Mode: Slate-700 */
         }
+
         @media (min-width: 768px) {
             .timeline-container::before {
-                left: 50%; 
+                left: 50%;
                 transform: translateX(-50%);
             }
         }
@@ -130,74 +150,114 @@
             align-items: center;
             z-index: 1000;
         }
+
         .modal-content {
             background-color: white;
             padding: 2.5rem;
             border-radius: 1.5rem;
             max-width: 90%;
-            width: 700px; /* Increased modal width for better content display (as requested for "wide") */
+            width: 700px;
+            /* Increased modal width for better content display (as requested for "wide") */
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             animation: fadeInScale 0.3s ease-out;
         }
+
         .dark .modal-content {
-            background-color: #1e293b; /* dark-card */
-            color: #f1f5f9; /* slate-100 */
+            background-color: #1e293b;
+            /* dark-card */
+            color: #f1f5f9;
+            /* slate-100 */
         }
+
         @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     </style>
 </head>
+
 <body class="text-slate-800 dark:bg-dark dark:text-slate-100">
     <!-- Announcement Bar -->
-    <div class="w-full bg-primary-600 text-white text-center py-2 px-4 font-semibold text-sm md:text-base tracking-wide z-50">
+    <div
+        class="w-full bg-primary-600 text-white text-center py-2 px-4 font-semibold text-sm md:text-base tracking-wide z-50">
         <span>🚀 Welcome! Check out the latest updates on my academic journey. Stay tuned for more!</span>
     </div>
 
     <!-- Header & Navigation -->
-    <header class="bg-white/95 backdrop-blur-sm sticky top-0 z-40 shadow-lg-2 border-b border-slate-100 dark:bg-dark/95 dark:border-slate-700">
+    <header
+        class="bg-white/95 backdrop-blur-sm sticky top-0 z-40 shadow-lg-2 border-b border-slate-100 dark:bg-dark/95 dark:border-slate-700">
         <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center max-w-7xl">
             <a href="#" class="text-2xl font-extrabold text-primary-600 tracking-tight flex items-center">
                 <i data-lucide="compass" class="w-6 h-6 mr-2"></i>
-                Hesten<span class="text-slate-800 text-base font-medium ml-2 hidden sm:inline dark:text-slate-300"> | Academic Portfolio</span>
+                Hesten<span class="text-slate-800 text-base font-medium ml-2 hidden sm:inline dark:text-slate-300"> |
+                    Academic Portfolio</span>
             </a>
             <div class="hidden md:flex items-center space-x-6">
                 <!-- Theme Toggle Button - Desktop -->
-                <button id="theme-toggle-desktop" class="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700 transition-colors duration-300" aria-label="Toggle Dark Mode">
+                <button id="theme-toggle-desktop"
+                    class="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700 transition-colors duration-300"
+                    aria-label="Toggle Dark Mode">
                     <i data-lucide="sun" id="theme-icon-desktop" class="w-5 h-5"></i>
                 </button>
-                
+
                 <div class="flex items-center space-x-8">
                     <!-- Navigation Links -->
-                    <a href="#about" class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">About Me</a>
-                    <a href="#timeline" class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">Timeline</a>
-                    <a href="#classes" class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">Courses</a> 
-                    <a href="#portfolio" class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">My Work</a>
-                    <a href="#notes" class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">Notebook</a>
-                    <a href="#contact" class="bg-primary-600 text-white px-5 py-2 rounded-xl hover:bg-primary-700 transition-transform duration-300 hover:scale-[1.02] shadow-xl shadow-primary-600/30 font-semibold">
+                    <a href="#about"
+                        class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">About
+                        Me</a>
+                    <a href="#timeline"
+                        class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">Timeline</a>
+                    <a href="#classes"
+                        class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">Courses</a>
+                    <a href="#portfolio"
+                        class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">My
+                        Work</a>
+                    <a href="#notes"
+                        class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">Notebook</a>
+                    <a href="#contact"
+                        class="bg-primary-600 text-white px-5 py-2 rounded-xl hover:bg-primary-700 transition-transform duration-300 hover:scale-[1.02] shadow-xl shadow-primary-600/30 font-semibold">
                         Connect
                     </a>
                 </div>
             </div>
-            <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors dark:hover:bg-slate-700" aria-label="Open mobile menu">
+            <button id="mobile-menu-button"
+                class="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors dark:hover:bg-slate-700"
+                aria-label="Open mobile menu">
                 <i data-lucide="menu" id="menu-icon" class="text-slate-800 w-6 h-6 dark:text-slate-100"></i>
             </button>
         </nav>
         <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 flex flex-col space-y-4 bg-white shadow-inner dark:bg-dark dark:shadow-slate-800">
+        <div id="mobile-menu"
+            class="hidden md:hidden px-4 pb-4 flex flex-col space-y-4 bg-white shadow-inner dark:bg-dark dark:shadow-slate-800">
             <!-- Theme Toggle Button - Mobile -->
-            <button id="theme-toggle-mobile" class="inline-flex items-center justify-center p-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600 transition-colors font-medium">
-                <i data-lucide="sun" id="theme-icon-mobile" class="w-5 h-5 mr-2"></i> <span id="mobile-toggle-text">Toggle Dark Mode</span>
+            <button id="theme-toggle-mobile"
+                class="inline-flex items-center justify-center p-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600 transition-colors font-medium">
+                <i data-lucide="sun" id="theme-icon-mobile" class="w-5 h-5 mr-2"></i> <span
+                    id="mobile-toggle-text">Toggle Dark Mode</span>
             </button>
-            <a href="#about" class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">About Me</a>
-            <a href="#timeline" class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">Timeline</a>
-            <a href="#classes" class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">Courses</a> 
-            <a href="#portfolio" class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">My Work</a>
-            <a href="#notes" class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">Notebook</a>
-            <a href="#contact" class="mobile-nav-link bg-primary-600 text-white px-4 py-2 rounded-xl text-center font-semibold hover:bg-primary-700 transition-colors">
+            <a href="#about"
+                class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">About
+                Me</a>
+            <a href="#timeline"
+                class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">Timeline</a>
+            <a href="#classes"
+                class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">Courses</a>
+            <a href="#portfolio"
+                class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">My
+                Work</a>
+            <a href="#notes"
+                class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">Notebook</a>
+            <a href="#contact"
+                class="mobile-nav-link bg-primary-600 text-white px-4 py-2 rounded-xl text-center font-semibold hover:bg-primary-700 transition-colors">
                 Contact Me
             </a>
         </div>
@@ -206,22 +266,29 @@
     <main class="container mx-auto px-4 sm:px-6 max-w-7xl pt-4">
 
         <!-- Hero Section -->
-        <section id="hero" class="text-center py-20 section-animate bg-white rounded-3xl border border-primary-100 shadow-xl-2 shadow-primary-200/50 overflow-hidden relative dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
+        <section id="hero"
+            class="text-center py-20 section-animate bg-white rounded-3xl border border-primary-100 shadow-xl-2 shadow-primary-200/50 overflow-hidden relative dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
             <!-- Subtle background pattern -->
             <div class="absolute inset-0 opacity-10 bg-repeat pointer-events-none hero-bg-pattern"></div>
-            
+
             <div class="relative z-10 p-4">
-                <div class="w-24 h-24 mx-auto rounded-full mb-6 bg-primary-100 flex items-center justify-center border-4 border-white dark:border-dark-card shadow-3xl">
+                <div
+                    class="w-24 h-24 mx-auto rounded-full mb-6 bg-primary-100 flex items-center justify-center border-4 border-white dark:border-dark-card shadow-3xl">
                     <i data-lucide="book-open-text" class="w-12 h-12 text-primary-600"></i>
                 </div>
                 <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight dark:text-slate-50">
-                    Future <span class="text-primary-600 dark:text-primary-400">Educator</span>.<br class="sm:hidden"> Current <span class="text-primary-600 dark:text-primary-400">Scholar</span>.
+                    Future <span class="text-primary-600 dark:text-primary-400">Educator</span>.<br class="sm:hidden">
+                    Current <span class="text-primary-600 dark:text-primary-400">Scholar</span>.
                 </h1>
                 <p class="text-lg md:text-xl text-slate-600 max-w-4xl mx-auto dark:text-slate-400">
-                    Welcome to my academic portfolio, documenting my research, writings, and reflections on **inclusive teaching** and Social Sciences, driven by my passion for supporting students with learning differences.
+                    Welcome to my academic portfolio, documenting my research, writings, and reflections on **inclusive
+                    teaching** and Social Sciences, driven by my passion for supporting students with learning
+                    differences.
                 </p>
-                <a href="#timeline" class="mt-8 inline-flex items-center text-primary-600 font-semibold group hover:text-primary-700 transition-colors duration-500 transform hover:scale-[1.05] border-b-2 border-primary-100 hover:border-primary-600 pb-1 dark:text-primary-400 dark:hover:text-primary-300 dark:border-primary-700/50 dark:hover:border-primary-400">
-                    View My Journey <i data-lucide="arrow-down" class="ml-2 w-5 h-5 group-hover:translate-y-0.5 transition-transform duration-300"></i>
+                <a href="#timeline"
+                    class="mt-8 inline-flex items-center text-primary-600 font-semibold group hover:text-primary-700 transition-colors duration-500 transform hover:scale-[1.05] border-b-2 border-primary-100 hover:border-primary-600 pb-1 dark:text-primary-400 dark:hover:text-primary-300 dark:border-primary-700/50 dark:hover:border-primary-400">
+                    View My Journey <i data-lucide="arrow-down"
+                        class="ml-2 w-5 h-5 group-hover:translate-y-0.5 transition-transform duration-300"></i>
                 </a>
             </div>
         </section>
@@ -230,56 +297,75 @@
         <section id="about" class="section-animate py-20 border-t border-slate-200 dark:border-slate-700">
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div>
-                    <h2 class="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight dark:text-slate-50">Hi, I'm Hesten! 👋</h2>
+                    <h2 class="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight dark:text-slate-50">Hi, I'm
+                        Hesten! 👋</h2>
                     <p class="text-slate-600 mb-4 text-lg leading-relaxed dark:text-slate-400">
-                        I'm a dedicated student at the Community College of Vermont (CCV). As a scholar who also manages learning differences, I bring a deep sense of **empathy and practical understanding** to education. This website showcases my academic work and commitment to building inclusive, accessible classrooms.
+                        I'm a dedicated student at the Community College of Vermont (CCV). As a scholar who also manages
+                        learning differences, I bring a deep sense of **empathy and practical understanding** to
+                        education. This website showcases my academic work and commitment to building inclusive,
+                        accessible classrooms.
                     </p>
                     <!-- Highlighted Goal Box -->
-                    <div class="bg-primary-50 rounded-xl p-6 shadow-md border border-primary-100 mt-6 dark:bg-slate-700 dark:border-slate-600">
-                         <i data-lucide="target" class="text-primary-600 w-6 h-6 mb-3 dark:text-primary-400"></i>
-                         <p class="text-slate-700 italic font-medium dark:text-slate-300">
-                             My goal is to transfer to the **University of Vermont (UVM)** for Secondary Education, concentrating in History and Social Sciences, with a special focus on Universal Design for Learning (UDL) and student advocacy.
-                         </p>
+                    <div
+                        class="bg-primary-50 rounded-xl p-6 shadow-md border border-primary-100 mt-6 dark:bg-slate-700 dark:border-slate-600">
+                        <i data-lucide="target" class="text-primary-600 w-6 h-6 mb-3 dark:text-primary-400"></i>
+                        <p class="text-slate-700 italic font-medium dark:text-slate-300">
+                            My goal is to transfer to the **University of Vermont (UVM)** for Secondary Education,
+                            concentrating in History and Social Sciences, with a special focus on Universal Design for
+                            Learning (UDL) and student advocacy.
+                        </p>
                     </div>
                 </div>
                 <!-- Stats / Info Card (UPDATED TO BE INTERACTIVE) -->
-                <div class="bg-white rounded-xl p-8 shadow-xl-2 border border-slate-100 transition-shadow duration-300 hover:shadow-3xl dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
-                    <h3 class="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-3 dark:text-slate-50 dark:border-slate-700">My Academic Snapshot</h3>
+                <div
+                    class="bg-white rounded-xl p-8 shadow-xl-2 border border-slate-100 transition-shadow duration-300 hover:shadow-3xl dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
+                    <h3
+                        class="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-3 dark:text-slate-50 dark:border-slate-700">
+                        My Academic Snapshot</h3>
                     <div class="flex flex-col space-y-6">
-                        
+
                         <!-- Current Studies (NOW CLICKABLE TRIGGER for an overview) -->
-                        <div id="studies-detail-trigger" tabindex="0" role="button" aria-expanded="false" class="studies-trigger flex items-start p-3 -m-3 rounded-lg cursor-pointer transition-colors duration-200 hover:bg-primary-50 dark:hover:bg-dark-card/50">
-                            <i data-lucide="graduation-cap" class="text-primary-600 w-7 h-7 flex-shrink-0 mt-1 dark:text-primary-400"></i>
+                        <div id="studies-detail-trigger" tabindex="0" role="button" aria-expanded="false"
+                            class="studies-trigger flex items-start p-3 -m-3 rounded-lg cursor-pointer transition-colors duration-200 hover:bg-primary-50 dark:hover:bg-dark-card/50">
+                            <i data-lucide="graduation-cap"
+                                class="text-primary-600 w-7 h-7 flex-shrink-0 mt-1 dark:text-primary-400"></i>
                             <div class="ml-4">
                                 <p class="font-semibold text-slate-900 dark:text-slate-100">
-                                    Current Studies <i data-lucide="external-link" class="w-4 h-4 inline-block ml-1 text-primary-600 dark:text-primary-400"></i>
+                                    Current Studies <i data-lucide="external-link"
+                                        class="w-4 h-4 inline-block ml-1 text-primary-600 dark:text-primary-400"></i>
                                 </p>
-                                <p class="text-slate-600 text-sm dark:text-slate-400">Associate of Arts in Liberal Studies (CCV)</p>
+                                <p class="text-slate-600 text-sm dark:text-slate-400">Associate of Arts in Liberal
+                                    Studies (CCV)</p>
                             </div>
                         </div>
-                        
+
                         <!-- Static Transfer Target -->
                         <div class="flex items-start">
-                            <i data-lucide="map-pin" class="text-primary-600 w-7 h-7 flex-shrink-0 mt-1 dark:text-primary-400"></i>
+                            <i data-lucide="map-pin"
+                                class="text-primary-600 w-7 h-7 flex-shrink-0 mt-1 dark:text-primary-400"></i>
                             <div class="ml-4">
                                 <p class="font-semibold text-slate-900 dark:text-slate-100">Transfer Target</p>
-                                <p class="text-slate-600 text-sm dark:text-slate-400">University of Vermont (UVM) - Secondary Education</p>
+                                <p class="text-slate-600 text-sm dark:text-slate-400">University of Vermont (UVM) -
+                                    Secondary Education</p>
                             </div>
                         </div>
-                        
+
                         <!-- Static Core Focus (Updated from Areas of Focus) -->
                         <div class="flex items-start">
-                            <i data-lucide="briefcase" class="text-primary-600 w-7 h-7 flex-shrink-0 mt-1 dark:text-primary-400"></i>
+                            <i data-lucide="briefcase"
+                                class="text-primary-600 w-7 h-7 flex-shrink-0 mt-1 dark:text-primary-400"></i>
                             <div class="ml-4">
                                 <p class="font-semibold text-slate-900 dark:text-slate-100">Core Focus</p>
-                                <p class="text-slate-600 text-sm dark:text-slate-400">Inclusive Education, History, and Student Advocacy</p>
+                                <p class="text-slate-600 text-sm dark:text-slate-400">Inclusive Education, History, and
+                                    Student Advocacy</p>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- NEW BUTTON FOR FULL OUTLINE -->
                     <div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-700">
-                        <button id="full-outline-button" class="w-full inline-flex items-center justify-center bg-primary-50 text-primary-700 px-5 py-3 rounded-xl border border-primary-300 hover:bg-primary-100 transition-colors font-semibold shadow-md dark:bg-slate-700 dark:text-primary-400 dark:border-primary-700 dark:hover:bg-slate-600">
+                        <button id="full-outline-button"
+                            class="w-full inline-flex items-center justify-center bg-primary-50 text-primary-700 px-5 py-3 rounded-xl border border-primary-300 hover:bg-primary-100 transition-colors font-semibold shadow-md dark:bg-slate-700 dark:text-primary-400 dark:border-primary-700 dark:hover:bg-slate-600">
                             <i data-lucide="layout-list" class="w-5 h-5 mr-3"></i> View Full Degree Plan Outline
                         </button>
                     </div>
@@ -290,86 +376,114 @@
 
         <!-- Education Timeline Section -->
         <section id="timeline" class="section-animate py-20 border-t border-slate-200 dark:border-slate-700">
-            <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center dark:text-slate-50">Education & Career Path</h2>
-            
+            <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center dark:text-slate-50">Education & Career Path
+            </h2>
+
             <div class="timeline-container max-w-4xl mx-auto">
-                
+
                 <!-- Timeline Item 1: High School Completion (INTERACTIVE) -->
                 <div class="flex md:contents">
                     <!-- Circle and connector for mobile -->
                     <div class="col-start-2 col-end-4 mr-auto md:mx-auto relative">
                         <div class="h-full w-8 flex items-center justify-center">
-                            <div class="w-6 h-6 rounded-full bg-slate-400 border-4 border-white dark:border-dark-card z-10 transition-colors duration-300 hover:bg-slate-500"></div>
+                            <div
+                                class="w-6 h-6 rounded-full bg-slate-400 border-4 border-white dark:border-dark-card z-10 transition-colors duration-300 hover:bg-slate-500">
+                            </div>
                         </div>
                     </div>
                     <!-- Card (Right side on desktop) -->
-                    <div id="hs-detail-trigger" tabindex="0" role="button" aria-expanded="false" class="studies-trigger col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] md:ml-auto md:text-left rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-left dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 cursor-pointer hover:bg-primary-50 dark:hover:bg-dark-card/50">
-                             <div class="flex justify-between items-start">
-                                 <div>
-                                     <p class="text-xs font-semibold uppercase text-slate-500 mb-1 dark:text-slate-400">June 2025</p>
-                                     <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">High School Diploma</h3>
-                                 </div>
-                                 <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-slate-500 dark:text-slate-400"></i>
-                             </div>
-                             <p class="text-sm text-slate-600 mt-2 dark:text-slate-400">Graduated from Burlington High School. Click to view key coursework and academic files.</p>
+                    <div id="hs-detail-trigger" tabindex="0" role="button" aria-expanded="false"
+                        class="studies-trigger col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] md:ml-auto md:text-left rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-left dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 cursor-pointer hover:bg-primary-50 dark:hover:bg-dark-card/50">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs font-semibold uppercase text-slate-500 mb-1 dark:text-slate-400">June
+                                    2025</p>
+                                <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">High School Diploma
+                                </h3>
+                            </div>
+                            <i data-lucide="external-link"
+                                class="w-4 h-4 flex-shrink-0 text-slate-500 dark:text-slate-400"></i>
+                        </div>
+                        <p class="text-sm text-slate-600 mt-2 dark:text-slate-400">Graduated from Burlington High
+                            School. Click to view key coursework and academic files.</p>
                     </div>
                 </div>
-                
+
                 <!-- Timeline Item 2: CCV Studies (INTERACTIVE) -->
                 <div class="flex md:contents flex-row-reverse">
                     <!-- Circle and connector for mobile -->
                     <div class="col-start-2 col-end-4 ml-auto md:mx-auto relative">
                         <div class="h-full w-8 flex items-center justify-center">
-                            <div class="w-6 h-6 rounded-full bg-primary-600 border-4 border-white dark:border-dark-card z-10 transition-colors duration-300 hover:bg-primary-700"></div>
+                            <div
+                                class="w-6 h-6 rounded-full bg-primary-600 border-4 border-white dark:border-dark-card z-10 transition-colors duration-300 hover:bg-primary-700">
+                            </div>
                         </div>
                     </div>
                     <!-- Card (Left side on desktop) -->
-                    <div id="ccv-detail-trigger" tabindex="0" role="button" aria-expanded="false" class="studies-trigger col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] md:mr-auto md:text-right rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-right dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 cursor-pointer hover:bg-primary-50 dark:hover:bg-dark-card/50">
+                    <div id="ccv-detail-trigger" tabindex="0" role="button" aria-expanded="false"
+                        class="studies-trigger col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] md:mr-auto md:text-right rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-right dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 cursor-pointer hover:bg-primary-50 dark:hover:bg-dark-card/50">
                         <div class="flex justify-end items-start">
-                             <div class="text-right">
-                                 <p class="text-xs font-semibold uppercase text-primary-600 dark:text-primary-400 mb-1">2025 - Present</p>
-                                 <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Associate of Arts, Liberal Studies</h3>
-                             </div>
-                             <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 ml-3 text-primary-600 dark:text-primary-400"></i>
+                            <div class="text-right">
+                                <p class="text-xs font-semibold uppercase text-primary-600 dark:text-primary-400 mb-1">
+                                    2025 - Present</p>
+                                <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Associate of Arts,
+                                    Liberal Studies</h3>
+                            </div>
+                            <i data-lucide="external-link"
+                                class="w-4 h-4 flex-shrink-0 ml-3 text-primary-600 dark:text-primary-400"></i>
                         </div>
-                        <p class="text-sm text-slate-600 mt-2 dark:text-slate-400 text-right">Community College of Vermont (CCV). Click to view program details and relevant coursework.</p>
+                        <p class="text-sm text-slate-600 mt-2 dark:text-slate-400 text-right">Community College of
+                            Vermont (CCV). Click to view program details and relevant coursework.</p>
                     </div>
                 </div>
-                
+
                 <!-- Timeline Item 3: UVM Transfer Goal (INTERACTIVE) -->
                 <div class="flex md:contents">
                     <!-- Circle and connector for mobile -->
                     <div class="col-start-2 col-end-4 mr-auto md:mx-auto relative">
                         <div class="h-full w-8 flex items-center justify-center">
-                            <div class="w-6 h-6 rounded-full bg-amber-500 border-4 border-white dark:border-dark-card z-10 transition-colors duration-300 hover:bg-amber-600"></div>
+                            <div
+                                class="w-6 h-6 rounded-full bg-amber-500 border-4 border-white dark:border-dark-card z-10 transition-colors duration-300 hover:bg-amber-600">
+                            </div>
                         </div>
                     </div>
                     <!-- Card (Right side on desktop) -->
-                    <div id="uvm-detail-trigger" tabindex="0" role="button" aria-expanded="false" class="studies-trigger col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] md:ml-auto md:text-left rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-left dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 cursor-pointer hover:bg-primary-50 dark:hover:bg-dark-card/50">
+                    <div id="uvm-detail-trigger" tabindex="0" role="button" aria-expanded="false"
+                        class="studies-trigger col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] md:ml-auto md:text-left rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-left dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 cursor-pointer hover:bg-primary-50 dark:hover:bg-dark-card/50">
                         <div class="flex justify-between items-start">
                             <div>
-                                <p class="text-xs font-semibold uppercase text-amber-600 dark:text-amber-400 mb-1">Target: Fall 2027</p>
-                                <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">BS in Secondary Education (UVM)</h3>
+                                <p class="text-xs font-semibold uppercase text-amber-600 dark:text-amber-400 mb-1">
+                                    Target: Fall 2027</p>
+                                <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">BS in Secondary
+                                    Education (UVM)</h3>
                             </div>
-                            <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 ml-3 text-slate-500 dark:text-slate-400"></i>
+                            <i data-lucide="external-link"
+                                class="w-4 h-4 flex-shrink-0 ml-3 text-slate-500 dark:text-slate-400"></i>
                         </div>
-                        <p class="text-sm text-slate-600 mt-2 dark:text-slate-400">Seeking transfer admission to the University of Vermont (UVM). Click to see target degree plan.</p>
+                        <p class="text-sm text-slate-600 mt-2 dark:text-slate-400">Seeking transfer admission to the
+                            University of Vermont (UVM). Click to see target degree plan.</p>
                     </div>
                 </div>
-                
+
                 <!-- Timeline Item 4: Future Career -->
                 <div class="flex md:contents flex-row-reverse">
                     <!-- Circle and connector for mobile -->
                     <div class="col-start-2 col-end-4 ml-auto md:mx-auto relative">
                         <div class="h-full w-8 flex items-center justify-center">
-                            <div class="w-6 h-6 rounded-full bg-dark border-4 border-white dark:border-dark-card z-10 transition-colors duration-300 hover:bg-slate-700"></div>
+                            <div
+                                class="w-6 h-6 rounded-full bg-dark border-4 border-white dark:border-dark-card z-10 transition-colors duration-300 hover:bg-slate-700">
+                            </div>
                         </div>
                     </div>
                     <!-- Card (Left side on desktop) -->
-                    <div class="col-start-4 col-end-12 p-4 md:p-6 w-full md:w-[calc(50%-2rem)] md:mr-auto md:text-right rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-right dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
+                    <div
+                        class="col-start-4 col-end-12 p-4 md:p-6 w-full md:w-[calc(50%-2rem)] md:mr-auto md:text-right rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] timeline-item-right dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
                         <p class="text-xs font-semibold uppercase text-dark dark:text-slate-300 mb-1">Beyond</p>
-                        <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Secondary Education Teacher & Advocate</h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-400">Goal: To inspire the next generation through teaching history and civics in a Vermont high school, specializing in differentiated instruction.</p>
+                        <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Secondary Education Teacher &
+                            Advocate</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Goal: To inspire the next generation
+                            through teaching history and civics in a Vermont high school, specializing in differentiated
+                            instruction.</p>
                     </div>
                 </div>
 
@@ -378,46 +492,58 @@
 
         <!-- Current Classes Section -->
         <section id="classes" class="section-animate py-20 border-t border-slate-200 dark:border-slate-700">
-            <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center dark:text-slate-50">Current & Recent Coursework</h2>
-            
+            <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center dark:text-slate-50">Current & Recent
+                Coursework</h2>
+
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
+
                 <!-- Class Card 1: History (Blue) - NOW INTERACTIVE -->
-                <div id="int1050-detail-trigger" tabindex="0" role="button" aria-expanded="false" class="studies-trigger bg-white rounded-xl border border-primary-100 shadow-lg-2 p-6 hover:shadow-xl-2 hover:border-primary-400 hover:scale-[1.01] transition-all duration-300 cursor-pointer dark:bg-dark-card dark:border-primary-700 dark:hover:border-primary-400">
+                <div id="int1050-detail-trigger" tabindex="0" role="button" aria-expanded="false"
+                    class="studies-trigger bg-white rounded-xl border border-primary-100 shadow-lg-2 p-6 hover:shadow-xl-2 hover:border-primary-400 hover:scale-[1.01] transition-all duration-300 cursor-pointer dark:bg-dark-card dark:border-primary-700 dark:hover:border-primary-400">
                     <div class="flex justify-between items-center mb-3">
-                            <div class="flex items-center">
-                                <i data-lucide="archive" class="w-6 h-6 text-primary-600 mr-3 dark:text-primary-400"></i>
-                                <span class="text-sm font-semibold text-primary-700 dark:text-primary-400">Fall 2025</span>
-                            </div>
-                            <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-primary-600 dark:text-primary-400"></i>
+                        <div class="flex items-center">
+                            <i data-lucide="archive" class="w-6 h-6 text-primary-600 mr-3 dark:text-primary-400"></i>
+                            <span class="text-sm font-semibold text-primary-700 dark:text-primary-400">Fall 2025</span>
+                        </div>
+                        <i data-lucide="external-link"
+                            class="w-4 h-4 flex-shrink-0 text-primary-600 dark:text-primary-400"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-1 dark:text-slate-100">INT-1050: Intro to Self and Society</h3>
-                    <p class="text-slate-600 text-sm dark:text-slate-400">Critical examination of societal values, individual beliefs, ways of knowing, and cultural worldviews. **Click for details.**</p>
+                    <h3 class="text-xl font-bold text-slate-900 mb-1 dark:text-slate-100">INT-1050: Intro to Self and
+                        Society</h3>
+                    <p class="text-slate-600 text-sm dark:text-slate-400">Critical examination of societal values,
+                        individual beliefs, ways of knowing, and cultural worldviews. **Click for details.**</p>
                 </div>
-                
+
                 <!-- Class Card 2: Sociology (Green) -->
-                <div class="bg-white rounded-xl border border-green-100 shadow-lg-2 p-6 hover:shadow-xl-2 hover:border-green-400 hover:scale-[1.01] transition-all duration-300 cursor-pointer dark:bg-dark-card dark:border-green-700 dark:hover:border-green-400">
+                <div
+                    class="bg-white rounded-xl border border-green-100 shadow-lg-2 p-6 hover:shadow-xl-2 hover:border-green-400 hover:scale-[1.01] transition-all duration-300 cursor-pointer dark:bg-dark-card dark:border-green-700 dark:hover:border-green-400">
                     <div class="flex items-center mb-3">
                         <i data-lucide="users" class="w-6 h-6 text-green-600 mr-3 dark:text-green-400"></i>
                         <span class="text-sm font-semibold text-green-700 dark:text-green-400">Spring 2025</span>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-1 dark:text-slate-100">SOC 101: Introduction to Sociology</h3>
-                    <p class="text-slate-600 text-sm dark:text-slate-400">Foundational concepts in social structures, inequality, and cultural analysis.</p>
+                    <h3 class="text-xl font-bold text-slate-900 mb-1 dark:text-slate-100">SOC 101: Introduction to
+                        Sociology</h3>
+                    <p class="text-slate-600 text-sm dark:text-slate-400">Foundational concepts in social structures,
+                        inequality, and cultural analysis.</p>
                 </div>
 
                 <!-- Class Card 3: Special Education (Pink/Purple) -->
-                <div class="bg-white rounded-xl border border-purple-100 shadow-lg-2 p-6 hover:shadow-xl-2 hover:border-purple-400 hover:scale-[1.01] transition-all duration-300 cursor-pointer dark:bg-dark-card dark:border-purple-700 dark:hover:border-purple-400">
+                <div
+                    class="bg-white rounded-xl border border-purple-100 shadow-lg-2 p-6 hover:shadow-xl-2 hover:border-purple-400 hover:scale-[1.01] transition-all duration-300 cursor-pointer dark:bg-dark-card dark:border-purple-700 dark:hover:border-purple-400">
                     <div class="flex items-center mb-3">
                         <i data-lucide="accessibility" class="w-6 h-6 text-purple-600 mr-3 dark:text-purple-400"></i>
                         <span class="text-sm font-semibold text-purple-700 dark:text-purple-400">Spring 2025</span>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-1 dark:text-slate-100">EDU 105: Intro to Special Education</h3>
-                    <p class="text-slate-600 text-sm dark:text-slate-400">Foundational practices in supporting students with diverse learning needs and UDL principles.</p>
+                    <h3 class="text-xl font-bold text-slate-900 mb-1 dark:text-slate-100">EDU 105: Intro to Special
+                        Education</h3>
+                    <p class="text-slate-600 text-sm dark:text-slate-400">Foundational practices in supporting students
+                        with diverse learning needs and UDL principles.</p>
                 </div>
             </div>
-            
+
             <div class="text-center mt-12">
-                <a href="javascript:void(0);" class="inline-flex items-center text-slate-500 hover:text-primary-600 transition-colors font-medium border-b border-dashed border-slate-300 pb-0.5 dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-600">
+                <a href="javascript:void(0);"
+                    class="inline-flex items-center text-slate-500 hover:text-primary-600 transition-colors font-medium border-b border-dashed border-slate-300 pb-0.5 dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-600">
                     <i data-lucide="archive" class="w-5 h-5 mr-2"></i> View Full Course List (Transcripts)
                 </a>
             </div>
@@ -425,213 +551,387 @@
 
         <!-- Portfolio Section -->
         <section id="portfolio" class="section-animate py-20 border-t border-slate-200 dark:border-slate-700">
-            <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center dark:text-slate-50">My Academic Work & Projects</h2>
+            <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center dark:text-slate-50">My Academic Work &
+                Projects</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
+
                 <!-- Project Card 1: Gilded Age Analysis -->
-                <div tabindex="0" class="project-card group bg-white rounded-xl border border-slate-200 shadow-lg-2 p-6 hover:shadow-xl-2 hover:border-indigo-400 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 dark:hover:border-indigo-500">
-                   <i data-lucide="file-text" class="w-8 h-8 text-indigo-600 mb-4 group-hover:scale-110 transition-transform dark:text-indigo-400"></i>
+                <div tabindex="0"
+                    class="project-card group bg-white rounded-xl border border-slate-200 shadow-lg-2 p-6 hover:shadow-xl-2 hover:border-indigo-400 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 dark:hover:border-indigo-500">
+                    <i data-lucide="file-text"
+                        class="w-8 h-8 text-indigo-600 mb-4 group-hover:scale-110 transition-transform dark:text-indigo-400"></i>
                     <h3 class="text-xl font-semibold mb-2 dark:text-slate-100">The Gilded Age: An Economic Analysis</h3>
-                    <p class="text-slate-600 mb-4 text-sm dark:text-slate-400">A research paper exploring the rapid social and economic shifts in 19th-century American cities.</p>
+                    <p class="text-slate-600 mb-4 text-sm dark:text-slate-400">A research paper exploring the rapid
+                        social and economic shifts in 19th-century American cities.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-3 py-1 rounded-full dark:bg-indigo-900 dark:text-indigo-300">History 101</span>
-                        <span class="bg-sky-100 text-sky-800 text-xs font-medium px-3 py-1 rounded-full dark:bg-sky-900 dark:text-sky-300">Research</span>
+                        <span
+                            class="bg-indigo-100 text-indigo-800 text-xs font-medium px-3 py-1 rounded-full dark:bg-indigo-900 dark:text-indigo-300">History
+                            101</span>
+                        <span
+                            class="bg-sky-100 text-sky-800 text-xs font-medium px-3 py-1 rounded-full dark:bg-sky-900 dark:text-sky-300">Research</span>
                     </div>
-                    <a href="javascript:void(0);" class="font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-300 inline-flex items-center text-sm dark:text-primary-400 dark:hover:text-primary-300">
-                        Read Paper <i data-lucide="chevron-right" class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    <a href="javascript:void(0);"
+                        class="font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-300 inline-flex items-center text-sm dark:text-primary-400 dark:hover:text-primary-300">
+                        Read Paper <i data-lucide="chevron-right"
+                            class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
 
                 <!-- Project Card 2: Lesson Plan -->
-                <div tabindex="0" class="project-card group bg-white rounded-xl border border-slate-200 shadow-lg-2 p-6 hover:shadow-xl-2 hover:border-orange-400 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 dark:hover:border-orange-500">
-                    <i data-lucide="book-open-check" class="w-8 h-8 text-orange-600 mb-4 group-hover:scale-110 transition-transform dark:text-orange-400"></i>
+                <div tabindex="0"
+                    class="project-card group bg-white rounded-xl border border-slate-200 shadow-lg-2 p-6 hover:shadow-xl-2 hover:border-orange-400 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 dark:hover:border-orange-500">
+                    <i data-lucide="book-open-check"
+                        class="w-8 h-8 text-orange-600 mb-4 group-hover:scale-110 transition-transform dark:text-orange-400"></i>
                     <h3 class="text-xl font-semibold mb-2 dark:text-slate-100">US Government: The Bill of Rights</h3>
-                    <p class="text-slate-600 mb-4 text-sm dark:text-slate-400">A detailed, universally designed lesson plan for 10th-grade history, including differentiated activities and choice assessments.</p>
+                    <p class="text-slate-600 mb-4 text-sm dark:text-slate-400">A detailed, universally designed lesson
+                        plan for 10th-grade history, including differentiated activities and choice assessments.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="bg-orange-100 text-orange-800 text-xs font-medium px-3 py-1 rounded-full dark:bg-orange-900 dark:text-orange-300">Education</span>
-                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-3 py-1 rounded-full dark:bg-purple-900 dark:text-purple-300">Inclusion/UDL</span>
+                        <span
+                            class="bg-orange-100 text-orange-800 text-xs font-medium px-3 py-1 rounded-full dark:bg-orange-900 dark:text-orange-300">Education</span>
+                        <span
+                            class="bg-purple-100 text-purple-800 text-xs font-medium px-3 py-1 rounded-full dark:bg-purple-900 dark:text-purple-300">Inclusion/UDL</span>
                     </div>
-                    <a href="javascript:void(0);" class="font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-300 inline-flex items-center text-sm dark:text-primary-400 dark:hover:text-primary-300">
-                        View Lesson Plan <i data-lucide="chevron-right" class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    <a href="javascript:void(0);"
+                        class="font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-300 inline-flex items-center text-sm dark:text-primary-400 dark:hover:text-primary-300">
+                        View Lesson Plan <i data-lucide="chevron-right"
+                            class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
 
                 <!-- Project Card 3: Presentation -->
-                <div tabindex="0" class="project-card group bg-white rounded-xl border border-slate-200 shadow-lg-2 p-6 hover:shadow-xl-2 hover:border-emerald-400 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 dark:hover:border-emerald-500">
-                    <i data-lucide="users" class="w-8 h-8 text-emerald-600 mb-4 group-hover:scale-110 transition-transform dark:text-emerald-400"></i>
+                <div tabindex="0"
+                    class="project-card group bg-white rounded-xl border border-slate-200 shadow-lg-2 p-6 hover:shadow-xl-2 hover:border-emerald-400 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 dark:hover:border-emerald-500">
+                    <i data-lucide="users"
+                        class="w-8 h-8 text-emerald-600 mb-4 group-hover:scale-110 transition-transform dark:text-emerald-400"></i>
                     <h3 class="text-xl font-semibold mb-2 dark:text-slate-100">Cultural Anthropology Presentation</h3>
-                    <p class="text-slate-600 mb-4 text-sm dark:text-slate-400">A slide deck analyzing the cultural significance of rituals and symbols in modern societies.</p>
+                    <p class="text-slate-600 mb-4 text-sm dark:text-slate-400">A slide deck analyzing the cultural
+                        significance of rituals and symbols in modern societies.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="bg-red-100 text-red-800 text-xs font-medium px-3 py-1 rounded-full dark:bg-red-900 dark:text-red-300">Anthropology</span>
-                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-300">Presentation</span>
+                        <span
+                            class="bg-red-100 text-red-800 text-xs font-medium px-3 py-1 rounded-full dark:bg-red-900 dark:text-red-300">Anthropology</span>
+                        <span
+                            class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full dark:bg-blue-900 dark:text-blue-300">Presentation</span>
                     </div>
-                    <a href="javascript:void(0);" class="font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-300 inline-flex items-center text-sm dark:text-primary-400 dark:hover:text-primary-300">
-                        See Presentation <i data-lucide="chevron-right" class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    <a href="javascript:void(0);"
+                        class="font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-300 inline-flex items-center text-sm dark:text-primary-400 dark:hover:text-primary-300">
+                        See Presentation <i data-lucide="chevron-right"
+                            class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
             </div>
         </section>
-        
+
         <!-- Notes Section -->
         <section id="notes" class="section-animate py-20 border-t border-slate-200 dark:border-slate-700">
-            <div class="bg-white rounded-xl shadow-xl-2 shadow-primary-100/50 p-8 md:p-12 border border-primary-100 dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
+            <div
+                class="bg-white rounded-xl shadow-xl-2 shadow-primary-100/50 p-8 md:p-12 border border-primary-100 dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
                 <div class="max-w-3xl mx-auto text-center">
                     <h2 class="text-3xl font-bold text-slate-900 mb-4 dark:text-slate-50">My Digital Notebook 🧠</h2>
-                    <p class="text-slate-600 mb-8 dark:text-slate-400">A curated and searchable collection of my class notes and reading summaries. Feel free to browse for study inspiration!</p>
+                    <p class="text-slate-600 mb-8 dark:text-slate-400">A curated and searchable collection of my class
+                        notes and reading summaries. Feel free to browse for study inspiration!</p>
                     <div class="relative">
-                        <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
-                        <input type="text" id="notes-search" placeholder="Search notes (e.g., 'vygotsky', 'constitution')..." 
-                                class="w-full pl-12 pr-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary-600 focus:border-primary-600 transition-all shadow-inner dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 dark:focus:ring-primary-400 dark:focus:border-primary-400"
-                                aria-label="Search digital notes">
+                        <i data-lucide="search"
+                            class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
+                        <input type="text" id="notes-search"
+                            placeholder="Search notes (e.g., 'vygotsky', 'constitution')..."
+                            class="w-full pl-12 pr-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary-600 focus:border-primary-600 transition-all shadow-inner dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 dark:focus:ring-primary-400 dark:focus:border-primary-400"
+                            aria-label="Search digital notes">
                     </div>
                 </div>
                 <ul id="notes-list" class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
                     <!-- Note 1 (Visible by default) -->
-                    <li data-keywords="history american gilded age industrialization" data-note-key="gilded-age" tabindex="0" class="note-item bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="pencil" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>American History: The Gilded Age</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Notes on industrialization, immigration, and political corruption.</p>
+                    <li data-keywords="history american gilded age industrialization" data-note-key="gilded-age"
+                        tabindex="0"
+                        class="note-item bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="pencil"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>American History: The
+                            Gilded Age</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Notes on industrialization,
+                            immigration, and political corruption.</p>
                     </li>
                     <!-- Note 2 (Visible by default) -->
-                    <li data-keywords="sociology social class marx weber" data-note-key="social-class" tabindex="0" class="note-item bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="book-marked" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>Sociology: Theories of Social Class</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Comparing the perspectives of Karl Marx and Max Weber.</p>
+                    <li data-keywords="sociology social class marx weber" data-note-key="social-class" tabindex="0"
+                        class="note-item bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="book-marked"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>Sociology: Theories of
+                            Social Class</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Comparing the perspectives of Karl
+                            Marx and Max Weber.</p>
                     </li>
                     <!-- Note 3 (Visible by default) -->
-                    <li data-keywords="history ancient rome republic empire" data-note-key="ancient-rome" tabindex="0" class="note-item bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="landmark" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>Ancient Rome: Republic to Empire</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Key events and figures in the transition of Roman governance.</p>
+                    <li data-keywords="history ancient rome republic empire" data-note-key="ancient-rome" tabindex="0"
+                        class="note-item bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="landmark"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>Ancient Rome: Republic
+                            to Empire</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Key events and figures in the
+                            transition of Roman governance.</p>
                     </li>
                     <!-- Note 4 (Visible by default) -->
-                    <li data-keywords="education psychology vygotsky learning special needs" data-note-key="vygotsky-theories" tabindex="0" class="note-item bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="brain-circuit" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>Educational Psychology: Vygotsky's Theories</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Understanding the Zone of Proximal Development.</p>
+                    <li data-keywords="education psychology vygotsky learning special needs"
+                        data-note-key="vygotsky-theories" tabindex="0"
+                        class="note-item bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="brain-circuit"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>Educational Psychology:
+                            Vygotsky's Theories</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Understanding the Zone of Proximal
+                            Development.</p>
                     </li>
                     <!-- Note 5 (Visible by default) -->
-                    <li data-keywords="government constitution checks balances" data-note-key="checks-balances" tabindex="0" class="note-item bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="scale" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>US Government: Checks and Balances</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">The separation of powers between the three branches.</p>
+                    <li data-keywords="government constitution checks balances" data-note-key="checks-balances"
+                        tabindex="0"
+                        class="note-item bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="scale" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>US
+                            Government: Checks and Balances</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">The separation of powers between the
+                            three branches.</p>
                     </li>
                     <!-- Note 6 (Visible by default) -->
-                    <li data-keywords="philosophy ethics utilitarianism" data-note-key="utilitarianism" tabindex="0" class="note-item bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="lightbulb" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>Intro to Ethics: Utilitarianism</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Core principles of the greatest good for the greatest number.</p>
+                    <li data-keywords="philosophy ethics utilitarianism" data-note-key="utilitarianism" tabindex="0"
+                        class="note-item bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="lightbulb"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>Intro to Ethics:
+                            Utilitarianism</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Core principles of the greatest good
+                            for the greatest number.</p>
                     </li>
-                    
+
                     <!-- OLD HIDDEN NOTES -->
-                    <li data-keywords="history middle ages feudalism" data-note-key="feudalism" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="shield" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>World History: Feudalism in the Middle Ages</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Summary of political and social hierarchies in medieval Europe.</p>
+                    <li data-keywords="history middle ages feudalism" data-note-key="feudalism" tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="shield"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>World History: Feudalism
+                            in the Middle Ages</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Summary of political and social
+                            hierarchies in medieval Europe.</p>
                     </li>
-                    <li data-keywords="education pedagogy classroom management udl accommodations" data-note-key="classroom-management" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="layout-dashboard" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>Pedagogy: Effective Classroom Management</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Techniques for maintaining engagement and order in a secondary classroom.</p>
+                    <li data-keywords="education pedagogy classroom management udl accommodations"
+                        data-note-key="classroom-management" tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="layout-dashboard"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>Pedagogy: Effective
+                            Classroom Management</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Techniques for maintaining engagement
+                            and order in a secondary classroom.</p>
                     </li>
-                    <li data-keywords="sociology research methods quantitative qualitative" data-note-key="research-methods" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="bar-chart-3" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>Sociology: Research Methods</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Differentiating between quantitative and qualitative research approaches.</p>
+                    <li data-keywords="sociology research methods quantitative qualitative"
+                        data-note-key="research-methods" tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="bar-chart-3"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>Sociology: Research
+                            Methods</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Differentiating between quantitative
+                            and qualitative research approaches.</p>
                     </li>
 
                     <!-- NEW INT-1050 NOTES (WEEKS 1-15, all hidden initially) -->
-                    <li data-keywords="int1050 self society week1 plp plan goals resources" data-note-key="int1050-week1" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="compass" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Personal Learning Plan</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Drafting course alignment with long-term career and UDL goals.</p>
+                    <li data-keywords="int1050 self society week1 plp plan goals resources"
+                        data-note-key="int1050-week1" tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="compass"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Personal
+                            Learning Plan</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Drafting course alignment with
+                            long-term career and UDL goals.</p>
                     </li>
-                    <li data-keywords="int1050 ethics duty utilitarianism policy" data-note-key="int1050-week2" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="scale" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Deontology vs. Utilitarianism</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Comparing duty-based and consequentialist ethical frameworks.</p>
+                    <li data-keywords="int1050 ethics duty utilitarianism policy" data-note-key="int1050-week2"
+                        tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="scale"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Deontology vs.
+                            Utilitarianism</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Comparing duty-based and
+                            consequentialist ethical frameworks.</p>
                     </li>
-                    <li data-keywords="int1050 epistemology knowing learning styles udl" data-note-key="int1050-week3" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="file-text" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Epistemology Paper</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Reflection on personal ways of knowing and the role of UDL.</p>
+                    <li data-keywords="int1050 epistemology knowing learning styles udl" data-note-key="int1050-week3"
+                        tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="file-text"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Epistemology
+                            Paper</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Reflection on personal ways of
+                            knowing and the role of UDL.</p>
                     </li>
-                    <li data-keywords="int1050 culture vermont identity worldview" data-note-key="int1050-week4" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="map-pin" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Cultural Identity Reflection</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Analysis of how regional culture shapes perceptions of success.</p>
+                    <li data-keywords="int1050 culture vermont identity worldview" data-note-key="int1050-week4"
+                        tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="map-pin"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Cultural
+                            Identity Reflection</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Analysis of how regional culture
+                            shapes perceptions of success.</p>
                     </li>
-                    <li data-keywords="int1050 sociology institutions school manifest latent" data-note-key="int1050-week5" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="users" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Social Institutions Analysis</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Functionalist view of high school: manifest vs. latent functions.</p>
+                    <li data-keywords="int1050 sociology institutions school manifest latent"
+                        data-note-key="int1050-week5" tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="users"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Social
+                            Institutions Analysis</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Functionalist view of high school:
+                            manifest vs. latent functions.</p>
                     </li>
-                    <li data-keywords="int1050 social structure agency habitus presentation" data-note-key="int1050-week6" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="presentation" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Social Structure & Agency</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Analyzing individual choice in the context of social class and capital.</p>
+                    <li data-keywords="int1050 social structure agency habitus presentation"
+                        data-note-key="int1050-week6" tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="presentation"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Social
+                            Structure & Agency</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Analyzing individual choice in the
+                            context of social class and capital.</p>
                     </li>
-                    <li data-keywords="int1050 capstone research proposal dyslexia udl" data-note-key="int1050-week7" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="flask-conical" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Research Proposal (Capstone)</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Developing the formal plan for the final paper on UDL and student motivation.</p>
+                    <li data-keywords="int1050 capstone research proposal dyslexia udl" data-note-key="int1050-week7"
+                        tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="flask-conical"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Research
+                            Proposal (Capstone)</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Developing the formal plan for the
+                            final paper on UDL and student motivation.</p>
                     </li>
-                    <li data-keywords="int1050 midterm synthesis reflection grades" data-note-key="int1050-week8" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="clipboard-list" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Midterm Synthesis Paper</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Synthesizing first half concepts: epistemology, ethics, and self-assessment.</p>
+                    <li data-keywords="int1050 midterm synthesis reflection grades" data-note-key="int1050-week8"
+                        tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="clipboard-list"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Midterm
+                            Synthesis Paper</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Synthesizing first half concepts:
+                            epistemology, ethics, and self-assessment.</p>
                     </li>
-                    <li data-keywords="int1050 power privilege advocacy intersectionality" data-note-key="int1050-week9" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="gauge" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Power, Privilege & Advocacy</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Analyzing different power structures and the educator's role as an advocate.</p>
+                    <li data-keywords="int1050 power privilege advocacy intersectionality" data-note-key="int1050-week9"
+                        tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="gauge"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Power,
+                            Privilege & Advocacy</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Analyzing different power structures
+                            and the educator's role as an advocate.</p>
                     </li>
-                    <li data-keywords="int1050 capstone final outline draft" data-note-key="int1050-week10" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="file-edit" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Final Capstone Draft</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Substantial submission and review of the main research paper draft.</p>
+                    <li data-keywords="int1050 capstone final outline draft" data-note-key="int1050-week10" tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="file-edit"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Final Capstone
+                            Draft</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Substantial submission and review of
+                            the main research paper draft.</p>
                     </li>
-                    <li data-keywords="int1050 global citizenship relativism duties" data-note-key="int1050-week11" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="globe" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Global Citizenship Essay</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Comparative analysis of Western/non-Western duties and cultural relativism.</p>
+                    <li data-keywords="int1050 global citizenship relativism duties" data-note-key="int1050-week11"
+                        tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="globe"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Global
+                            Citizenship Essay</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Comparative analysis of
+                            Western/non-Western duties and cultural relativism.</p>
                     </li>
-                    <li data-keywords="int1050 theory case study vygotsky scaffolding" data-note-key="int1050-week12" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="brain-circuit" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Theory Application (Vygotsky)</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Case study applying Vygotsky's ZPD and scaffolding to a classroom scenario.</p>
+                    <li data-keywords="int1050 theory case study vygotsky scaffolding" data-note-key="int1050-week12"
+                        tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="brain-circuit"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Theory
+                            Application (Vygotsky)</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Case study applying Vygotsky's ZPD
+                            and scaffolding to a classroom scenario.</p>
                     </li>
-                    <li data-keywords="int1050 community engagement tutoring proposal" data-note-key="int1050-week13" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="handshake" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Community Project Proposal</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Plan for tutoring high school students and applying social justice themes.</p>
+                    <li data-keywords="int1050 community engagement tutoring proposal" data-note-key="int1050-week13"
+                        tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="handshake"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Community
+                            Project Proposal</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Plan for tutoring high school
+                            students and applying social justice themes.</p>
                     </li>
-                    <li data-keywords="int1050 final review revision peer udel" data-note-key="int1050-week14" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="git-pull-request-draft" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Peer Review & Revisions</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Summary of final paper critiques and revision strategy for UDL clarity.</p>
+                    <li data-keywords="int1050 final review revision peer udel" data-note-key="int1050-week14"
+                        tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="git-pull-request-draft"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Peer Review &
+                            Revisions</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Summary of final paper critiques and
+                            revision strategy for UDL clarity.</p>
                     </li>
-                    <li data-keywords="int1050 capstone final submission portfolio" data-note-key="int1050-week15" tabindex="0" class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
-                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="award" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Final Capstone Submission</h4>
-                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Culmination of coursework and final paper on inclusive education.</p>
+                    <li data-keywords="int1050 capstone final submission portfolio" data-note-key="int1050-week15"
+                        tabindex="0"
+                        class="note-item hidden-note hidden bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer focus:outline-none shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400">
+                        <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i
+                                data-lucide="award"
+                                class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>INT-1050: Final Capstone
+                            Submission</h4>
+                        <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">Culmination of coursework and final
+                            paper on inclusive education.</p>
                     </li>
                 </ul>
-                
+
                 <p id="no-results" class="text-center text-slate-500 mt-8 hidden dark:text-slate-400">
-                    <i data-lucide="frown" class="w-6 h-6 inline-block mr-2"></i> No notes found matching your search term.
+                    <i data-lucide="frown" class="w-6 h-6 inline-block mr-2"></i> No notes found matching your search
+                    term.
                 </p>
-                
+
                 <!-- Load More Button (managed by JS) -->
                 <div class="text-center mt-8">
-                    <button id="load-more-notes" class="inline-flex items-center bg-primary-100 text-primary-700 px-6 py-2 rounded-xl border border-primary-300 hover:bg-primary-200 transition-colors font-semibold shadow-inner dark:bg-slate-700 dark:text-primary-400 dark:border-primary-700 dark:hover:bg-slate-600">
+                    <button id="load-more-notes"
+                        class="inline-flex items-center bg-primary-100 text-primary-700 px-6 py-2 rounded-xl border border-primary-300 hover:bg-primary-200 transition-colors font-semibold shadow-inner dark:bg-slate-700 dark:text-primary-400 dark:border-primary-700 dark:hover:bg-slate-600">
                         <i data-lucide="refresh-ccw" class="w-4 h-4 mr-2"></i> Load More Notes
                     </button>
                 </div>
             </div>
         </section>
-        
+
         <!-- Contact Section (UPDATED) -->
         <section id="contact" class="section-animate py-20 border-t border-slate-200 dark:border-slate-700 text-center">
-             <h2 class="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight dark:text-slate-50">Let's Connect</h2>
-             <p class="text-slate-600 max-w-2xl mx-auto mb-10 text-lg dark:text-slate-400">Have a question about my work, a transfer opportunity, or just want to collaborate on educational advocacy? I'd love to hear from you!</p>
-             
-             <!-- Main Contact Button -->
-             <a href="mailto:hla00242@ccv.vsc.edu?subject=Hesten's%20Student%20PLP%20for%20CCV%20at%20VSC" class="inline-flex items-center bg-primary-600 text-white px-8 py-3 rounded-xl hover:bg-primary-700 transition-transform duration-300 hover:scale-[1.05] shadow-xl-2 shadow-primary-600/50 text-lg font-semibold dark:shadow-primary-400/30">
-                 <i data-lucide="mail" class="mr-3 w-5 h-5"></i>
-                 Email Hesten
-             </a>
+            <h2 class="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight dark:text-slate-50">Let's Connect</h2>
+            <p class="text-slate-600 max-w-2xl mx-auto mb-10 text-lg dark:text-slate-400">Have a question about my work,
+                a transfer opportunity, or just want to collaborate on educational advocacy? I'd love to hear from you!
+            </p>
+
+            <!-- Main Contact Button -->
+            <a href="mailto:hla00242@ccv.vsc.edu?subject=Hesten's%20Student%20PLP%20for%20CCV%20at%20VSC"
+                class="inline-flex items-center bg-primary-600 text-white px-8 py-3 rounded-xl hover:bg-primary-700 transition-transform duration-300 hover:scale-[1.05] shadow-xl-2 shadow-primary-600/50 text-lg font-semibold dark:shadow-primary-400/30">
+                <i data-lucide="mail" class="mr-3 w-5 h-5"></i>
+                Email Hesten
+            </a>
         </section>
 
     </main>
 
     <!-- Footer (UPDATED hrefs for consistency) -->
     <footer class="bg-dark text-slate-400">
-        <div class="container mx-auto px-4 sm:px-6 py-10 flex flex-col md:flex-row justify-between items-center text-center md:text-left max-w-7xl">
+        <div
+            class="container mx-auto px-4 sm:px-6 py-10 flex flex-col md:flex-row justify-between items-center text-center md:text-left max-w-7xl">
             <div>
                 <p class="font-bold text-white text-lg">Hesten's Academic Portfolio</p>
                 <p class="text-sm mt-1">&copy; 2025 All Rights Reserved. Built with Tailwind CSS and Lucide Icons.</p>
             </div>
             <div class="flex space-x-6 mt-6 md:mt-0">
-                <a href="https://github.com/Hestena62/hla00242" class="hover:text-primary-400 transition-colors" aria-label="GitHub Profile"><i data-lucide="github" class="w-6 h-6"></i></a>
-                <a href="#linkedin" class="hover:text-primary-400 transition-colors" aria-label="LinkedIn Profile"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
-                <a href="https://www.x.com/hla00242" class="hover:text-primary-400 transition-colors" aria-label="Twitter Profile"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                <a href="https://github.com/Hestena62/hla00242" class="hover:text-primary-400 transition-colors"
+                    aria-label="GitHub Profile"><i data-lucide="github" class="w-6 h-6"></i></a>
+                <a href="#linkedin" class="hover:text-primary-400 transition-colors" aria-label="LinkedIn Profile"><i
+                        data-lucide="linkedin" class="w-6 h-6"></i></a>
+                <a href="https://www.x.com/hla00242" class="hover:text-primary-400 transition-colors"
+                    aria-label="Twitter Profile"><i data-lucide="twitter" class="w-6 h-6"></i></a>
             </div>
         </div>
     </footer>
@@ -644,7 +944,9 @@
                     <!-- Title content injected here (e.g., "Note: " or the full Academic Path title) -->
                     <span id="modal-display-title" class="text-primary-600 dark:text-primary-400"></span>
                 </h3>
-                <button id="close-modal" class="text-slate-400 hover:text-slate-700 p-2 rounded-full transition-colors dark:hover:text-slate-200" aria-label="Close Detail View">
+                <button id="close-modal"
+                    class="text-slate-400 hover:text-slate-700 p-2 rounded-full transition-colors dark:hover:text-slate-200"
+                    aria-label="Close Detail View">
                     <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
             </div>
@@ -652,7 +954,8 @@
             <div id="modal-note-content" class="space-y-4 text-slate-600 dark:text-slate-300">
                 <!-- Content will be generated by JS -->
             </div>
-            <button id="modal-close-button" class="w-full mt-6 bg-primary-600 text-white px-5 py-2 rounded-xl hover:bg-primary-700 transition-colors font-semibold">
+            <button id="modal-close-button"
+                class="w-full mt-6 bg-primary-600 text-white px-5 py-2 rounded-xl hover:bg-primary-700 transition-colors font-semibold">
                 Got It
             </button>
         </div>
@@ -662,7 +965,7 @@
     <script>
         // Ensure Lucide Icons are initialized (important for dynamic content like the modal)
         lucide.createIcons();
-        
+
         // --- NEW DETAIL CONTENT FOR WEEKS 1 - 15 (MOVED TO TOP TO FIX REFERENCE ERROR) ---
 
         const week1PLPContent = {
@@ -685,7 +988,7 @@
                 </div>
             `
         };
-        
+
         const week2EthicsContent = {
             title: "Week 2: Ethical Frameworks Analysis",
             content: `
@@ -894,7 +1197,7 @@
                 </div>
             `
         };
-        
+
         const week11GlobalContent = {
             title: "Week 11: Global Citizenship Essay",
             content: `
@@ -915,7 +1218,7 @@
                 </div>
             `
         };
-        
+
         const week12TheoryContent = {
             title: "Week 12: Theory Application Case Study (Education)",
             content: `
@@ -1452,9 +1755,9 @@
                             Weekly Assignments & Deliverables
                         </h4>
                         <div class="space-y-2 ml-4">
-                            <!-- Week 1: PLP -->
+                            <!-- Week 1: "So, What are YOu, Anyway?" -->
                             <div class="p-3 bg-slate-100 rounded-lg dark:bg-slate-700">
-                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 1: Personal Learning Plan (PLP) Draft</p>
+                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week 1: "So, What are YOu, Anyway?"</p>
                                 <a href="javascript:void(0);" data-modal-trigger="week1-plp" class="text-primary-600 dark:text-primary-400 text-sm hover:text-primary-700 font-medium inline-flex items-center mt-1 cursor-pointer">
                                     \${lucide.createIcons({'attributes': {'class': 'w-4 h-4 mr-1'}, 'iconName': 'file-text'})} View Detail
                                 </a>
@@ -1575,7 +1878,7 @@
                 </div>
             `
         };
-        
+
         // --- Dark Mode Functionality (Existing) ---
         const html = document.documentElement;
         const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
@@ -1586,11 +1889,11 @@
 
         function updateThemeIcon(isDark) {
             const iconName = isDark ? 'moon' : 'sun';
-            
+
             // Update icons
             themeIconDesktop.setAttribute('data-lucide', iconName);
             themeIconMobile.setAttribute('data-lucide', iconName);
-            
+
             // Update mobile button text
             mobileToggleText.textContent = isDark ? 'Toggle Light Mode' : 'Toggle Dark Mode';
 
@@ -1633,7 +1936,7 @@
         // 2. Attach Theme Listeners
         themeToggleDesktop.addEventListener('click', toggleTheme);
         themeToggleMobile.addEventListener('click', toggleTheme);
-        
+
         // --- Mobile Menu Toggle and Auto-Close Functionality (Existing) ---
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -1660,10 +1963,10 @@
 
         // --- Notes Search & Scalability Functionality (Existing) ---
         const searchInput = document.getElementById("notes-search");
-        const allNotes = document.querySelectorAll(".note-item"); 
+        const allNotes = document.querySelectorAll(".note-item");
         const noResults = document.getElementById("no-results");
         const loadMoreButton = document.getElementById("load-more-notes");
-        
+
         const NOTES_TO_SHOW_INITIAL = 6;
         const NOTES_TO_LOAD_PER_CLICK = 3;
 
@@ -1673,42 +1976,42 @@
             allNotes.forEach((note, index) => {
                 if (index >= NOTES_TO_SHOW_INITIAL) {
                     note.classList.add('hidden', 'hidden-note');
-                    note.style.display = 'block'; 
+                    note.style.display = 'block';
                     hiddenCount++;
                 } else {
                     note.classList.remove('hidden', 'hidden-note');
                     note.style.display = 'block';
                 }
             });
-            
+
             if (hiddenCount > 0) {
                 loadMoreButton.classList.remove('hidden');
             } else {
                 loadMoreButton.classList.add('hidden');
             }
         }
-        
+
         // 2. Load More function
         function loadMoreNotes() {
             const currentlyHidden = document.querySelectorAll('.note-item.hidden-note');
-            
+
             for (let i = 0; i < NOTES_TO_LOAD_PER_CLICK && i < currentlyHidden.length; i++) {
                 const note = currentlyHidden[i];
-                note.classList.remove('hidden', 'hidden-note'); 
+                note.classList.remove('hidden', 'hidden-note');
                 note.classList.add('faded-in');
                 setTimeout(() => note.classList.remove('faded-in'), 800);
             }
-            
+
             if (document.querySelectorAll('.note-item.hidden-note').length === 0) {
                 loadMoreButton.classList.add('hidden');
             }
         }
-        
+
         // 3. Search input listener
-        searchInput.addEventListener("keyup", function() {
+        searchInput.addEventListener("keyup", function () {
             const filter = searchInput.value.toLowerCase().trim();
             let visibleCount = 0;
-            
+
             loadMoreButton.classList.add('hidden');
 
             for (let note of allNotes) {
@@ -1717,24 +2020,24 @@
 
                 if (keywords.includes(filter) || title.includes(filter)) {
                     note.style.display = "block";
-                    note.classList.remove('hidden'); 
+                    note.classList.remove('hidden');
                     visibleCount++;
                 } else {
                     note.style.display = "none";
                 }
             }
-            
-            if(visibleCount === 0) {
+
+            if (visibleCount === 0) {
                 noResults.classList.remove('hidden');
             } else {
                 noResults.classList.add('hidden');
             }
-            
+
             if (filter === "") {
                 initializeNotesDisplay();
             }
         });
-        
+
         // --- Modal Interaction Logic (Unified for Notes and Academic Path) ---
         const customModal = document.getElementById('custom-modal');
         const modalTitlePrefix = document.getElementById('modal-title'); // The H3 element
@@ -1747,27 +2050,27 @@
         const ccvTrigger = document.getElementById('ccv-detail-trigger'); // CCV Timeline trigger
         const uvmTrigger = document.getElementById('uvm-detail-trigger'); // UVM Timeline trigger
         const int1050Trigger = document.getElementById('int1050-detail-trigger'); // Course trigger
-        
+
         // NEW BUTTON REFERENCE
         const fullOutlineButton = document.getElementById('full-outline-button');
 
         function openModal(prefix, title, contentHTML) {
             // Set the primary title based on whether it's a Note (prefix="Note: ") or a Pathway (prefix="")
-            modalTitlePrefix.textContent = prefix; 
-            modalDisplayTitle.textContent = title; 
-            
+            modalTitlePrefix.textContent = prefix;
+            modalDisplayTitle.textContent = title;
+
             modalNoteContent.innerHTML = contentHTML;
-            
+
             customModal.style.display = 'flex';
             customModal.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden'; 
+            document.body.style.overflow = 'hidden';
             lucide.createIcons(); // Re-render icons inside the modal content
         }
 
         function closeModal() {
             customModal.style.display = 'none';
             customModal.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = ''; 
+            document.body.style.overflow = '';
         }
 
         // Handler for Notebook entries
@@ -1780,8 +2083,8 @@
 
             const noteData = academicNotes[key];
             // Clean the title by removing the icon and extra spaces
-            const fullTitle = noteElement.querySelector('h4').textContent.replace(/[\u200B\s]/g, '').replace(/.*?>/g, ''); 
-            
+            const fullTitle = noteElement.querySelector('h4').textContent.replace(/[\u200B\s]/g, '').replace(/.*?>/g, '');
+
             openModal("Note: ", fullTitle, noteData.content);
         }
 
@@ -1874,7 +2177,7 @@
                 }
             });
         });
-        
+
         // 5. Attach Academic Studies trigger listener (Existing - in About section)
         if (studiesTrigger) {
             studiesTrigger.addEventListener('click', handleStudiesDetail);
@@ -1885,7 +2188,7 @@
                 }
             });
         }
-        
+
         // 6. Attach NEW Full Outline button listener
         if (fullOutlineButton) {
             fullOutlineButton.addEventListener('click', handleFullOutlineDetail);
@@ -1907,7 +2210,7 @@
                 }
             });
         }
-        
+
         // 8. Attach CCV Timeline trigger listener (Existing - in Timeline section)
         if (ccvTrigger) {
             ccvTrigger.addEventListener('click', handleCCVDetail);
@@ -1918,7 +2221,7 @@
                 }
             });
         }
-        
+
         // 9. Attach UVM Timeline trigger listener (Existing - in Timeline section)
         if (uvmTrigger) {
             uvmTrigger.addEventListener('click', handleUVMDetail);
@@ -1961,7 +2264,7 @@
             if (target) {
                 e.preventDefault();
                 const triggerKey = target.getAttribute('data-modal-trigger');
-                
+
                 switch (triggerKey) {
                     case 'week1-plp':
                         handleWeek1PLPDetail();
@@ -2022,9 +2325,9 @@
 
         // --- Intersection Observer for Fade-In Scroll Animation (UNCHANGED) ---
         const observerOptions = {
-            root: null, 
+            root: null,
             rootMargin: '0px',
-            threshold: 0.1 
+            threshold: 0.1
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -2048,4 +2351,5 @@
 
     </script>
 </body>
+
 </html>
