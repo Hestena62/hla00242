@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="SampleTestSuite" tests="2" failures="1">
-    <testcase classname="example.Class1" name="testMethod1"/>
-    <testcase classname="example.Class2" name="testMethod2">
-        <failure message="AssertionError">Expected true but was false</failure>
-    </testcase>
-</testsuite>
