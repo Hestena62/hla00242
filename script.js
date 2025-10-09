@@ -1,0 +1,5 @@
+const projects = [
+    { "id": "gilded-age-paper", "title": "The Gilded Age: An Economic Analysis", "description": "A research paper exploring the rapid social and economic shifts in 19th-century American cities.", "icon": "file-text", "color": "indigo", "tags": [ {"name": "History 101", "color": "indigo"}, {"name": "Research", "color": "sky"} ], "linkText": "Read Paper" },
+    { "id": "lesson-plan", "title": "US Government: The Bill of Rights", "description": "A detailed, universally designed lesson plan for 10th-grade history, including differentiated activities and choice assessments.", "icon": "book-open-check", "color": "orange", "tags": [ {"name": "Education", "color": "orange"}, {"name": "Inclusion/UDL", "color": "purple"} ], "linkText": "View Lesson Plan" },
+    { "id": "anthro-preso", "title": "Cultural Anthropology Presentation", "description": "A slide deck analyzing the cultural significance of rituals and symbols in modern societies.", "icon": "presentation", "color": "emerald", "tags": [ {"name": "Anthropology", "color": "red"}, {"name": "Presentation", "color": "blue"} ], "linkText": "See Presentation" }
+];
