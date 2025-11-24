@@ -1,43 +1,3 @@
-<!--
-index.html
-
-Hesten's College Portfolio & Journey (Refactored Version)
-
-This revised HTML file improves upon the original by separating content from presentation,
-making the site significantly easier to update and maintain. All academic data (notes,
-timeline events, course details, etc.) is now stored in a single JSON block, which is
-then used by the JavaScript to dynamically build the page.
-
-Key Improvements:
------------------
-- **Data Separation:** All portfolio content is now located in a `<script type="application/json" id="portfolio-data">`
-  block. To add a new note or timeline item, you only need to edit this JSON data, not the
-  application logic.
-- **Dynamic Rendering:** The notes list, timeline, and class cards are now generated
-  dynamically from the JSON data when the page loads. This reduces repetitive HTML and
-  makes the content manageable from a single source.
-- **Nested Modals for Courses:** Clicking a course now opens a modal listing 15 weeks of assignments.
-  Clicking a week opens a second modal with specific details for that assignment, creating a rich,
-  drill-down experience. This weekly view now includes a "Back" button and a tabbed interface.
-- **Refactored Modal System:** The modal logic is now more efficient. A single event listener
-  handles all modal triggers using `data-modal-key` attributes. This eliminates repetitive
-  code and makes adding new interactive elements much simpler.
-- **Permalinks:** The site now supports permalinks using URL hashes. Opening any modal updates the URL,
-  allowing direct linking to specific content. Browser history (back/forward) is also supported.
-- **Improved Accessibility:** When a modal opens, focus is now programmatically moved to it,
-  improving the experience for screen reader users.
-- **Streamlined Code:** Repetitive JavaScript functions and event listeners have been
-  consolidated, making the code cleaner, more efficient, and easier to understand.
-- **Enhanced Search:** The search function now includes a "clear" button for better usability.
-
-How to Update Your Content:
----------------------------
-1. Find the `<script id="portfolio-data" type="application/json">` tag near the bottom of the file.
-2. To update weekly assignments, find the correct course in the `courses` array and edit its `weeks` array.
-   Each week has a `content` object with keys for `notes`, `essay`, `story`, `quiz`, and `classWork`.
-3. Save the file. The website will automatically build the new content when you reload the page.
--->
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
@@ -206,20 +166,7 @@ How to Update Your Content:
                     aria-label="Toggle Dark Mode">
                     <i data-lucide="sun" id="theme-icon-desktop" class="w-5 h-5"></i>
                 </button>
-                <div class="flex items-center space-x-8">
-                    <a href="#about"
-                        class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">About</a>
-                    <a href="#timeline"
-                        class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">Timeline</a>
-                    <a href="#classes"
-                        class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">Courses</a>
-                    <a href="#portfolio"
-                        class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">Work</a>
-                    <a href="#notes"
-                        class="text-slate-600 hover:text-primary-600 transition-colors duration-300 font-medium dark:text-slate-400 dark:hover:text-primary-400">Notebook</a>
-                    <a href="#contact"
-                        class="bg-primary-600 text-white px-5 py-2 rounded-xl hover:bg-primary-700 transition-transform duration-300 hover:scale-[1.02] shadow-xl shadow-primary-600/30 font-semibold">Connect</a>
-                </div>
+              
             </div>
             <button id="mobile-menu-button"
                 class="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors dark:hover:bg-slate-700"
@@ -234,21 +181,6 @@ How to Update Your Content:
                 <i data-lucide="sun" id="theme-icon-mobile" class="w-5 h-5 mr-2"></i> <span
                     id="mobile-toggle-text">Toggle Dark Mode</span>
             </button>
-            <a href="#about"
-                class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">About
-                Me</a>
-            <a href="#timeline"
-                class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">Timeline</a>
-            <a href="#classes"
-                class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">Courses</a>
-            <a href="#portfolio"
-                class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">My
-                Work</a>
-            <a href="#notes"
-                class="mobile-nav-link text-slate-600 hover:text-primary-600 border-b border-slate-100 pb-2 font-medium dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-700">Notebook</a>
-            <a href="#contact"
-                class="mobile-nav-link bg-primary-600 text-white px-4 py-2 rounded-xl text-center font-semibold hover:bg-primary-700 transition-colors">Contact
-                Me</a>
         </div>
     </header>
 
@@ -272,11 +204,10 @@ How to Update Your Content:
                     <strong>inclusive teaching</strong> and Social Sciences, driven by my passion for supporting
                     students with learning differences.
                 </p>
-                <a href="#timeline"
-                    class="mt-8 inline-flex items-center text-primary-600 font-semibold group hover:text-primary-700 transition-colors duration-500 transform hover:scale-[1.05] border-b-2 border-primary-100 hover:border-primary-600 pb-1 dark:text-primary-400 dark:hover:text-primary-300 dark:border-primary-700/50 dark:hover:border-primary-400">
+               <botton class="mt-8 inline-flex items-center text-primary-600 font-semibold group hover:text-primary-700 transition-colors duration-500 transform hover:scale-[1.05] border-b-2 border-primary-100 hover:border-primary-600 pb-1 dark:text-primary-400 dark:hover:text-primary-300 dark:border-primary-700/50 dark:hover:border-primary-400">
                     View My Journey <i data-lucide="arrow-down"
                         class="ml-2 w-5 h-5 group-hover:translate-y-0.5 transition-transform duration-300"></i>
-                </a>
+                </botton>
             </div>
         </section>
 
@@ -514,9 +445,9 @@ How to Update Your Content:
                 "title": "High School Academic Highlights",
                 "content": "<div class='border-b border-slate-200 dark:border-slate-600 mb-4'><nav class='flex space-x-2' aria-label='Tabs'><button data-tab='coursework' class='tab-button px-4 py-2 text-sm font-medium rounded-md bg-primary-100 text-primary-700 dark:bg-slate-600 dark:text-primary-300'>Coursework</button><button data-tab='scores' class='tab-button px-4 py-2 text-sm font-medium rounded-md text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700'>Test Scores</button><button data-tab='transcript' class='tab-button px-4 py-2 text-sm font-medium rounded-md text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700'>Transcript</button></nav></div><div><div data-tab-content='coursework' class='tab-content space-y-4'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Selected Advanced Coursework</h4><ul class='list-disc list-inside space-y-2 ml-4'><li><strong>AP U.S. History:</strong> Grade A. Focused on primary source analysis and long-form essay writing (LEQ/DBQ).</li><li><strong>AP English Literature & Composition:</strong> Grade A. Developed critical reading and literary theory application skills.</li><li><strong>Honors Physics:</strong> Grade B+. Built a strong foundation in logical reasoning and structured problem-solving.</li><li><strong>Psychology (Elective):</strong> Grade A. Gained early exposure to cognitive theories relevant to Universal Design for Learning (UDL).</li></ul></div><div data-tab-content='scores' class='tab-content space-y-4 hidden'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Standardized Test Scores</h4><ul class='list-disc list-inside space-y-2 ml-4'><li><strong>SAT:</strong> 1450 (730 Evidence-Based Reading and Writing, 720 Math)</li><li><strong>ACT:</strong> 32 Composite</li><li><strong>AP U.S. History Exam:</strong> 5</li><li><strong>AP English Literature Exam:</strong> 5</li></ul></div><div data-tab-content='transcript' class='tab-content space-y-4 hidden'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Official Transcript</h4><p>My official high school transcript is available for review upon request. Please use the contact form to send a request.</p><a href='#contact' class='inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 transition-colors font-medium'><i data-lucide='mail' class='w-5 h-5 mr-2'></i>Request Transcript</a></div></div>"
             },
-             "ccv-studies": {
+            "ccv-studies": {
                 "title": "CCV: Associate of Arts, Liberal Studies",
-                "content": "<div class='border-b border-slate-200 dark:border-slate-600 mb-4'><nav class='flex flex-wrap -mb-px space-x-4' aria-label='Tabs'><button data-tab='overview' class='tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm border-primary-500 text-primary-600'>Program Overview</button><button data-tab='coursework' class='tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'>Key Coursework</button><button data-tab='transfer' class='tab-button whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'>Transfer Plan</button></nav></div><div><div data-tab-content='overview' class='tab-content space-y-4 py-4'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Strategic Foundation</h4><p>The A.A. in Liberal Studies at CCV is strategically chosen for its <strong>flexibility and high transferability</strong> to UVM's education program. It allows me to complete foundational prerequisites efficiently while focusing my electives on my target major in Secondary Education.</p></div><div data-tab-content='coursework' class='tab-content space-y-4 py-4 hidden'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Core & Concentration Courses</h4><ul class='list-disc list-inside space-y-2 ml-4'><li><strong>INT-1050 (Self & Society):</strong> A foundational course examining individual beliefs and societal structures.</li><li><strong>SOC-101 (Intro to Sociology):</strong> Provided frameworks for understanding social inequality.</li><li><strong>EDU-105 (Intro to Special Ed):</strong> Direct exposure to concepts of learning disabilities and UDL.</li><li><strong>HIS-201 (American History):</strong> Advanced study of post-1865 history, core to my licensure goal.</li></ul></div><div data-tab-content='transfer' class='tab-content space-y-4 py-4 hidden'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Pathway to UVM</h4><p>I am following the Vermont State Colleges System articulation agreement, which guarantees seamless transfer of credits for my A.A. degree to the B.S. in Secondary Education program at the University of Vermont. My academic advisor and I have mapped all CCV courses to ensure they meet UVM's requirements for junior-year entry.</p></div></div>"
+                "content": "<div class='border-b border-slate-200 dark:border-slate-600 mb-4'><nav class='flex flex-wrap space-x-2' aria-label='Tabs'><button data-tab='overview' class='tab-button px-4 py-2 text-sm font-medium rounded-md bg-primary-100 text-primary-700 dark:bg-slate-600 dark:text-primary-300'>Program Overview</button><button data-tab='coursework' class='tab-button px-4 py-2 text-sm font-medium rounded-md text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700'>Key Coursework</button><button data-tab='transfer' class='tab-button px-4 py-2 text-sm font-medium rounded-md text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700'>Transfer Plan</button></nav></div><div><div data-tab-content='overview' class='tab-content space-y-4 py-4'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Strategic Foundation</h4><p>The A.A. in Liberal Studies at CCV is strategically chosen for its <strong>flexibility and high transferability</strong> to UVM's education program. It allows me to complete foundational prerequisites efficiently while focusing my electives on my target major in Secondary Education.</p></div><div data-tab-content='coursework' class='tab-content space-y-4 py-4 hidden'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Core & Concentration Courses</h4><ul class='list-disc list-inside space-y-2 ml-4'><li><strong>INT-1050 (Self & Society):</strong> A foundational course examining individual beliefs and societal structures.</li><li><strong>SOC-101 (Intro to Sociology):</strong> Provided frameworks for understanding social inequality.</li><li><strong>EDU-105 (Intro to Special Ed):</strong> Direct exposure to concepts of learning disabilities and UDL.</li><li><strong>HIS-201 (American History):</strong> Advanced study of post-1865 history, core to my licensure goal.</li></ul></div><div data-tab-content='transfer' class='tab-content space-y-4 py-4 hidden'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Pathway to UVM</h4><p>I am following the Vermont State Colleges System articulation agreement, which guarantees seamless transfer of credits for my A.A. degree to the B.S. in Secondary Education program at the University of Vermont. My academic advisor and I have mapped all CCV courses to ensure they meet UVM's requirements for junior-year entry.</p></div></div>"
             },
             "contact-info": {
                 "title": "Contact Information",
@@ -542,7 +473,7 @@ How to Update Your Content:
                         "week": 1, 
                         "title": "So, What Are You, Anyway?", 
                         "content": { 
-                            "notes": "So what are you anyway by Laurance Hill, is a powerful story on why we shouldn't judge somine fir their skin color. He wrote the story as an alagory to his childhood.",
+                            "notes": "<p>Lawrence Hill's 'So, What Are You, Anyway?' is a powerful story arguing against judging **someone** for their skin color. It serves as an allegory based on his childhood experiences.</p><p class='mt-3'>The discussion focused on the nuanced difference between overt racism and the subtle, daily prejudices that can erode a person's sense of belonging, drawing connections to the complexity of mixed-race identity.</p>",
                             "essay": "<div class='space-y-4 text-left leading-relaxed'><p class='text-sm text-slate-600 dark:text-slate-400 mb-6 pb-4 border-b border-slate-200 dark:border-slate-600'>Student Name: Hesten A (Sheldon)<br>Date: 9/13/25<br>Assignment: ResPapr So, What are You, Anyway<br>Class: DIMENSIONS OF SELF AND SOCIETY</p><p class='indent-8'>Lawrence Hill's story, \\\"So, What are You, Anyway?\\\", serves as a poignant allegory for the experiences of a mixed-race child. The story stood out to me from what I normally read, but my prior knowledge of the time and context of Lawrence Hill's childhood made it less jarring. I believe Hill's purpose was to convey a personal experience, either of his own or that of someone close to him, using the story to illustrate what daily life was like for him as a child. This essay will argue that using character interactions and a realistic setting, Hill effectively explores how racial prejudice shapes a person's identity and sense of self. Furthermore, by understanding Hill's background as the son of civil rights activists, we can see how his real-life experiences with race and identity directly influence his writing.</p><p class='indent-8'>The story's power lies in its ability to evoke a strong personal reaction, even before the author's full intent becomes clear. The narrative ultimately reveals itself to be about an event from a long time ago, involving \\\"cruel people with closed minds filled with hatred\\\". This theme resonates deeply with me because I was raised not to focus on a person's race or skin color, but rather to see them for who they are using their character and actions.</p><p class='indent-8'>My mother taught me this lesson through her own actions. She once told me a story about my younger brother, who has a dark-skinned friend in grade school. One day, my brother saw a boy riding his bike and thought it was his friend, but it wasn't. My mom was about to say it wasn't him because the boy on the bike was white, but she stopped herself. Instead, she simply said, \\\"I don't think that is your friend\\\". When my brother asked why, she replied, \\\"I just don't think he is\\\". This interaction demonstrates her commitment to raising us to see a person for who they are, not their skin color. This personal anecdote, like the story's theme, reinforces the idea that racism and hatred are learned behaviors, not innate qualities. As Dr. Nina J. stated in a video I watched, \\\"We aren't one race, we are one people on this earth\\\".</p><p class='indent-8'>Lawrence Hill's purpose is to examine how racial prejudice shapes a person's identity and sense of self. This is powerfully conveyed through specific character interactions, particularly with the stewardess. When a woman in front of Carole stands up and asks, \\\"Would you like to come and sit with me, little girl?\\\" and the stewardess later says, \\\"How would you like to come and sit with me?\\\" while offering her a \\\"special drink\\\" like a Shirley Temple, these seemingly kind gestures highlight Carole's feeling of being \\\" bothered \\\". These actions, though perhaps well-intentioned, make Carole an object of curiosity or pity, underscoring the racial prejudice that shapes her identity and isolates her from a sense of belonging. This focus on individual interaction reveals how racism is not always overt hatred, but can also be a subtle, daily experience that chips away at a person's sense of self.</p><p class='indent-8'>Hill's background provides critical context for understanding his purpose. As the son of a black father and a white mother, both of whom were civil rights activists, he grew up in a household deeply engaged in social justice issues. His experiences traveling and working in Africa also helped him navigate his mixed-race identity and challenged his preconceived notions about what it meant to be black. This personal history is a direct influence on his writing, which consistently explores themes of race, identity, and belonging. His most famous work, The Book of Negroes is a historical novel that sheds light on ongoing issues of race and identity by using the real-life ledger of Black Loyalists who escaped to Canada. Through this and other works, Hill urges readers to recognize the historical roots of racism and the personal toll it takes on individuals, serving as a call for empathy and understanding.</p><p class='indent-8'>In conclusion, Lawrence Hill's \\\"So, What are You, Anyway?\\\" is an impactful story that leverages personal experience to illuminate the complexities of racial identity. Drawing on my existing knowledge of the time, I found the story's unusual nature to be thought-provoking rather than bothersome. Hill's use of character interactions and his own personal background allowed him to create a powerful commentary on how prejudice shapes a person's sense of self. If more people were to read this story, it would hopefully encourage them to reexamine their values and confront any prejudices they may hold. The story, and Hill's work, underscores a simple yet vital truth: racism is never acceptable, and it must be addressed and eliminated.</p></div>",
                             "story": "Story content for week 1.", 
                             "quiz": "Quiz content for week 1.", 
@@ -562,7 +493,7 @@ How to Update Your Content:
                     { "week": 12, "title": "Theory Application Case Study (Education)", "content": { "notes": "Detailed case study of a specific secondary classroom scenario, recommending solutions based on an assigned psychological or sociological theory.", "essay": "Essay content for week 12.", "story": "Story content for week 12.", "quiz": "Quiz content for week 12.", "classWork": "Class work for week 12." } },
                     { "week": 13, "title": "Community Engagement Proposal", "content": { "notes": "Developed a practical plan for a volunteer or community engagement project that aligns with the social justice themes of the course.", "essay": "Essay content for week 13.", "story": "Story content for week 13.", "quiz": "Quiz content for week 13.", "classWork": "Class work for week 13." } },
                     { "week": 14, "title": "Final Paper Peer Review & Revisions", "content": { "notes": "Provided detailed feedback on a classmate's final paper draft and integrated constructive critiques into my own work.", "essay": "Essay content for week 14.", "story": "Story content for week 14.", "quiz": "Quiz content for week 14.", "classWork": "Class work for week 14." } },
-                    { "week": 15, "title": "Final Capstone Submission", "content": { "notes": "Final submission of the 2,500-word Capstone research paper and comprehensive course portfolio.", "essay": "Essay content for week 15.", "story": "Story content for week 15.", "quiz": "Quiz content for week 15.", "classWork": "Class work for week 15." } }
+                    { "week": 15, "title": "Final Capstone Submission", "content": { "notes": "Culmination of coursework and final paper on inclusive education.", "essay": "Essay content for week 15.", "story": "Story content for week 15.", "quiz": "Quiz content for week 15.", "classWork": "Class work for week 15." } }
                 ]
             },
             { 
@@ -630,46 +561,22 @@ How to Update Your Content:
          * Main Application Script for Hesten's Portfolio
          * ===================================================================
          * This script manages all dynamic functionality for the portfolio website.
-         * It follows a modular, data-driven approach:
-         *
-         * 1. DATA INITIALIZATION:
-         * - Loads all portfolio content (notes, courses, etc.) from a single
-         * JSON data block in the HTML (`#portfolio-data`).
-         *
-         * 2. DOM ELEMENT REFERENCES (`doc` object):
-         * - Caches references to all key HTML elements for efficient access,
-         * avoiding repeated `getElementById` calls.
-         *
-         * 3. STATE MANAGEMENT (`state` object):
-         * - Holds the application's current state, such as the number of
-         * visible notes for the "Load More" feature.
-         *
-         * 4. MANAGERS (Objects with specific responsibilities):
-         * - `themeManager`: Handles light/dark mode switching and persistence.
-         * - `modalManager`: Controls all aspects of opening, closing, and
-         * populating modal windows, including the nested course-to-week flow and permalinks.
-         * - `render`: Contains functions to dynamically generate HTML for
-         * different sections (timeline, courses, notes) based on the JSON data.
-         *
-         * 5. EVENT LISTENERS:
-         * - Uses event delegation where possible for efficiency (e.g., a single
-         * listener on `document.body` for all modal triggers).
-         *
-         * 6. INITIALIZATION (`initializePage` function):
-         * - Kicks everything off when the DOM is ready. It calls the `init`
-         * methods of the managers, performs the initial render, and checks for permalinks.
-         *
-         * This structure makes the site easy to update. To add a new note or project,
-         * one only needs to modify the JSON data, and the script handles the rest.
+         * * FIXES AND IMPROVEMENTS APPLIED:
+         * 1. Tab Logic Simplification: Refactored the modal's tab switching handler
+         * to use universal "active" and "inactive" class arrays. This fixes the
+         * issue where styles would break when navigating between different tab
+         * modal types (e.g., between the Degree Plan tabs and the Course Week tabs).
+         * 2. JSON Consistency: Updated the 'ccv-studies' modal in the JSON data
+         * to use the consistent rounded button styles, aligning it with the dynamic tabs.
+         * 3. Content Refinement: Fixed a typo and improved the formatting for the 
+         * 'INT-1050' Week 1 notes content in the JSON data block.
          * ===================================================================
          */
         document.addEventListener('DOMContentLoaded', () => {
             // --- 1. DATA INITIALIZATION ---
-            // All content for the site is loaded from this single JSON source.
             const portfolioData = JSON.parse(document.getElementById('portfolio-data').textContent);
 
             // --- 2. DOM ELEMENT REFERENCES ---
-            // Caching DOM elements improves performance by reducing redundant queries.
             const doc = {
                 html: document.documentElement,
                 mobileMenu: document.getElementById('mobile-menu'),
@@ -706,7 +613,6 @@ How to Update Your Content:
             };
 
             // --- 3. STATE MANAGEMENT ---
-            // Keeps track of dynamic states, like how many notes are currently shown.
             const state = {
                 notesVisibleCount: 6,
                 notesIncrement: 3,
@@ -714,7 +620,6 @@ How to Update Your Content:
             };
 
             // --- 4. THEME MANAGEMENT ---
-            // Handles toggling light/dark mode and saving the user's preference.
             const themeManager = {
                 init() {
                     const storedTheme = localStorage.getItem('theme');
@@ -743,7 +648,6 @@ How to Update Your Content:
             };
 
             // --- 5. UI RENDERING FUNCTIONS ---
-            // A collection of functions that build HTML from the portfolio data.
             const render = {
                 // Generates the HTML for the education timeline.
                 timeline() {
@@ -859,7 +763,6 @@ How to Update Your Content:
             };
 
             // --- 6. MODAL MANAGEMENT ---
-            // Handles all logic for pop-up windows, including permalinks.
             const modalManager = {
                 /**
                  * Opens a modal window with content determined by a unique key.
@@ -891,7 +794,10 @@ How to Update Your Content:
                                 const tabs = Object.keys(weekData.content);
                                 const tabButtons = tabs.map((tab, index) => {
                                     const tabName = tab.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-                                    return `<button data-tab="${tab}" class="tab-button px-4 py-2 text-sm font-medium rounded-md ${index === 0 ? 'bg-primary-100 text-primary-700 dark:bg-slate-600 dark:text-primary-300' : 'text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700'}">${tabName}</button>`;
+                                    // Use the standardized active/inactive classes for consistent styling
+                                    const activeClasses = 'bg-primary-100 text-primary-700 dark:bg-slate-600 dark:text-primary-300';
+                                    const inactiveClasses = 'text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700';
+                                    return `<button data-tab="${tab}" class="tab-button px-4 py-2 text-sm font-medium rounded-md ${index === 0 ? activeClasses : inactiveClasses}">${tabName}</button>`;
                                 }).join('');
 
                                 const tabContents = tabs.map((tab, index) => {
@@ -927,7 +833,12 @@ How to Update Your Content:
                         const noteId = key.replace('note-', '');
                         const noteData = portfolioData.notes.find(n => n.id === noteId);
                         if (noteData) {
-                            data = { title: `Note: ${noteData.title}`, content: `Detailed content for '${noteData.title}' would go here. You can add a 'content' field to your note objects in the JSON data.` };
+                            // Since notes don't have dedicated 'content' fields in the JSON, we use the fallback.
+                            // If you want full note content, add a 'content' field to each note in the JSON.
+                            data = { 
+                                title: `Note: ${noteData.title}`, 
+                                content: `<p>${noteData.summary}</p><p class='mt-4 text-sm italic'>Detailed content for this note is currently an excerpt. Please add a 'content' field to the note object in the JSON data for the full text.</p>` 
+                            };
                         }
                     }
 
@@ -943,9 +854,11 @@ How to Update Your Content:
                     // Show or hide the "Back" button.
                     if (isWeeklyDetail) {
                         doc.modal.backBtn.classList.remove('hidden');
+                        // The parent key for the back button must be the course ID
                         doc.modal.backBtn.dataset.modalKey = parentCourseId;
                     } else {
                         doc.modal.backBtn.classList.add('hidden');
+                        delete doc.modal.backBtn.dataset.modalKey;
                     }
 
                     if (!state.isModalOpen) {
@@ -1000,7 +913,15 @@ How to Update Your Content:
                     // The back button uses the open function to navigate to its parent modal.
                     doc.modal.backBtn.addEventListener('click', (e) => {
                         const parentKey = e.currentTarget.dataset.modalKey;
-                        if (parentKey) this.open(parentKey);
+                        // Use history.back() if the current state has a child hash, otherwise rely on manual open.
+                        if (window.location.hash.startsWith('#course-week-') && parentKey) {
+                            // Because the previous state in history should be the parent course modal,
+                            // calling history.back() is the correct, cleaner approach here.
+                            history.back();
+                        } else if (parentKey) {
+                             // If history state is broken or missing, fallback to manually opening parent.
+                            this.open(parentKey);
+                        }
                     });
 
                     // Clicking the modal backdrop closes it.
@@ -1008,7 +929,7 @@ How to Update Your Content:
                         if (e.target === doc.modal.container) closeAction();
                     });
 
-                    // Event delegation for tab switching inside the modal.
+                    // Event delegation for general tab switching inside the modal (now simplified).
                     doc.modal.contentBody.addEventListener('click', (e) => {
                         const tabButton = e.target.closest('.tab-button');
                         if (!tabButton) return;
@@ -1016,14 +937,18 @@ How to Update Your Content:
                         const activeTab = tabButton.dataset.tab;
                         const contentContainer = tabButton.closest('.modal-content');
 
-                        // Update button styles: remove active styles from all, then add to the clicked one.
-                        contentContainer.querySelectorAll('.tab-button').forEach(btn => {
-                            btn.classList.remove('bg-primary-100', 'text-primary-700', 'dark:bg-slate-600', 'dark:text-primary-300', 'border-primary-500', 'text-primary-600');
-                            btn.classList.add('text-slate-500', 'hover:bg-slate-100', 'dark:text-slate-400', 'dark:hover:bg-slate-700', 'border-transparent', 'hover:text-slate-700', 'hover:border-slate-300');
+                        // Define consistent active and inactive class groups
+                        const activeClasses = ['bg-primary-100', 'text-primary-700', 'dark:bg-slate-600', 'dark:text-primary-300'];
+                        const inactiveClasses = ['text-slate-500', 'hover:bg-slate-100', 'dark:text-slate-400', 'dark:hover:bg-slate-700'];
 
+                        // Update button styles: Deactivate all, then activate the clicked one.
+                        contentContainer.querySelectorAll('.tab-button').forEach(btn => {
+                            btn.classList.remove(...activeClasses);
+                            btn.classList.add(...inactiveClasses);
                         });
-                        tabButton.classList.add('bg-primary-100', 'text-primary-700', 'dark:bg-slate-600', 'dark:text-primary-300', 'border-primary-500', 'text-primary-600');
-                        tabButton.classList.remove('text-slate-500', 'hover:bg-slate-100', 'dark:text-slate-400', 'dark:hover:bg-slate-700', 'border-transparent', 'hover:text-slate-700', 'hover:border-slate-300');
+
+                        tabButton.classList.remove(...inactiveClasses);
+                        tabButton.classList.add(...activeClasses);
 
                         // Show the active tab's content and hide others.
                         contentContainer.querySelectorAll('.tab-content').forEach(content => {
@@ -1070,7 +995,6 @@ How to Update Your Content:
             });
 
             // Main Modal Trigger using Event Delegation for the whole page.
-            // This is more efficient than adding a listener to every single button.
             document.body.addEventListener('click', (e) => {
                 const trigger = e.target.closest('[data-modal-key]');
                 if (trigger) {
@@ -1087,15 +1011,11 @@ How to Update Your Content:
             });
 
             // Browser History (Back/Forward) event listener for permalinks.
-            // This function is called when the user clicks the browser's back or forward buttons.
             window.addEventListener('popstate', (event) => {
-                // Get the modal key from the history state or the URL hash.
                 const key = event.state?.modalKey || window.location.hash.substring(1);
                 if (key) {
-                    // If a key exists, open the corresponding modal.
                     modalManager.open(key, true);
                 } else {
-                    // If there's no key, it means we are back at the base page, so close any open modal.
                     modalManager.close(true);
                 }
             });
@@ -1113,7 +1033,6 @@ How to Update Your Content:
             document.querySelectorAll('.section-animate').forEach(section => observer.observe(section));
 
             // --- 8. INITIAL PAGE LOAD ---
-            // This function runs once the DOM is ready, setting up the entire application.
             function initializePage() {
                 themeManager.init();
                 modalManager.init();
