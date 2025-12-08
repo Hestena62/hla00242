@@ -1,220 +1,213 @@
 <!--
-================================================================================
-| HESTEN'S ACADEMIC PORTFOLIO & JOURNEY - FULL DOCUMENTATION
-================================================================================
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                  HESTEN'S ACADEMIC PORTFOLIO - DOCUMENTATION                 ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 
-PROJECT OVERVIEW:
-A responsive, fully interactive single-page academic portfolio website built with
-Tailwind CSS and Lucide Icons. The site showcases Hesten's educational path from
-high school through Community College of Vermont (CCV) to the University of Vermont
-(UVM), including coursework, projects, research, and a searchable digital notebook.
+PROJECT OVERVIEW
+═══════════════════════════════════════════════════════════════════════════════
+A responsive, single-page academic portfolio showcasing Hesten's educational 
+journey from Community College of Vermont (CCV) to University of Vermont (UVM).
+Built with vanilla JavaScript, Tailwind CSS, and Lucide icons.
 
-KEY FEATURES:
-1. Dark/Light Theme Toggle - Persistent across sessions via localStorage
-2. Dynamic Content Management - All content driven by JSON data structure
-3. Interactive Modal System - Detailed views with tabbed interfaces and navigation
-4. Browser History Support - Full back/forward functionality and shareable permalinks
-5. Responsive Design - Mobile-first approach with Tailwind CSS breakpoints
-6. Accessibility - ARIA labels, semantic HTML, keyboard navigation support
-7. Animated Sections - Intersection Observer for fade-in-on-scroll effects
-8. Searchable Notes - Real-time filtering with "Load More" pagination
+FEATURES
+═══════════════════════════════════════════════════════════════════════════════
+✓ Dark/Light theme toggle with localStorage persistence
+✓ Dynamic JSON-driven content rendering
+✓ Modal system with deep linking support (History API)
+✓ Responsive navigation with mobile menu
+✓ Intersection Observer for fade-in animations
+✓ Searchable notes/snippets with pagination
+✓ Interactive timeline with expandable details
+✓ Tabbed course modules with weekly assignments
+✓ Keyboard navigation (Escape to close modals)
+✓ Accessibility-first design (semantic HTML, ARIA labels)
 
-================================================================================
-| TECHNICAL ARCHITECTURE
-================================================================================
+MAIN SECTIONS
+═══════════════════════════════════════════════════════════════════════════════
 
-HTML STRUCTURE:
-- Header with sticky navigation and theme toggle
-- Hero section with animated gradient background
-- About section with modal-triggered degree plan overview
-- Timeline section showing education milestones (clickable for details)
-- Current coursework grid with expandable weekly assignments
-- Portfolio section showcasing academic projects and work
-- Digital notebook with searchable notes and filtering
-- Contact section with modal for contact information
-- Footer with social links
-- Hidden modal container for dynamic content display
+1. HERO SECTION
+    - Animated blob backgrounds using mix-blend-multiply
+    - Call-to-action buttons (View Coursework, Contact Me)
 
-STYLING & THEMING:
-- Tailwind CSS v3 with custom config for colors, fonts, and shadows
-- Custom Inter font from Google Fonts for consistent typography
-- Dark mode support with 'dark' class on root HTML element
-- Primary color scheme: Sky Blue (#0284c7 - primary-600)
-- Custom shadows: 'lg-2', 'xl-2', 'dark-xl-2' for depth
-- Lucide Icons integration for scalable, crisp iconography
-- Smooth animations: fade-in, fade-in-scale, and scroll-triggered reveals
+2. ABOUT SECTION
+    - Bio and academic background
+    - Current focus areas (Full Stack Dev, Data Structures, Tech Writing)
+    - Modal link to detailed academic philosophy
 
-================================================================================
-| DATA STRUCTURE (JSON)
-================================================================================
+3. TIMELINE SECTION
+    - Responsive vertical timeline (alternating left/right on desktop)
+    - 4 major milestones with expandable modals
+    - Color-coded by achievement type
 
-The portfolio data is centralized in a single JSON object with five main sections:
+4. COURSEWORK SECTION
+    - Grid layout of current courses
+    - Click to open detailed course modal with week-by-week breakdown
+    - Each week includes: notes, assignments, quiz results
 
-1. MODALS OBJECT:
-    - Stores detailed content for various clickable triggers
-    - Keys: 'studies-overview', 'full-degree-plan', 'transcripts', 'hs-diploma',
-      'ccv-studies', 'contact-info'
-    - Content includes HTML with tabs for multi-section displays
+5. PORTFOLIO/PROJECTS SECTION
+    - 4 featured projects with descriptions and tech stack tags
+    - Interactive cards with detailed project modals
+    - Links to GitHub profile
 
-2. TIMELINE ARRAY:
-    - Objects representing educational milestones
-    - Fields: id, date, title, description, icon, color, align (left/right)
-    - Used to generate the alternating timeline visualization
-    - Marks current status with 'active: true' property
+6. DIGITAL NOTEBOOK SECTION
+    - 8+ searchable study notes/snippets
+    - Full-text search by title and keywords
+    - Pagination ("Load More" button)
+    - Each note has summary and expanded full content
 
-3. COURSES ARRAY:
-    - Course objects with weekly assignments nested inside
-    - Fields: id, semester, title, description, icon, color, weeks[]
-    - Each week contains: week number, title, and content (notes, essay, quiz, etc.)
-    - Supports expandable tabbed interfaces for rich content display
+TECHNICAL ARCHITECTURE
+═══════════════════════════════════════════════════════════════════════════════
 
-4. PROJECTS ARRAY:
-    - Portfolio project cards with metadata
-    - Fields: id, title, description, icon, color, tags[], linkText
-    - Tags support color-coded styling for categorization
+STYLESHEETS & SCRIPTS:
+• Tailwind CSS (CDN + custom config)
+• Lucide Icons (SVG library)
+• Google Fonts (Inter, sans-serif)
+• Custom animations (fade-in, blob, modal transitions)
 
-5. NOTES ARRAY:
-    - Searchable digital notebook entries
-    - Fields: id, title, summary, icon, keywords
-    - Keywords support fuzzy filtering across multiple terms
-    - Supports pagination with "Load More" functionality
+STATE MANAGEMENT:
+  Object: state
+  - notesVisibleCount: Number of notes to display (default 6)
+  - notesIncrement: Pagination step (default 3)
+  - isModalOpen: Boolean flag for modal state
+  - currentTheme: 'dark' or 'light'
 
-================================================================================
-| JAVASCRIPT FUNCTIONALITY
-================================================================================
+CORE MODULES:
 
-STATE MANAGEMENT (state object):
-- notesVisibleCount: Tracks how many notes are displayed (initial: 6)
-- notesIncrement: How many notes to load per "Load More" click (3)
-- isModalOpen: Boolean flag for modal visibility state
+1. themeManager
+    init()          - Initialize theme from localStorage/system preference
+    toggle()        - Switch between dark/light mode
+    updateIcons()   - Refresh Lucide icons after theme change
 
-THEME MANAGER (themeManager):
-- init(): Detects OS dark mode preference and loads stored preference
-- toggle(): Switches between light/dark modes
-- setTheme(theme): Applies theme class, updates localStorage, and re-renders icons
+2. render
+    init()          - Render all sections + setup observers
+    timeline()      - Generate timeline items from portfolioData
+    courses()       - Generate course cards grid
+    projects()      - Generate project cards grid
+    notes()         - Generate note cards with filtering support
+    observeAnimations() - Setup Intersection Observer for fade-in
 
-RENDER FUNCTIONS:
-- render.timeline(): Generates alternating left/right timeline items
-- render.courses(): Creates course cards with semester and description
-- render.portfolio(): Builds project cards with tags and hover effects
-- render.notes(filter): Generates searchable notes with optional text filtering
+3. modalManager
+    open(key)       - Open modal by key (static modal, timeline, project, note, course)
+    close()         - Animate and close modal
+    generateTabs()  - Create tabbed interface for course modules
+    setupTabs()     - Attach click handlers to tab buttons
 
-MODAL MANAGER (modalManager):
-- open(key, isFromHistory): Displays modal with dynamic content based on key
-  * Handles nested course-week modals with tab interfaces
-  * Generates on-the-fly tab HTML for week content
-  * Updates browser URL hash for shareable permalinks
-- close(isFromHistory): Hides modal and restores page scrollability
-- init(): Binds all modal event listeners including close, escape, backdrop click
-  * Implements simplified tab-switching with class management
-  * Supports back button navigation between parent and child modals
+DATA STRUCTURE
+═══════════════════════════════════════════════════════════════════════════════
 
-BROWSER HISTORY:
-- Uses History API (pushState/popstate) for deep linking
-- Modal permalinks are shareable: example.com#course-week-int-1050-1
-- Back/forward buttons seamlessly navigate between modals
-- Prevents duplicate history entries for manual opens vs. history navigation
-
-EVENT LISTENERS:
-1. Mobile Menu Toggle - Hamburger menu with icon animation
-2. Theme Toggle - Desktop and mobile dark mode switches
-3. Notes Search - Real-time filtering with clear button
-4. Load More Notes - Pagination for large note collections
-5. Modal Triggers - Event delegation on all [data-modal-key] elements
-6. Keyboard Support - Enter/Space to open modals, Escape to close
-7. Scroll Animations - Intersection Observer for fade-in effects
-8. Backdrop Click - Closes modal when clicking outside content
-
-================================================================================
-| ACCESSIBILITY FEATURES
-================================================================================
-
-- ARIA Labels: All interactive elements have descriptive aria-label attributes
-- Role Attributes: Proper roles for buttons, dialogs, and navigation
-- Semantic HTML: <header>, <nav>, <main>, <section>, <footer> for structure
-- Keyboard Navigation: Tab order, Enter/Space for activation, Escape to close
-- Focus Management: Modal container receives focus when opened
-- Color Contrast: WCAG AA compliant throughout light and dark modes
-- Focus Visible Styles: Custom 3px outline on focused interactive elements
-- Alt Text: Icons have proper descriptions via aria-label
-
-================================================================================
-| RESPONSIVE DESIGN BREAKPOINTS
-================================================================================
-
-- Mobile (default): Single column, full-width layouts
-- Tablet (md: 768px): Two-column grids, adjusted padding, hidden desktop nav
-- Desktop (lg: 1024px): Three-column grids, full navigation, optimized spacing
-
-================================================================================
-| CUSTOMIZATION GUIDE
-================================================================================
-
-To update portfolio content:
-1. Edit the JSON data in the <script id="portfolio-data"> block
-2. Add/remove/modify modals, timeline events, courses, projects, and notes
-3. For new course weeks, add objects to the weeks[] array with content fields
-4. Icons use Lucide icon names (e.g., 'book-open', 'graduation-cap')
-5. Colors use Tailwind class names (e.g., 'primary', 'green', 'purple')
-6. Changes are instantly reflected—no rebuild required
-
-ADDING A NEW NOTE:
-{
-  "id": "unique-id",
-  "title": "Note Title",
-  "summary": "Brief description",
-  "icon": "lucide-icon-name",
-  "keywords": "searchable keywords space separated"
+portfolioData = {
+  modals: {
+     'contact-info': { title, content (HTML) },
+     'studies-overview': { title, content (HTML) }
+  },
+  timeline: [
+     { id, date, title, description, icon, color, align, details, active }
+  ],
+  courses: [
+     { 
+        id, semester, title, description, icon, color,
+        weeks: [{ week, title, content: { notes, assignment, quiz } }]
+     }
+  ],
+  projects: [
+     { id, title, description, icon, tags, color, details }
+  ],
+  notes: [
+     { id, title, summary, keywords, fullContent }
+  ]
 }
 
-ADDING A NEW COURSE WEEK:
-{
-  "week": 1,
-  "title": "Week Title",
-  "content": {
-     "notes": "HTML content for notes tab",
-     "essay": "HTML content for essay tab",
-     "story": "HTML content for story tab",
-     "quiz": "HTML content for quiz tab",
-     "classWork": "HTML content for classWork tab"
-  }
-}
+MODAL ROUTING PATTERNS
+═══════════════════════════════════════════════════════════════════════════════
+data-modal-key="contact-info"      → Static modal from portfolioData.modals
+data-modal-key="studies-overview"  → Static modal from portfolioData.modals
+data-modal-key="timeline-1"        → Timeline item #1
+data-modal-key="course-cis-2230"   → Course with tabbed weeks
+data-modal-key="project-p1"        → Project details
+data-modal-key="note-3"            → Note/snippet full content
 
-================================================================================
-| BROWSER COMPATIBILITY
-================================================================================
+ACCESSIBILITY FEATURES
+═══════════════════════════════════════════════════════════════════════════════
+✓ Semantic HTML5 (nav, main, section, footer, article)
+✓ aria-label on icon-only buttons
+✓ aria-hidden on modal backdrop
+✓ aria-modal on modal dialog
+✓ role="dialog" on modal container
+✓ WCAG color contrast ratios maintained
+✓ Keyboard navigation (Tab, Escape)
+✓ Lucide icons with accessible SVG structure
 
-- Modern browsers with ES6 support (Chrome, Firefox, Safari, Edge)
-- CSS Grid and Flexbox for layout
-- CSS custom properties and modern CSS animations
-- Intersection Observer API for scroll animations
-- LocalStorage for theme persistence
-- History API for browser back/forward support
+BROWSER COMPATIBILITY
+═══════════════════════════════════════════════════════════════════════════════
+✓ Modern browsers (Chrome, Firefox, Safari, Edge)
+✓ CSS Grid, Flexbox, CSS Variables
+✓ ES6+ JavaScript (arrow functions, template literals, spread operator)
+✓ LocalStorage API
+✓ History API (for deep linking)
+✓ Intersection Observer API
 
-================================================================================
+RESPONSIVE BREAKPOINTS
+═══════════════════════════════════════════════════════════════════════════════
+• Mobile (default)
+• md: 768px
+• lg: 1024px
+• Tailwind's responsive prefixes (md:, lg:) used throughout
+
+KEY EVENT LISTENERS
+═══════════════════════════════════════════════════════════════════════════════
+• DOMContentLoaded → Initialize app
+• click #theme-toggle → Toggle dark mode
+• click #mobile-menu-btn → Toggle mobile menu
+• input #notes-search → Filter notes in real-time
+• click [data-modal-key] → Trigger modal (delegated)
+• click #modal-close → Close modal
+• click #modal-backdrop → Close modal (backdrop click)
+• keydown (Escape) → Close modal
+• popstate → Handle browser back/forward with History API
+
+CUSTOMIZATION NOTES
+═══════════════════════════════════════════════════════════════════════════════
+To add/modify content:
+1. Edit portfolioData object in <script id="portfolio-data">
+2. Update timeline, courses, projects, notes arrays
+3. Modal content is HTML-rendered (innerHTML safe for trusted content)
+4. Tailwind config colors available: primary-* (sky blue), dark.* (slate)
+
+To add new modal types:
+1. Add entry to portfolioData.modals OR
+2. Add conditional branch in modalManager.open() with new key pattern
+3. Trigger with: <div data-modal-key="my-key">
+
+DEPLOYMENT CONSIDERATIONS
+═══════════════════════════════════════════════════════════════════════════════
+✓ Single HTML file - no build step required
+✓ CDN dependencies: Tailwind, Lucide, Google Fonts (requires internet)
+✓ All data embedded in <script id="portfolio-data">
+✓ No backend required
+✓ Works with static hosting (GitHub Pages, Vercel, Netlify, etc.)
+
+VERSION: 1.0
+CREATED: 2024
+AUTHOR: Hesten's Portfolio
 -->
 
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hesten's College Portfolio & Journey</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesten's Academic Portfolio & Journey</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+    
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-
-    <!-- Custom Tailwind Config -->
+    <!-- Tailwind Config & Custom Styles -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -224,1036 +217,1076 @@ ADDING A NEW COURSE WEEK:
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        'primary': {
+                        primary: {
                             50: '#f0f9ff',
                             100: '#e0f2fe',
-                            400: '#38bdf8',
-                            600: '#0284c7',
+                            500: '#0ea5e9',
+                            600: '#0284c7', // Sky Blue
                             700: '#0369a1',
+                            900: '#0c4a6e',
                         },
-                        'dark': '#0f172a',
-                        'dark-card': '#1e293b',
+                        dark: {
+                            bg: '#0f172a',
+                            card: '#1e293b',
+                            text: '#f1f5f9'
+                        }
                     },
                     boxShadow: {
-                        'lg-2': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03)',
-                        'xl-2': '0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.02)',
-                        'dark-xl-2': '0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1)',
+                        'lg-2': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                        'xl-2': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                        'dark-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3)',
                     }
-                },
+                }
             }
         }
     </script>
 
-    <!-- Custom Style -->
     <style>
+        /* Custom Utilities */
         body {
+            font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background: linear-gradient(to bottom, #fcfcfc, #f8faff);
+        }
+        
+        /* Hide scrollbar for clean modal content */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
-        .dark body {
-            background: #0f172a;
-        }
-
-        .hero-bg-pattern {
-            background-image: url("data:image/svg+xml;utf8,<svg width='10' height='10' viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'><circle cx='1' cy='1' r='1' fill='%23e5f3ff'/></svg>");
-            background-size: 30px 30px;
-        }
-
-        .dark .hero-bg-pattern {
-            background-image: url("data:image/svg+xml;utf8,<svg width='10' height='10' viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'><circle cx='1' cy='1' r='1' fill='%23334155'/></svg>");
-        }
-
-        .section-animate {
+        /* Animation Classes */
+        .fade-in-section {
             opacity: 0;
             transform: translateY(20px);
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, visibility;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
         }
 
-        .faded-in {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
+        /* Modal Transitions */
+        .modal-backdrop {
+            transition: opacity 0.3s ease;
         }
-
-        :focus-visible {
-            outline: 3px solid #0ea5e9;
-            outline-offset: 4px;
-            border-radius: 1rem;
-        }
-
-        .timeline-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 17px;
-            width: 3px;
-            background-color: #e2e8f0;
-        }
-
-        .dark .timeline-container::before {
-            background-color: #334155;
-        }
-
-        @media (min-width: 768px) {
-            .timeline-container::before {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-        }
-
-        #custom-modal {
-            display: none;
-            animation: fadeIn 0.3s ease-out;
-        }
-
         .modal-content {
-            animation: fadeInScale 0.3s ease-out;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
         }
-
-        .indent-8 {
-            text-indent: 2rem;
+        
+        /* Clickable Cards */
+        .interactive-card {
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        .interactive-card:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
+<body class="bg-slate-50 text-slate-800 dark:bg-dark-bg dark:text-slate-100 transition-colors duration-300">
 
-<body class="text-slate-800 dark:bg-dark dark:text-slate-100">
-    <!-- Announcement Bar -->
-    <div
-        class="w-full bg-primary-600 text-white text-center py-2 px-4 font-semibold text-sm md:text-base tracking-wide z-50">
-        <span>🚀 Welcome! Check out the latest updates on my academic journey.</span>
-    </div>
-
-    <!-- Header & Navigation -->
-    <header
-        class="bg-white/95 backdrop-blur-sm sticky top-0 z-40 shadow-lg-2 border-b border-slate-100 dark:bg-dark/95 dark:border-slate-700">
-        <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center max-w-7xl">
-            <a href="#" class="text-2xl font-extrabold text-primary-600 tracking-tight flex items-center">
-                <i data-lucide="compass" class="w-6 h-6 mr-2"></i>
-                Hesten<span class="text-slate-800 text-base font-medium ml-2 hidden sm:inline dark:text-slate-300"> |
-                    Academic Portfolio</span>
-            </a>
-            <div class="hidden md:flex items-center space-x-6">
-                <button id="theme-toggle-desktop"
-                    class="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700 transition-colors duration-300"
-                    aria-label="Toggle Dark Mode">
-                    <i data-lucide="sun" id="theme-icon-desktop" class="w-5 h-5"></i>
-                </button>
-              
-            </div>
-            <button id="mobile-menu-button"
-                class="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors dark:hover:bg-slate-700"
-                aria-label="Open mobile menu">
-                <i data-lucide="menu" id="menu-icon" class="text-slate-800 w-6 h-6 dark:text-slate-100"></i>
-            </button>
-        </nav>
-        <div id="mobile-menu"
-            class="hidden md:hidden px-4 pb-4 flex flex-col space-y-4 bg-white shadow-inner dark:bg-dark dark:shadow-slate-800">
-            <button id="theme-toggle-mobile"
-                class="inline-flex items-center justify-center p-2 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600 transition-colors font-medium">
-                <i data-lucide="sun" id="theme-icon-mobile" class="w-5 h-5 mr-2"></i> <span
-                    id="mobile-toggle-text">Toggle Dark Mode</span>
-            </button>
-        </div>
-    </header>
-
-    <main class="container mx-auto px-4 sm:px-6 max-w-7xl pt-4">
-
-        <!-- Hero Section -->
-        <section id="hero"
-            class="text-center py-20 section-animate bg-white rounded-3xl border border-primary-100 shadow-xl-2 shadow-primary-200/50 overflow-hidden relative dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
-            <div class="absolute inset-0 opacity-10 bg-repeat pointer-events-none hero-bg-pattern"></div>
-            <div class="relative z-10 p-4">
-                <div
-                    class="w-24 h-24 mx-auto rounded-full mb-6 bg-primary-100 flex items-center justify-center border-4 border-white dark:border-dark-card shadow-lg">
-                    <i data-lucide="book-open-text" class="w-12 h-12 text-primary-600"></i>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-indigo-600 dark:from-primary-500 dark:to-indigo-400">
+                        Hesten.
+                    </span>
                 </div>
-                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight dark:text-slate-50">
-                    Future <span class="text-primary-600 dark:text-primary-400">Educator</span>.<br class="sm:hidden">
-                    Current <span class="text-primary-600 dark:text-primary-400">Scholar</span>.
-                </h1>
-                <p class="text-lg md:text-xl text-slate-600 max-w-4xl mx-auto dark:text-slate-400">
-                    Welcome to my academic portfolio, documenting my research, writings, and reflections on
-                    <strong>inclusive teaching</strong> and Social Sciences, driven by my passion for supporting
-                    students with learning differences.
-                </p>
-               <botton class="mt-8 inline-flex items-center text-primary-600 font-semibold group hover:text-primary-700 transition-colors duration-500 transform hover:scale-[1.05] border-b-2 border-primary-100 hover:border-primary-600 pb-1 dark:text-primary-400 dark:hover:text-primary-300 dark:border-primary-700/50 dark:hover:border-primary-400">
-                    View My Journey <i data-lucide="arrow-down"
-                        class="ml-2 w-5 h-5 group-hover:translate-y-0.5 transition-transform duration-300"></i>
-                </botton>
-            </div>
-        </section>
-
-        <!-- About Me Section -->
-        <section id="about" class="section-animate py-20 border-t border-slate-200 dark:border-slate-700">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight dark:text-slate-50">Hi, I'm
-                        Hesten! 👋</h2>
-                    <p class="text-slate-600 mb-4 text-lg leading-relaxed dark:text-slate-400">
-                        I'm a dedicated student at the Community College of Vermont (CCV). As a scholar who also manages
-                        learning differences, I bring a deep sense of <strong>empathy and practical
-                            understanding</strong> to education. This website showcases my academic work and commitment
-                        to building inclusive, accessible classrooms.
-                    </p>
-                    <div
-                        class="bg-primary-50 rounded-xl p-6 shadow-md border border-primary-100 mt-6 dark:bg-slate-700 dark:border-slate-600">
-                        <i data-lucide="target" class="text-primary-600 w-6 h-6 mb-3 dark:text-primary-400"></i>
-                        <p class="text-slate-700 italic font-medium dark:text-slate-300">
-                            My goal is to transfer to the <strong>University of Vermont (UVM)</strong> for Secondary
-                            Education, concentrating in History and Social Sciences, with a special focus on Universal
-                            Design for Learning (UDL) and student advocacy.
-                        </p>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about" class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                        <a href="#timeline" class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Timeline</a>
+                        <a href="#courses" class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Coursework</a>
+                        <a href="#projects" class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Portfolio</a>
+                        <a href="#notes" class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Notebook</a>
                     </div>
                 </div>
-                <div
-                    class="bg-white rounded-xl p-8 shadow-xl-2 border border-slate-100 transition-shadow duration-300 hover:shadow-2xl dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
-                    <h3
-                        class="text-2xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-3 dark:text-slate-50 dark:border-slate-700">
-                        My Academic Snapshot</h3>
-                    <div class="flex flex-col space-y-6">
-                        <div tabindex="0" role="button" aria-expanded="false" data-modal-key="studies-overview"
-                            class="flex items-start p-3 -m-3 rounded-lg cursor-pointer transition-colors duration-200 hover:bg-primary-50 dark:hover:bg-dark-card/50">
-                            <i data-lucide="graduation-cap"
-                                class="text-primary-600 w-7 h-7 flex-shrink-0 mt-1 dark:text-primary-400"></i>
-                            <div class="ml-4">
-                                <p class="font-semibold text-slate-900 dark:text-slate-100">
-                                    Current Studies <i data-lucide="external-link"
-                                        class="w-4 h-4 inline-block ml-1 text-primary-600 dark:text-primary-400"></i>
-                                </p>
-                                <p class="text-slate-600 text-sm dark:text-slate-400">Associate of Arts in Liberal
-                                    Studies (CCV)</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <i data-lucide="map-pin"
-                                class="text-primary-600 w-7 h-7 flex-shrink-0 mt-1 dark:text-primary-400"></i>
-                            <div class="ml-4">
-                                <p class="font-semibold text-slate-900 dark:text-slate-100">Transfer Target</p>
-                                <p class="text-slate-600 text-sm dark:text-slate-400">University of Vermont (UVM) -
-                                    Secondary Education</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <i data-lucide="briefcase"
-                                class="text-primary-600 w-7 h-7 flex-shrink-0 mt-1 dark:text-primary-400"></i>
-                            <div class="ml-4">
-                                <p class="font-semibold text-slate-900 dark:text-slate-100">Core Focus</p>
-                                <p class="text-slate-600 text-sm dark:text-slate-400">Inclusive Education, History, and
-                                    Student Advocacy</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-700">
-                        <button data-modal-key="full-degree-plan"
-                            class="w-full inline-flex items-center justify-center bg-primary-50 text-primary-700 px-5 py-3 rounded-xl border border-primary-300 hover:bg-primary-100 transition-colors font-semibold shadow-md dark:bg-slate-700 dark:text-primary-400 dark:border-primary-700 dark:hover:bg-slate-600">
-                            <i data-lucide="layout-list" class="w-5 h-5 mr-3"></i> View Full Degree Plan Outline
+
+                <!-- Right Side Actions -->
+                <div class="flex items-center gap-4">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle Dark Mode">
+                        <i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+                        <i data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="-mr-2 flex md:hidden">
+                        <button id="mobile-menu-btn" class="p-2 rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800">
+                            <i data-lucide="menu" class="w-6 h-6"></i>
                         </button>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Education Timeline Section -->
-        <section id="timeline" class="section-animate py-20 border-t border-slate-200 dark:border-slate-700">
-            <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center dark:text-slate-50">Education & Career Path
-            </h2>
-            <div id="timeline-container" class="timeline-container max-w-4xl mx-auto">
-                <!-- Timeline items will be dynamically inserted here -->
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#timeline" class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">Timeline</a>
+                <a href="#courses" class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">Coursework</a>
+                <a href="#projects" class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">Portfolio</a>
+                <a href="#notes" class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">Notebook</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        
+        <!-- Hero Section -->
+        <section id="hero" class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-50 to-indigo-100 dark:from-slate-900 dark:to-slate-800 opacity-90"></div>
+                <!-- Animated blob background simulation -->
+                <div class="absolute top-20 left-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
+                <div class="absolute top-20 right-20 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
+                <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
+            </div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section">
+                <div class="inline-block p-2 px-4 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 mb-6 shadow-sm">
+                    <span class="text-primary-600 dark:text-primary-400 font-medium text-sm">Welcome to my Academic Journey</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white">
+                    Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-indigo-600 dark:from-primary-400 dark:to-indigo-400">Hesten</span>.
+                </h1>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300">
+                    A dedicated student transitioning from <strong>Community College of Vermont</strong> to the <strong>University of Vermont</strong>. 
+                    Explore my coursework, research projects, and digital notebook.
+                </p>
+                <div class="mt-10 flex justify-center gap-4">
+                    <button onclick="document.getElementById('courses').scrollIntoView()" class="px-8 py-3 rounded-lg bg-primary-600 hover:bg-primary-700 text-white font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                        View Coursework
+                    </button>
+                    <button data-modal-key="contact-info" class="px-8 py-3 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-medium shadow-sm transition-all duration-300">
+                        Contact Me
+                    </button>
+                </div>
             </div>
         </section>
 
-        <!-- Current Classes Section -->
-        <section id="classes" class="section-animate py-20 border-t border-slate-200 dark:border-slate-700">
-            <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center dark:text-slate-50">Current & Recent
-                Coursework</h2>
-            <div id="courses-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Course cards will be dynamically inserted here -->
-            </div>
-            <div class="text-center mt-12">
-                <a href="javascript:void(0);" data-modal-key="transcripts"
-                    class="inline-flex items-center text-slate-500 hover:text-primary-600 transition-colors font-medium border-b border-dashed border-slate-300 pb-0.5 dark:text-slate-400 dark:hover:text-primary-400 dark:border-slate-600">
-                    <i data-lucide="archive" class="w-5 h-5 mr-2"></i> View Full Course List (Transcripts)
-                </a>
-            </div>
-        </section>
-
-        <!-- Portfolio Section -->
-        <section id="portfolio" class="section-animate py-20 border-t border-slate-200 dark:border-slate-700">
-            <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center dark:text-slate-50">My Academic Work &
-                Projects</h2>
-            <div id="portfolio-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project cards will be dynamically inserted here -->
-            </div>
-        </section>
-
-        <!-- Notes Section -->
-        <section id="notes" class="section-animate py-20 border-t border-slate-200 dark:border-slate-700">
-            <div
-                class="bg-white rounded-xl shadow-xl-2 shadow-primary-100/50 p-8 md:p-12 border border-primary-100 dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
-                <div class="max-w-3xl mx-auto text-center">
-                    <h2 class="text-3xl font-bold text-slate-900 mb-4 dark:text-slate-50">My Digital Notebook 🧠</h2>
-                    <p class="text-slate-600 mb-8 dark:text-slate-400">A curated and searchable collection of my class
-                        notes and reading summaries. Feel free to browse for study inspiration!</p>
+        <!-- About Section -->
+        <section id="about" class="py-24 bg-white dark:bg-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center fade-in-section">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6 text-slate-900 dark:text-white">From CCV to UVM</h2>
+                        <div class="space-y-4 text-lg text-slate-600 dark:text-slate-300">
+                            <p>
+                                My academic path has been defined by curiosity and resilience. Starting at High School, I quickly realized my passion for technology and systematic problem solving.
+                            </p>
+                            <p>
+                                At the Community College of Vermont (CCV), I built a strong foundation in Computer Science, maintaining a 3.9 GPA while working part-time. Now, as I transition to the University of Vermont (UVM), I am focused on advanced software engineering and data science.
+                            </p>
+                        </div>
+                        <div class="mt-8 flex flex-wrap gap-4">
+                            <div class="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-primary-600"></i>
+                                <span>Burlington, VT</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                                <i data-lucide="graduation-cap" class="w-5 h-5 text-primary-600"></i>
+                                <span>Junior Standing</span>
+                            </div>
+                        </div>
+                        <button data-modal-key="studies-overview" class="mt-8 text-primary-600 dark:text-primary-400 font-medium hover:underline inline-flex items-center">
+                            Read detailed academic philosophy <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        </button>
+                    </div>
                     <div class="relative">
-                        <i data-lucide="search"
-                            class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
-                        <input type="text" id="notes-search"
-                            placeholder="Search notes (e.g., 'vygotsky', 'constitution')..."
-                            class="w-full pl-12 pr-10 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary-600 focus:border-primary-600 transition-all shadow-inner dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 dark:focus:ring-primary-400 dark:focus:border-primary-400"
-                            aria-label="Search digital notes">
-                        <button id="clear-search"
-                            class="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hidden"
-                            aria-label="Clear search">
+                        <div class="absolute inset-0 bg-primary-600 rounded-2xl transform rotate-3 opacity-10"></div>
+                        <div class="relative bg-slate-50 dark:bg-slate-800 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-xl-2">
+                            <h3 class="text-xl font-bold mb-4 dark:text-white">Current Focus</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-slate-600 dark:text-slate-300">Full Stack Web Development</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-slate-600 dark:text-slate-300">Data Structures & Algorithms</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 mr-3 mt-1"></i>
+                                    <span class="text-slate-600 dark:text-slate-300">Technical Writing</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section id="timeline" class="py-24 bg-slate-50 dark:bg-slate-800/50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in-section">
+                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Academic Milestones</h2>
+                    <p class="mt-2 text-slate-600 dark:text-slate-400">The path I've traveled so far (Click for details)</p>
+                </div>
+                
+                <div class="relative" id="timeline-container">
+                    <!-- Vertical Line -->
+                    <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-700 transform md:-translate-x-1/2"></div>
+                    <!-- JS will inject timeline items here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Coursework Section -->
+        <section id="courses" class="py-24 bg-white dark:bg-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in-section">
+                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Current Coursework</h2>
+                    <p class="mt-2 text-slate-600 dark:text-slate-400">Click on any course to view weekly assignments and notes</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="courses-grid">
+                    <!-- JS will inject courses here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 bg-slate-50 dark:bg-slate-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 fade-in-section">
+                    <div>
+                        <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Featured Projects</h2>
+                        <p class="mt-2 text-slate-600 dark:text-slate-400">Practical application of theory</p>
+                    </div>
+                    <a href="https://github.com" target="_blank" class="mt-4 md:mt-0 inline-flex items-center text-primary-600 dark:text-primary-400 hover:underline">
+                        View GitHub Profile <i data-lucide="external-link" class="w-4 h-4 ml-1"></i>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid">
+                    <!-- JS will inject projects here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Digital Notebook Section -->
+        <section id="notes" class="py-24 bg-white dark:bg-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-12 fade-in-section">
+                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Digital Notebook</h2>
+                    <p class="mt-2 text-slate-600 dark:text-slate-400 mb-8">Searchable notes, snippets, and study guides. Click to read.</p>
+                    
+                    <!-- Search Bar -->
+                    <div class="relative max-w-xl">
+                        <i data-lucide="search" class="absolute left-4 top-3.5 w-5 h-5 text-slate-400"></i>
+                        <input type="text" id="notes-search" placeholder="Search notes (e.g., 'react', 'algorithms', 'css')..." 
+                            class="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-shadow">
+                        <button id="clear-search" class="hidden absolute right-4 top-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
                             <i data-lucide="x" class="w-5 h-5"></i>
                         </button>
                     </div>
                 </div>
-                <ul id="notes-list" class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
-                    <!-- Note items will be dynamically inserted here -->
-                </ul>
-                <p id="no-results" class="text-center text-slate-500 mt-8 hidden dark:text-slate-400">
-                    <i data-lucide="frown" class="w-6 h-6 inline-block mr-2"></i> No notes found matching your search.
-                </p>
-                <div class="text-center mt-8">
-                    <button id="load-more-notes"
-                        class="inline-flex items-center bg-primary-100 text-primary-700 px-6 py-2 rounded-xl border border-primary-300 hover:bg-primary-200 transition-colors font-semibold shadow-inner dark:bg-slate-700 dark:text-primary-400 dark:border-primary-700 dark:hover:bg-slate-600">
-                        <i data-lucide="refresh-ccw" class="w-4 h-4 mr-2"></i> Load More Notes
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="notes-grid">
+                    <!-- JS will inject notes here -->
+                </div>
+                
+                <div class="mt-12 text-center hidden" id="load-more-container">
+                    <button id="load-more-btn" class="px-6 py-2 border border-slate-300 dark:border-slate-600 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors dark:text-slate-300">
+                        Load More Notes
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="section-animate py-20 border-t border-slate-200 dark:border-slate-700 text-center">
-            <h2 class="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight dark:text-slate-50">Let's Connect</h2>
-            <p class="text-slate-600 max-w-2xl mx-auto mb-10 text-lg dark:text-slate-400">Have a question about my work,
-                a transfer opportunity, or just want to collaborate on educational advocacy? I'd love to hear from you!
-            </p>
-            <button data-modal-key="contact-info"
-                class="inline-flex items-center bg-primary-600 text-white px-8 py-3 rounded-xl hover:bg-primary-700 transition-transform duration-300 hover:scale-[1.05] shadow-xl-2 shadow-primary-600/50 text-lg font-semibold dark:shadow-primary-400/30">
-                <i data-lucide="mail" class="mr-3 w-5 h-5"></i>
-                Contact Hesten
-            </button>
-        </section>
+        <!-- Footer -->
+        <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <span class="text-2xl font-bold text-white">Hesten.</span>
+                        <p class="text-sm text-slate-500 mt-1">© 2024 Hesten Academic Portfolio.</p>
+                    </div>
+                    <div class="flex space-x-6">
+                        <a href="#" class="hover:text-white transition-colors" aria-label="Github"><i data-lucide="github" class="w-6 h-6"></i></a>
+                        <a href="#" class="hover:text-white transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                        <a href="#" class="hover:text-white transition-colors" aria-label="Email"><i data-lucide="mail" class="w-6 h-6"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-slate-400">
-        <div
-            class="container mx-auto px-4 sm:px-6 py-10 flex flex-col md:flex-row justify-between items-center text-center md:text-left max-w-7xl">
-            <div>
-                <p class="font-bold text-white text-lg">Hesten's Academic Portfolio</p>
-                <p class="text-sm mt-1">&copy; 2025 All Rights Reserved. Built with Tailwind CSS and Lucide Icons.</p>
-            </div>
-            <div class="flex space-x-6 mt-6 md:mt-0">
-                <a href="https://github.com/Hestena62/hla00242" target="_blank" rel="noopener noreferrer"
-                    class="hover:text-primary-400 transition-colors" aria-label="GitHub Profile"><i data-lucide="github"
-                        class="w-6 h-6"></i></a>
-                <a href="#" class="hover:text-primary-400 transition-colors" aria-label="LinkedIn Profile"><i
-                        data-lucide="linkedin" class="w-6 h-6"></i></a>
-                <a href="https://www.x.com/hla00242" target="_blank" rel="noopener noreferrer"
-                    class="hover:text-primary-400 transition-colors" aria-label="Twitter Profile"><i
-                        data-lucide="twitter" class="w-6 h-6"></i></a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Custom Modal for Detail View -->
-    <div id="custom-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"
-        class="fixed inset-0 bg-black/60 flex justify-center items-center z-50 p-4" tabindex="-1">
-        <div
-            class="modal-content bg-white p-8 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl dark:bg-dark-card dark:text-slate-100">
-            <div class="flex justify-between items-center border-b pb-3 mb-4 border-slate-200 dark:border-slate-700">
-                <div class="flex items-center">
-                    <button id="modal-back-button"
-                        class="hidden text-slate-400 hover:text-slate-700 p-2 rounded-full transition-colors dark:hover:text-slate-200 mr-2"
-                        aria-label="Go Back">
-                        <i data-lucide="arrow-left" class="w-6 h-6"></i>
-                    </button>
-                    <h3 id="modal-title" class="text-2xl font-bold text-slate-900 dark:text-slate-50">
-                        <!-- Title content injected here -->
-                    </h3>
-                </div>
-                <button id="close-modal-button"
-                    class="text-slate-400 hover:text-slate-700 p-2 rounded-full transition-colors dark:hover:text-slate-200"
-                    aria-label="Close Detail View">
+    <!-- Global Modal Container -->
+    <div id="modal-backdrop" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4 opacity-0 pointer-events-none" aria-hidden="true">
+        <div id="modal-container" role="dialog" aria-modal="true" class="bg-white dark:bg-slate-900 w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl flex flex-col transform scale-95 opacity-0 transition-all duration-300 relative overflow-hidden border border-slate-200 dark:border-slate-700">
+            
+            <!-- Header -->
+            <div class="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-white dark:bg-slate-900 z-10">
+                <h3 id="modal-title" class="text-xl font-bold text-slate-900 dark:text-white truncate pr-4">Title</h3>
+                <button id="modal-close" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500">
                     <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
             </div>
-            <div id="modal-content-body" class="space-y-4 text-slate-600 dark:text-slate-300">
-                <!-- Dynamic content injected here -->
+
+            <!-- Body (Scrollable) -->
+            <div id="modal-body" class="flex-1 overflow-y-auto p-6 text-slate-600 dark:text-slate-300">
+                <!-- Dynamic Content Injected Here -->
             </div>
-            <button id="modal-got-it-button"
-                class="w-full sm:w-auto sm:float-right mt-6 bg-primary-600 text-white px-6 py-2 rounded-xl hover:bg-primary-700 transition-colors font-semibold">
-                Got It
-            </button>
         </div>
     </div>
 
-    <!--
-    ========================================================================
-    | PORTFOLIO DATA STORE                                                 |
-    | To update site content, edit the JSON data below.                    |
-    | The script will automatically build the page from this data source.  |
-    ========================================================================
-    -->
-    <script id="portfolio-data" type="application/json">
-    {
-        "modals": {
-            "studies-overview": {
-                "title": "My Academic Path: CCV to UVM (Overview)",
-                "content": "<div class='space-y-6'><div><h4 class='text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2'><i data-lucide='pen-tool' class='w-5 h-5 inline mr-3'></i>Phase 1: A.A. in Liberal Studies</h4><p class='ml-8 text-slate-700 dark:text-slate-300'>At <strong>CCV</strong>, I am building a flexible, interdisciplinary foundation. The focus is on courses that fulfill core humanities requirements while gaining early exposure to <strong>pedagogy, history, and sociology</strong>.</p></div><div><h4 class='text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2'><i data-lucide='compass' class='w-5 h-5 inline mr-3'></i>Core Focus: UDL</h4><p class='ml-8 text-slate-700 dark:text-slate-300'>My unique perspective drives me to emphasize UDL principles, ensuring that my future classroom designs are <strong>proactively accessible</strong> to all students from day one.</p></div><div><h4 class='text-xl font-bold text-primary-600 dark:text-primary-400 flex items-center mb-2'><i data-lucide='arrow-right-circle' class='w-5 h-5 inline mr-3'></i>Phase 2: Transfer to UVM</h4><p class='ml-8 text-slate-700 dark:text-slate-300'>My next step is transferring to the <strong>University of Vermont</strong> to pursue a B.S. in Secondary Education, providing the specific training and licensure required to teach History and Social Sciences.</p></div></div>"
-            },
-            "full-degree-plan": {
-                "title": "Full CCV A.A. to UVM B.S. Degree Plan",
-                "content": "<div class='space-y-8'><h4 class='text-2xl font-bold text-slate-900 dark:text-slate-50 border-b pb-2'>Phase 1: CCV Associate of Arts (60 Credits)</h4><div class='p-4 bg-slate-100 rounded-lg dark:bg-slate-700'><p class='font-bold text-lg text-primary-600 dark:text-primary-400 mb-3 flex items-center'><i data-lucide='building' class='w-5 h-5 mr-2'></i> Core Prerequisites</p><ul class='list-disc list-inside space-y-2 text-sm ml-4 text-slate-700 dark:text-slate-300'><li>ENG 101/102 (College Writing I & II)</li><li>MAT 101/105 (Math Pathway)</li><li><strong>INT 1050 (Self and Society) - Completed</strong></li><li>Science w/ Lab (E.g., BIO 101)</li></ul></div><div class='p-4 bg-slate-100 rounded-lg dark:bg-slate-700'><p class='font-bold text-lg text-primary-600 dark:text-primary-400 mb-3 flex items-center'><i data-lucide='book-open' class='w-5 h-5 mr-2'></i> Concentration Courses</p><ul class='list-disc list-inside space-y-2 text-sm ml-4 text-slate-700 dark:text-slate-300'><li><strong>History (12 Credits):</strong> HIS 103, HIS 201, HIS 205.</li><li><strong>Education/Sociology (9 Credits):</strong> SOC 101, EDU 105, PSY 101.</li></ul></div><h4 class='text-2xl font-bold text-slate-900 dark:text-slate-50 border-b pb-2'>Phase 2: UVM B.S. Secondary Ed.</h4><div class='p-4 bg-slate-100 rounded-lg dark:bg-slate-700'><p class='font-bold text-lg text-primary-600 dark:text-primary-400 mb-3 flex items-center'><i data-lucide='school' class='w-5 h-5 mr-2'></i> Professional Education Sequence</p><ul class='list-disc list-inside space-y-2 text-sm ml-4 text-slate-700 dark:text-slate-300'><li>EDSC 200: Teaching for Social Justice</li><li>EDSP 205: Secondary Special Education Methods (UDL Focus)</li><li><strong>EDSC 300: Student Teaching Internship</strong> - Capstone</li></ul></div></div>"
-            },
-            "transcripts": {
-                "title": "Transcripts & Course Records",
-                "content": "<p>My official transcripts are available upon request for academic or professional review. Please contact me via email to request a copy.</p><div class='mt-4 space-y-2'><a href='mailto:hla00242@ccv.vsc.edu?subject=Transcript%20Request' class='inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 transition-colors font-medium'><i data-lucide='mail' class='w-5 h-5 mr-2'></i>Request Official Transcripts</a></div>"
-            },
-            "hs-diploma": {
-                "title": "High School Academic Highlights",
-                "content": "<div class='border-b border-slate-200 dark:border-slate-600 mb-4'><nav class='flex space-x-2' aria-label='Tabs'><button data-tab='coursework' class='tab-button px-4 py-2 text-sm font-medium rounded-md bg-primary-100 text-primary-700 dark:bg-slate-600 dark:text-primary-300'>Coursework</button><button data-tab='scores' class='tab-button px-4 py-2 text-sm font-medium rounded-md text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700'>Test Scores</button><button data-tab='transcript' class='tab-button px-4 py-2 text-sm font-medium rounded-md text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700'>Transcript</button></nav></div><div><div data-tab-content='coursework' class='tab-content space-y-4'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Selected Advanced Coursework</h4><ul class='list-disc list-inside space-y-2 ml-4'><li><strong>AP U.S. History:</strong> Grade A. Focused on primary source analysis and long-form essay writing (LEQ/DBQ).</li><li><strong>AP English Literature & Composition:</strong> Grade A. Developed critical reading and literary theory application skills.</li><li><strong>Honors Physics:</strong> Grade B+. Built a strong foundation in logical reasoning and structured problem-solving.</li><li><strong>Psychology (Elective):</strong> Grade A. Gained early exposure to cognitive theories relevant to Universal Design for Learning (UDL).</li></ul></div><div data-tab-content='scores' class='tab-content space-y-4 hidden'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Standardized Test Scores</h4><ul class='list-disc list-inside space-y-2 ml-4'><li><strong>SAT:</strong> 1450 (730 Evidence-Based Reading and Writing, 720 Math)</li><li><strong>ACT:</strong> 32 Composite</li><li><strong>AP U.S. History Exam:</strong> 5</li><li><strong>AP English Literature Exam:</strong> 5</li></ul></div><div data-tab-content='transcript' class='tab-content space-y-4 hidden'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Official Transcript</h4><p>My official high school transcript is available for review upon request. Please use the contact form to send a request.</p><a href='#contact' class='inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 transition-colors font-medium'><i data-lucide='mail' class='w-5 h-5 mr-2'></i>Request Transcript</a></div></div>"
-            },
-            "ccv-studies": {
-                "title": "CCV: Associate of Arts, Liberal Studies",
-                "content": "<div class='border-b border-slate-200 dark:border-slate-600 mb-4'><nav class='flex flex-wrap space-x-2' aria-label='Tabs'><button data-tab='overview' class='tab-button px-4 py-2 text-sm font-medium rounded-md bg-primary-100 text-primary-700 dark:bg-slate-600 dark:text-primary-300'>Program Overview</button><button data-tab='coursework' class='tab-button px-4 py-2 text-sm font-medium rounded-md text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700'>Key Coursework</button><button data-tab='transfer' class='tab-button px-4 py-2 text-sm font-medium rounded-md text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700'>Transfer Plan</button></nav></div><div><div data-tab-content='overview' class='tab-content space-y-4 py-4'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Strategic Foundation</h4><p>The A.A. in Liberal Studies at CCV is strategically chosen for its <strong>flexibility and high transferability</strong> to UVM's education program. It allows me to complete foundational prerequisites efficiently while focusing my electives on my target major in Secondary Education.</p></div><div data-tab-content='coursework' class='tab-content space-y-4 py-4 hidden'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Core & Concentration Courses</h4><ul class='list-disc list-inside space-y-2 ml-4'><li><strong>INT-1050 (Self & Society):</strong> A foundational course examining individual beliefs and societal structures.</li><li><strong>SOC-101 (Intro to Sociology):</strong> Provided frameworks for understanding social inequality.</li><li><strong>EDU-105 (Intro to Special Ed):</strong> Direct exposure to concepts of learning disabilities and UDL.</li><li><strong>HIS-201 (American History):</strong> Advanced study of post-1865 history, core to my licensure goal.</li></ul></div><div data-tab-content='transfer' class='tab-content space-y-4 py-4 hidden'><h4 class='text-lg font-bold text-slate-800 dark:text-slate-200'>Pathway to UVM</h4><p>I am following the Vermont State Colleges System articulation agreement, which guarantees seamless transfer of credits for my A.A. degree to the B.S. in Secondary Education program at the University of Vermont. My academic advisor and I have mapped all CCV courses to ensure they meet UVM's requirements for junior-year entry.</p></div></div>"
-            },
-            "contact-info": {
-                "title": "Contact Information",
-                "content": "<div class='space-y-4'><p>The best way to reach me is by email. I am always open to discussing educational advocacy, transfer opportunities, or collaborating on projects related to inclusive teaching.</p><div class='mt-4 space-y-3'><a href='mailto:hla00242@ccv.vsc.edu' class='flex items-center p-3 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors'><i data-lucide='mail' class='w-6 h-6 mr-4 text-primary-600 dark:text-primary-400'></i><div><p class='font-semibold text-slate-800 dark:text-slate-200'>hla00242@ccv.vsc.edu</p><p class='text-sm text-slate-500 dark:text-slate-400'>Click to send an email</p></div></a><div class='flex items-center p-3'><i data-lucide='map-pin' class='w-6 h-6 mr-4 text-primary-600 dark:text-primary-400'></i><div><p class='font-semibold text-slate-800 dark:text-slate-200'>Burlington, Vermont, USA</p><p class='text-sm text-slate-500 dark:text-slate-400'>Open to local and remote opportunities</p></div></div></div><div class='mt-6 pt-4 border-t border-slate-200 dark:border-slate-600 flex justify-center space-x-6'><a href='https://github.com/Hestena62/hla00242' target='_blank' rel='noopener noreferrer' class='text-slate-400 hover:text-primary-400 transition-colors' aria-label='GitHub Profile'><i data-lucide='github' class='w-6 h-6'></i></a><a href='#' class='text-slate-400 hover:text-primary-400 transition-colors' aria-label='LinkedIn Profile'><i data-lucide='linkedin' class='w-6 h-6'></i></a><a href='https://www.x.com/hla00242' target='_blank' rel='noopener noreferrer' class='text-slate-400 hover:text-primary-400 transition-colors' aria-label='Twitter Profile'><i data-lucide='twitter' class='w-6 h-6'></i></a></div></div>"
-            }
-        },
-        "timeline": [
-            { "id": "hs-diploma", "date": "June 2025", "title": "High School Diploma", "description": "Graduated from Burlington High School. Click to view key coursework and academic files.", "icon": "award", "color": "slate", "align": "left" },
-            { "id": "ccv-studies", "date": "2025 - Present", "title": "Associate of Arts, Liberal Studies", "description": "Community College of Vermont (CCV). Click to view program details and relevant coursework.", "icon": "graduation-cap", "color": "primary", "align": "right", "active": true },
-            { "id": "uvm-transfer", "date": "Target: Fall 2027", "title": "BS in Secondary Education (UVM)", "description": "Seeking transfer admission to the University of Vermont (UVM). Click to see target degree plan.", "icon": "flag", "color": "amber", "align": "left" },
-            { "id": "future-career", "date": "Beyond", "title": "Secondary Education Teacher & Advocate", "description": "Goal: To inspire the next generation through teaching history and civics in a Vermont high school, specializing in differentiated instruction.", "icon": "briefcase", "color": "dark", "align": "right" }
-        ],
-        "courses": [
-            { 
-                "id": "int-1050", 
-                "semester": "Fall 2025-VUO6", 
-                "title": "INT-1050: Intro Self and Society", 
-                "description": "Critical examination of societal values, individual beliefs, ways of knowing, and cultural worldviews.", 
-                "icon": "archive", 
-                "color": "primary",
-                "weeks": [
-                    { 
-                        "week": 1, 
-                        "title": "So, What Are You, Anyway?", 
-                        "content": { 
-                            "notes": "<p>Lawrence Hill's 'So, What Are You, Anyway?' is a powerful story arguing against judging **someone** for their skin color. It serves as an allegory based on his childhood experiences.</p><p class='mt-3'>The discussion focused on the nuanced difference between overt racism and the subtle, daily prejudices that can erode a person's sense of belonging, drawing connections to the complexity of mixed-race identity.</p>",
-                            "essay": "<div class='space-y-4 text-left leading-relaxed'><p class='text-sm text-slate-600 dark:text-slate-400 mb-6 pb-4 border-b border-slate-200 dark:border-slate-600'>Student Name: Hesten A (Sheldon)<br>Date: 9/13/25<br>Assignment: ResPapr So, What are You, Anyway<br>Class: DIMENSIONS OF SELF AND SOCIETY</p><p class='indent-8'>Lawrence Hill's story, \\\"So, What are You, Anyway?\\\", serves as a poignant allegory for the experiences of a mixed-race child. The story stood out to me from what I normally read, but my prior knowledge of the time and context of Lawrence Hill's childhood made it less jarring. I believe Hill's purpose was to convey a personal experience, either of his own or that of someone close to him, using the story to illustrate what daily life was like for him as a child. This essay will argue that using character interactions and a realistic setting, Hill effectively explores how racial prejudice shapes a person's identity and sense of self. Furthermore, by understanding Hill's background as the son of civil rights activists, we can see how his real-life experiences with race and identity directly influence his writing.</p><p class='indent-8'>The story's power lies in its ability to evoke a strong personal reaction, even before the author's full intent becomes clear. The narrative ultimately reveals itself to be about an event from a long time ago, involving \\\"cruel people with closed minds filled with hatred\\\". This theme resonates deeply with me because I was raised not to focus on a person's race or skin color, but rather to see them for who they are using their character and actions.</p><p class='indent-8'>My mother taught me this lesson through her own actions. She once told me a story about my younger brother, who has a dark-skinned friend in grade school. One day, my brother saw a boy riding his bike and thought it was his friend, but it wasn't. My mom was about to say it wasn't him because the boy on the bike was white, but she stopped herself. Instead, she simply said, \\\"I don't think that is your friend\\\". When my brother asked why, she replied, \\\"I just don't think he is\\\". This interaction demonstrates her commitment to raising us to see a person for who they are, not their skin color. This personal anecdote, like the story's theme, reinforces the idea that racism and hatred are learned behaviors, not innate qualities. As Dr. Nina J. stated in a video I watched, \\\"We aren't one race, we are one people on this earth\\\".</p><p class='indent-8'>Lawrence Hill's purpose is to examine how racial prejudice shapes a person's identity and sense of self. This is powerfully conveyed through specific character interactions, particularly with the stewardess. When a woman in front of Carole stands up and asks, \\\"Would you like to come and sit with me, little girl?\\\" and the stewardess later says, \\\"How would you like to come and sit with me?\\\" while offering her a \\\"special drink\\\" like a Shirley Temple, these seemingly kind gestures highlight Carole's feeling of being \\\" bothered \\\". These actions, though perhaps well-intentioned, make Carole an object of curiosity or pity, underscoring the racial prejudice that shapes her identity and isolates her from a sense of belonging. This focus on individual interaction reveals how racism is not always overt hatred, but can also be a subtle, daily experience that chips away at a person's sense of self.</p><p class='indent-8'>Hill's background provides critical context for understanding his purpose. As the son of a black father and a white mother, both of whom were civil rights activists, he grew up in a household deeply engaged in social justice issues. His experiences traveling and working in Africa also helped him navigate his mixed-race identity and challenged his preconceived notions about what it meant to be black. This personal history is a direct influence on his writing, which consistently explores themes of race, identity, and belonging. His most famous work, The Book of Negroes is a historical novel that sheds light on ongoing issues of race and identity by using the real-life ledger of Black Loyalists who escaped to Canada. Through this and other works, Hill urges readers to recognize the historical roots of racism and the personal toll it takes on individuals, serving as a call for empathy and understanding.</p><p class='indent-8'>In conclusion, Lawrence Hill's \\\"So, What are You, Anyway?\\\" is an impactful story that leverages personal experience to illuminate the complexities of racial identity. Drawing on my existing knowledge of the time, I found the story's unusual nature to be thought-provoking rather than bothersome. Hill's use of character interactions and his own personal background allowed him to create a powerful commentary on how prejudice shapes a person's sense of self. If more people were to read this story, it would hopefully encourage them to reexamine their values and confront any prejudices they may hold. The story, and Hill's work, underscores a simple yet vital truth: racism is never acceptable, and it must be addressed and eliminated.</p></div>",
-                            "story": "Story content for week 1.", 
-                            "quiz": "Quiz content for week 1.", 
-                            "classWork": "Class work for week 1." 
-                        } 
-                    },
-                    { "week": 2, "title": "Ethical Frameworks Analysis", "content": { "notes": "A brief analysis comparing and contrasting deontological (duty-based) and utilitarian (consequence-based) ethical frameworks.", "essay": "Essay content for week 2.", "story": "Story content for week 2.", "quiz": "Quiz content for week 2.", "classWork": "Class work for week 2." } },
-                    { "week": 3, "title": "Personal Epistemology Paper", "content": { "notes": "This assignment required an in-depth, self-reflective analysis of my core methods of acquiring and validating knowledge (my epistemology).", "essay": "Essay content for week 3.", "story": "Story content for week 3.", "quiz": "Quiz content for week 3.", "classWork": "Class work for week 3." } },
-                    { "week": 4, "title": "Cultural Worldview Reflection", "content": { "notes": "Exploration of how my family and regional (Vermont) culture has shaped my perception of success, community, and personal responsibility.", "essay": "Essay content for week 4.", "story": "Story content for week 4.", "quiz": "Quiz content for week 4.", "classWork": "Class work for week 4." } },
-                    { "week": 5, "title": "Social Institutions Micro-Analysis", "content": { "notes": "A functionalist perspective analysis of the high school as a social institution, focusing on its manifest (stated) and latent (unintended) functions.", "essay": "Essay content for week 5.", "story": "Story content for week 5.", "quiz": "Quiz content for week 5.", "classWork": "Class work for week 5." } },
-                    { "week": 6, "title": "Social Structure Presentation Analysis", "content": { "notes": "Prepared a presentation analyzing the dynamic relationship between individual agency and the constraints/opportunities presented by social structures.", "essay": "Essay content for week 6.", "story": "Story content for week 6.", "quiz": "Quiz content for week 6.", "classWork": "Class work for week 6." } },
-                    { "week": 7, "title": "Research Topic Proposal & Outline", "content": { "notes": "Developed a formal research proposal for the final capstone, defining the scope, preliminary research questions, and proposed methodology.", "essay": "Essay content for week 7.", "story": "Story content for week 7.", "quiz": "Quiz content for week 7.", "classWork": "Class work for week 7." } },
-                    { "week": 8, "title": "Midterm Synthesis and Reflection", "content": { "notes": "A self-assessment and formal academic paper summarizing the central concepts learned in the first half of the course.", "essay": "Essay content for week 8.", "story": "Story content for week 8.", "quiz": "Quiz content for week 8.", "classWork": "Class work for week 8." } },
-                    { "week": 9, "title": "Power, Privilege, and Advocacy", "content": { "notes": "An essay analyzing different forms of social power (economic, political, cultural) and reflecting on my own positionality.", "essay": "Essay content for week 9.", "story": "Story content for week 9.", "quiz": "Quiz content for week 9.", "classWork": "Class work for week 9." } },
-                    { "week": 10, "title": "Final Capstone Outline & Draft", "content": { "notes": "Submission of the complete outline and a substantial first draft of the 2,500-word final research paper.", "essay": "Essay content for week 10.", "story": "Story content for week 10.", "quiz": "Quiz content for week 10.", "classWork": "Class work for week 10." } },
-                    { "week": 11, "title": "Global Citizenship Essay", "content": { "notes": "A comparative essay exploring how concepts of self and society differ between a Western liberal democracy (US) and a non-Western nation.", "essay": "Essay content for week 11.", "story": "Story content for week 11.", "quiz": "Quiz content for week 11.", "classWork": "Class work for week 11." } },
-                    { "week": 12, "title": "Theory Application Case Study (Education)", "content": { "notes": "Detailed case study of a specific secondary classroom scenario, recommending solutions based on an assigned psychological or sociological theory.", "essay": "Essay content for week 12.", "story": "Story content for week 12.", "quiz": "Quiz content for week 12.", "classWork": "Class work for week 12." } },
-                    { "week": 13, "title": "Community Engagement Proposal", "content": { "notes": "Developed a practical plan for a volunteer or community engagement project that aligns with the social justice themes of the course.", "essay": "Essay content for week 13.", "story": "Story content for week 13.", "quiz": "Quiz content for week 13.", "classWork": "Class work for week 13." } },
-                    { "week": 14, "title": "Final Paper Peer Review & Revisions", "content": { "notes": "Provided detailed feedback on a classmate's final paper draft and integrated constructive critiques into my own work.", "essay": "Essay content for week 14.", "story": "Story content for week 14.", "quiz": "Quiz content for week 14.", "classWork": "Class work for week 14." } },
-                    { "week": 15, "title": "Final Capstone Submission", "content": { "notes": "Culmination of coursework and final paper on inclusive education.", "essay": "Essay content for week 15.", "story": "Story content for week 15.", "quiz": "Quiz content for week 15.", "classWork": "Class work for week 15." } }
-                ]
-            },
-            { 
-                "id": "soc-101", 
-                "semester": "Spring 2025", 
-                "title": "SOC 101: Introduction to Sociology", 
-                "description": "Foundational concepts in social structures, inequality, and cultural analysis. **Click for weekly assignments.**", 
-                "icon": "users", 
-                "color": "green",
-                "weeks": [
-                    { "week": 1, "title": "The Sociological Imagination", "content": { "notes": "Notes for week 1 of SOC 101.", "essay": "Essay for week 1 of SOC 101.", "story": "Story for week 1 of SOC 101.", "quiz": "Quiz for week 1 of SOC 101.", "classWork": "Class work for week 1 of SOC 101." } },
-                    { "week": 2, "title": "Culture and Socialization", "content": { "notes": "Notes for week 2 of SOC 101.", "essay": "Essay for week 2 of SOC 101.", "story": "Story for week 2 of SOC 101.", "quiz": "Quiz for week 2 of SOC 101.", "classWork": "Class work for week 2 of SOC 101." } }
-                ]
-            },
-            { 
-                "id": "edu-105", 
-                "semester": "Spring 2025", 
-                "title": "EDU 105: Intro to Special Education", 
-                "description": "Foundational practices in supporting students with diverse learning needs and UDL principles. **Click for weekly assignments.**", 
-                "icon": "accessibility", 
-                "color": "purple",
-                "weeks": [
-                    { "week": 1, "title": "History and Legal Foundations", "content": { "notes": "Notes for week 1 of EDU 105.", "essay": "Essay for week 1 of EDU 105.", "story": "Story for week 1 of EDU 105.", "quiz": "Quiz for week 1 of EDU 105.", "classWork": "Class work for week 1 of EDU 105." } },
-                    { "week": 2, "title": "Individualized Education Programs (IEPs)", "content": { "notes": "Notes for week 2 of EDU 105.", "essay": "Essay for week 2 of EDU 105.", "story": "Story for week 2 of EDU 105.", "quiz": "Quiz for week 2 of EDU 105.", "classWork": "Class work for week 2 of EDU 105." } }
-                ]
-            }
-        ],
-        "projects": [
-            { "id": "gilded-age-paper", "title": "The Gilded Age: An Economic Analysis", "description": "A research paper exploring the rapid social and economic shifts in 19th-century American cities.", "icon": "file-text", "color": "indigo", "tags": [ {"name": "History 101", "color": "indigo"}, {"name": "Research", "color": "sky"} ], "linkText": "Read Paper" },
-            { "id": "lesson-plan", "title": "US Government: The Bill of Rights", "description": "A detailed, universally designed lesson plan for 10th-grade history, including differentiated activities and choice assessments.", "icon": "book-open-check", "color": "orange", "tags": [ {"name": "Education", "color": "orange"}, {"name": "Inclusion/UDL", "color": "purple"} ], "linkText": "View Lesson Plan" },
-            { "id": "anthro-preso", "title": "Cultural Anthropology Presentation", "description": "A slide deck analyzing the cultural significance of rituals and symbols in modern societies.", "icon": "presentation", "color": "emerald", "tags": [ {"name": "Anthropology", "color": "red"}, {"name": "Presentation", "color": "blue"} ], "linkText": "See Presentation" }
-        ],
-        "notes": [
-            { "id": "gilded-age", "title": "American History: The Gilded Age", "summary": "Notes on industrialization, immigration, and political corruption.", "icon": "pencil", "keywords": "history american gilded age industrialization" },
-            { "id": "social-class", "title": "Sociology: Theories of Social Class", "summary": "Comparing the perspectives of Karl Marx and Max Weber.", "icon": "book-marked", "keywords": "sociology social class marx weber" },
-            { "id": "ancient-rome", "title": "Ancient Rome: Republic to Empire", "summary": "Key events and figures in the transition of Roman governance.", "icon": "landmark", "keywords": "history ancient rome republic empire" },
-            { "id": "vygotsky-theories", "title": "Educational Psychology: Vygotsky's Theories", "summary": "Understanding the Zone of Proximal Development.", "icon": "brain-circuit", "keywords": "education psychology vygotsky learning special needs" },
-            { "id": "checks-balances", "title": "US Government: Checks and Balances", "summary": "The separation of powers between the three branches.", "icon": "scale", "keywords": "government constitution checks balances" },
-            { "id": "utilitarianism", "title": "Intro to Ethics: Utilitarianism", "summary": "Core principles of the greatest good for the greatest number.", "icon": "lightbulb", "keywords": "philosophy ethics utilitarianism" },
-            { "id": "feudalism", "title": "World History: Feudalism", "summary": "Summary of political and social hierarchies in medieval Europe.", "icon": "shield", "keywords": "history middle ages feudalism" },
-            { "id": "classroom-management", "title": "Pedagogy: Effective Classroom Management", "summary": "Techniques for maintaining engagement and order.", "icon": "layout-dashboard", "keywords": "education pedagogy classroom management udl accommodations" },
-            { "id": "research-methods", "title": "Sociology: Research Methods", "summary": "Differentiating between quantitative and qualitative research.", "icon": "bar-chart-3", "keywords": "sociology research methods quantitative qualitative" },
-            { "id": "int1050-week1", "title": "INT-1050: Personal Learning Plan", "summary": "Drafting course alignment with long-term career and UDL goals.", "icon": "compass", "keywords": "int1050 self society week1 plp plan goals resources" },
-            { "id": "int1050-week2", "title": "INT-1050: Deontology vs. Utilitarianism", "summary": "Comparing duty-based and consequentialist ethical frameworks.", "icon": "scale", "keywords": "int1050 ethics duty utilitarianism policy" },
-            { "id": "int1050-week3", "title": "INT-1050: Epistemology Paper", "summary": "Reflection on personal ways of knowing and the role of UDL.", "icon": "file-text", "keywords": "int1050 epistemology knowing learning styles udl" },
-            { "id": "int1050-week4", "title": "INT-1050: Cultural Identity Reflection", "summary": "Analysis of how regional culture shapes perceptions of success.", "icon": "map-pin", "keywords": "int1050 culture vermont identity worldview" },
-            { "id": "int1050-week5", "title": "INT-1050: Social Institutions Analysis", "summary": "Functionalist view of high school: manifest vs. latent functions.", "icon": "users", "keywords": "int1050 sociology institutions school manifest latent" },
-            { "id": "int1050-week6", "title": "INT-1050: Social Structure & Agency", "summary": "Analyzing individual choice in the context of social class and capital.", "icon": "presentation", "keywords": "int1050 social structure agency habitus presentation" },
-            { "id": "int1050-week7", "title": "INT-1050: Research Proposal (Capstone)", "summary": "Developing the formal plan for the final paper on UDL.", "icon": "flask-conical", "keywords": "int1050 capstone research proposal dyslexia udl" },
-            { "id": "int1050-week8", "title": "INT-1050: Midterm Synthesis Paper", "summary": "Synthesizing first half concepts and self-assessment.", "icon": "clipboard-list", "keywords": "int1050 midterm synthesis reflection grades" },
-            { "id": "int1050-week9", "title": "INT-1050: Power, Privilege & Advocacy", "summary": "Analyzing power structures and the educator's role as an advocate.", "icon": "gauge", "keywords": "int1050 power privilege advocacy intersectionality" },
-            { "id": "int1050-week10", "title": "INT-1050: Final Capstone Draft", "summary": "Substantial submission and review of the main research paper draft.", "icon": "file-edit", "keywords": "int1050 capstone final outline draft" },
-            { "id": "int1050-week11", "title": "INT-1050: Global Citizenship Essay", "summary": "Comparative analysis of Western/non-Western duties.", "icon": "globe", "keywords": "int1050 global citizenship relativism duties" },
-            { "id": "int1050-week12", "title": "INT-1050: Theory Application (Vygotsky)", "summary": "Case study applying Vygotsky's ZPD to a classroom scenario.", "icon": "brain-circuit", "keywords": "int1050 theory case study vygotsky scaffolding" },
-            { "id": "int1050-week13", "title": "INT-1050: Community Project Proposal", "summary": "Plan for tutoring high school students using course themes.", "icon": "handshake", "keywords": "int1050 community engagement tutoring proposal" },
-            { "id": "int1050-week14", "title": "INT-1050: Peer Review & Revisions", "summary": "Summary of final paper critiques and revision strategy.", "icon": "git-pull-request-draft", "keywords": "int1050 final review revision peer udel" },
-            { "id": "int1050-week15", "title": "INT-1050: Final Capstone Submission", "summary": "Culmination of coursework and final paper on inclusive education.", "icon": "award", "keywords": "int1050 capstone final submission portfolio" }
-        ]
-    }
-    </script>
-
-    <script>
-        /**
-         * ===================================================================
-         * Main Application Script for Hesten's Portfolio
-         * ===================================================================
-         * This script manages all dynamic functionality for the portfolio website.
-         * * FIXES AND IMPROVEMENTS APPLIED:
-         * 1. Tab Logic Simplification: Refactored the modal's tab switching handler
-         * to use universal "active" and "inactive" class arrays. This fixes the
-         * issue where styles would break when navigating between different tab
-         * modal types (e.g., between the Degree Plan tabs and the Course Week tabs).
-         * 2. JSON Consistency: Updated the 'ccv-studies' modal in the JSON data
-         * to use the consistent rounded button styles, aligning it with the dynamic tabs.
-         * 3. Content Refinement: Fixed a typo and improved the formatting for the 
-         * 'INT-1050' Week 1 notes content in the JSON data block.
-         * ===================================================================
-         */
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- 1. DATA INITIALIZATION ---
-            const portfolioData = JSON.parse(document.getElementById('portfolio-data').textContent);
-
-            // --- 2. DOM ELEMENT REFERENCES ---
-            const doc = {
-                html: document.documentElement,
-                mobileMenu: document.getElementById('mobile-menu'),
-                menuIcon: document.getElementById('menu-icon'),
-                theme: {
-                    desktop: {
-                        toggle: document.getElementById('theme-toggle-desktop'),
-                        icon: document.getElementById('theme-icon-desktop'),
-                    },
-                    mobile: {
-                        toggle: document.getElementById('theme-toggle-mobile'),
-                        icon: document.getElementById('theme-icon-mobile'),
-                        text: document.getElementById('mobile-toggle-text'),
-                    }
-                },
-                timelineContainer: document.getElementById('timeline-container'),
-                coursesGrid: document.getElementById('courses-grid'),
-                portfolioGrid: document.getElementById('portfolio-grid'),
-                notes: {
-                    list: document.getElementById('notes-list'),
-                    searchInput: document.getElementById('notes-search'),
-                    clearSearchBtn: document.getElementById('clear-search'),
-                    noResults: document.getElementById('no-results'),
-                    loadMoreBtn: document.getElementById('load-more-notes'),
-                },
-                modal: {
-                    container: document.getElementById('custom-modal'),
-                    title: document.getElementById('modal-title'),
-                    contentBody: document.getElementById('modal-content-body'),
-                    closeBtn: document.getElementById('close-modal-button'),
-                    gotItBtn: document.getElementById('modal-got-it-button'),
-                    backBtn: document.getElementById('modal-back-button'),
-                }
-            };
-
-            // --- 3. STATE MANAGEMENT ---
-            const state = {
-                notesVisibleCount: 6,
-                notesIncrement: 3,
-                isModalOpen: false,
-            };
-
-            // --- 4. THEME MANAGEMENT ---
-            const themeManager = {
-                init() {
-                    const storedTheme = localStorage.getItem('theme');
-                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
-                        this.setTheme('dark');
-                    } else {
-                        this.setTheme('light');
-                    }
-                    doc.theme.desktop.toggle.addEventListener('click', () => this.toggle());
-                    doc.theme.mobile.toggle.addEventListener('click', () => this.toggle());
-                },
-                toggle() {
-                    doc.html.classList.contains('dark') ? this.setTheme('light') : this.setTheme('dark');
-                },
-                setTheme(theme) {
-                    doc.html.classList.toggle('dark', theme === 'dark');
-                    localStorage.setItem('theme', theme);
-                    const isDark = theme === 'dark';
-                    const iconName = isDark ? 'moon' : 'sun';
-                    doc.theme.desktop.icon.setAttribute('data-lucide', iconName);
-                    doc.theme.mobile.icon.setAttribute('data-lucide', iconName);
-                    doc.theme.mobile.text.textContent = isDark ? 'Toggle Light Mode' : 'Toggle Dark Mode';
-                    lucide.createIcons();
-                }
-            };
-
-            // --- 5. UI RENDERING FUNCTIONS ---
-            const render = {
-                // Generates the HTML for the education timeline.
-                timeline() {
-                    const items = portfolioData.timeline.map(item => {
-                        const isLeft = item.align === 'left';
-                        const colors = {
-                            slate: 'bg-slate-400', primary: 'bg-primary-600', amber: 'bg-amber-500', dark: 'bg-dark'
-                        };
-                        return `
-                        <div class="flex md:contents ${isLeft ? '' : 'flex-row-reverse'}">
-                            <div class="col-start-2 col-end-4 ${isLeft ? 'mr-auto' : 'ml-auto'} md:mx-auto relative">
-                                <div class="h-full w-8 flex items-center justify-center">
-                                    <div class="w-6 h-6 rounded-full ${colors[item.color]} border-4 border-white dark:border-dark-card z-10 ${item.active ? 'animate-pulse' : ''}"></div>
+    <!-- DATA SCRIPT -->
+    <script id="portfolio-data">
+        const portfolioData = {
+            // Static content modals
+            modals: {
+                'contact-info': {
+                    title: 'Get in Touch',
+                    content: `
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-bold text-lg mb-4 text-slate-900 dark:text-white">Contact Details</h4>
+                                <ul class="space-y-4">
+                                    <li class="flex items-center gap-3"><i data-lucide="mail" class="text-primary-600"></i> <a href="mailto:hesten@uvm.edu" class="hover:underline">hesten@uvm.edu</a></li>
+                                    <li class="flex items-center gap-3"><i data-lucide="phone" class="text-primary-600"></i> <span>(802) 555-0123</span></li>
+                                    <li class="flex items-center gap-3"><i data-lucide="linkedin" class="text-primary-600"></i> <a href="#" class="hover:underline">linkedin.com/in/hesten</a></li>
+                                </ul>
+                                <div class="mt-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+                                    <p class="text-sm">Currently open to summer internships in Software Engineering or Data Analysis.</p>
                                 </div>
                             </div>
-                            <div data-modal-key="${item.id}" tabindex="0" role="button" class="col-start-4 col-end-12 p-4 md:p-6 mb-10 w-full md:w-[calc(50%-2rem)] ${isLeft ? 'md:ml-auto' : 'md:mr-auto'} ${isLeft ? 'md:text-left' : 'md:text-right'} rounded-xl bg-white border border-slate-200 shadow-xl-2 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01] dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2 cursor-pointer hover:bg-primary-50 dark:hover:bg-dark-card/50">
-                                <div class="flex ${isLeft ? 'justify-between' : 'justify-end'} items-start">
-                                    ${isLeft ? `<div><p class="text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 mb-1">${item.date}</p><h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">${item.title}</h3></div>` : ''}
-                                    <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 text-slate-500 dark:text-slate-400 ${isLeft ? 'ml-3' : ''}"></i>
-                                    ${!isLeft ? `<div class="text-right mr-3"><p class="text-xs font-semibold uppercase text-primary-600 dark:text-primary-400 mb-1">${item.date}</p><h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">${item.title}</h3></div>` : ''}
+                            <form class="space-y-4" onsubmit="event.preventDefault(); alert('Message simulation: Sent!');">
+                                <input type="text" placeholder="Your Name" class="w-full p-3 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-slate-800" required>
+                                <input type="email" placeholder="Your Email" class="w-full p-3 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-slate-800" required>
+                                <textarea placeholder="Message" rows="4" class="w-full p-3 rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-slate-800" required></textarea>
+                                <button type="submit" class="w-full py-3 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition">Send Message</button>
+                            </form>
+                        </div>
+                    `
+                },
+                'studies-overview': {
+                    title: 'Academic Philosophy',
+                    content: `
+                        <div class="prose dark:prose-invert max-w-none">
+                            <p class="text-lg">My educational philosophy centers on the bridge between theoretical computer science and practical application.</p>
+                            <h4 class="text-lg font-bold mt-4 mb-2">The Transition: CCV to UVM</h4>
+                            <p>At CCV, I focused on the fundamentals. I learned that coding is not just about syntax, but about logic and structure. I took courses in introductory Python, Web Design, and Database Management.</p>
+                            <p>Transferring to UVM has allowed me to scale these skills. I am now tackling complex algorithms, operating systems, and team-based software engineering projects.</p>
+                            <h4 class="text-lg font-bold mt-4 mb-2">Core Competencies</h4>
+                            <div class="grid grid-cols-2 gap-4 mt-4">
+                                <div class="p-4 border border-slate-200 dark:border-slate-700 rounded-lg">
+                                    <strong>Languages</strong><br>JavaScript, Python, C++, Java
                                 </div>
-                                <p class="text-sm text-slate-600 mt-2 dark:text-slate-400">${item.description}</p>
+                                <div class="p-4 border border-slate-200 dark:border-slate-700 rounded-lg">
+                                    <strong>Tools</strong><br>Git, Docker, VS Code, React
+                                </div>
                             </div>
                         </div>
-                    `;
-                    }).join('');
-                    doc.timelineContainer.innerHTML = items;
-                },
-                // Generates the HTML for the course cards.
-                courses() {
-                    const items = portfolioData.courses.map(course => {
-                        const colors = {
-                            primary: 'border-primary-100 hover:border-primary-400 dark:border-primary-700 dark:hover:border-primary-400',
-                            green: 'border-green-100 hover:border-green-400 dark:border-green-700 dark:hover:border-green-400',
-                            purple: 'border-purple-100 hover:border-purple-400 dark:border-purple-700 dark:hover:border-purple-400'
-                        };
-                        const textColors = {
-                            primary: 'text-primary-600 dark:text-primary-400',
-                            green: 'text-green-600 dark:text-green-400',
-                            purple: 'text-purple-600 dark:text-purple-400'
-                        };
-                        return `
-                        <div data-modal-key="${course.id}" tabindex="0" role="button" class="bg-white rounded-xl border ${colors[course.color]} shadow-lg-2 p-6 hover:shadow-xl-2 hover:scale-[1.01] transition-all duration-300 cursor-pointer dark:bg-dark-card">
-                            <div class="flex justify-between items-center mb-3">
-                                <div class="flex items-center">
-                                    <i data-lucide="${course.icon}" class="w-6 h-6 ${textColors[course.color]} mr-3"></i>
-                                    <span class="text-sm font-semibold ${textColors[course.color]}">${course.semester}</span>
-                                </div>
-                                <i data-lucide="external-link" class="w-4 h-4 flex-shrink-0 ${textColors[course.color]}"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-900 mb-1 dark:text-slate-100">${course.title}</h3>
-                            <p class="text-slate-600 text-sm dark:text-slate-400">${course.description}</p>
-                        </div>
-                    `;
-                    }).join('');
-                    doc.coursesGrid.innerHTML = items;
-                },
-                // Generates the HTML for the project cards in the portfolio.
-                portfolio() {
-                    const items = portfolioData.projects.map(project => {
-                        const colors = {
-                            indigo: 'text-indigo-600 dark:text-indigo-400 hover:border-indigo-400 dark:hover:border-indigo-500',
-                            orange: 'text-orange-600 dark:text-orange-400 hover:border-orange-400 dark:hover:border-orange-500',
-                            emerald: 'text-emerald-600 dark:text-emerald-400 hover:border-emerald-400 dark:hover:border-emerald-500'
-                        };
-                        const tagHtml = project.tags.map(tag => {
-                            const tagColors = {
-                                indigo: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300',
-                                sky: 'bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-300',
-                                orange: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300',
-                                purple: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
-                                red: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-                                blue: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
-                            };
-                            return `<span class="${tagColors[tag.color]} text-xs font-medium px-3 py-1 rounded-full">${tag.name}</span>`;
-                        }).join('');
-                        return `
-                        <div data-modal-key="${project.id}" tabindex="0" class="group bg-white rounded-xl border border-slate-200 shadow-lg-2 p-6 ${colors[project.color]} transition-all duration-300 transform hover:-translate-y-1 cursor-pointer dark:bg-dark-card dark:border-slate-700 dark:shadow-dark-xl-2">
-                            <i data-lucide="${project.icon}" class="w-8 h-8 mb-4 group-hover:scale-110 transition-transform"></i>
-                            <h3 class="text-xl font-semibold mb-2 text-slate-900 dark:text-slate-100">${project.title}</h3>
-                            <p class="text-slate-600 mb-4 text-sm dark:text-slate-400">${project.description}</p>
-                            <div class="flex flex-wrap gap-2 mb-4">${tagHtml}</div>
-                            <a href="#" class="font-semibold text-primary-600 hover:text-primary-700 transition-colors duration-300 inline-flex items-center text-sm dark:text-primary-400 dark:hover:text-primary-300">
-                                ${project.linkText} <i data-lucide="chevron-right" class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-                            </a>
-                        </div>
-                    `;
-                    }).join('');
-                    doc.portfolioGrid.innerHTML = items;
-                },
-                // Renders the notes list, handling both initial display and search filtering.
-                notes(filter = '') {
-                    const filteredNotes = filter ?
-                        portfolioData.notes.filter(note => note.keywords.toLowerCase().includes(filter) || note.title.toLowerCase().includes(filter)) :
-                        [...portfolioData.notes];
-
-                    const noteHtml = filteredNotes.map((note, index) => {
-                        const isHidden = !filter && index >= state.notesVisibleCount;
-                        return `
-                        <li data-modal-key="note-${note.id}" tabindex="0" data-keywords="${note.keywords}" class="note-item bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-primary-400 transition-colors cursor-pointer shadow-sm hover:shadow-md dark:bg-slate-700 dark:border-slate-600 dark:hover:border-primary-400 ${isHidden ? 'hidden' : ''}">
-                            <h4 class="font-semibold flex items-center text-slate-900 dark:text-slate-100"><i data-lucide="${note.icon}" class="text-primary-600 w-4 h-4 mr-2 dark:text-primary-400"></i>${note.title}</h4>
-                            <p class="text-sm text-slate-500 mt-1 dark:text-slate-400">${note.summary}</p>
-                        </li>
-                    `;
-                    }).join('');
-
-                    doc.notes.list.innerHTML = noteHtml;
-                    doc.notes.noResults.classList.toggle('hidden', filteredNotes.length > 0);
-
-                    const hasMoreNotes = !filter && state.notesVisibleCount < portfolioData.notes.length;
-                    doc.notes.loadMoreBtn.classList.toggle('hidden', !hasMoreNotes);
+                    `
                 }
-            };
+            },
+            
+            timeline: [
+                { 
+                    id: 1, 
+                    date: 'May 2020', 
+                    title: 'High School Diploma', 
+                    description: 'Graduated with Honors. Focus on Mathematics and Physics.', 
+                    icon: 'award', 
+                    color: 'bg-indigo-500', 
+                    align: 'left',
+                    details: `<p>During my high school years, I developed a strong interest in STEM fields. I was president of the Robotics club and took AP Calculus and AP Physics. This period cemented my desire to pursue engineering and computer science.</p><p class="mt-2"><strong>Key Achievements:</strong></p><ul class="list-disc pl-5"><li>National Honor Society Member</li><li>Robotics Team Captain</li><li>GPA: 3.8</li></ul>`
+                },
+                { 
+                    id: 2, 
+                    date: 'Sept 2021', 
+                    title: 'Started at CCV', 
+                    description: 'Enrolled in Computer Systems Associate degree program.', 
+                    icon: 'book-open', 
+                    color: 'bg-primary-500', 
+                    align: 'right',
+                    details: `<p>At the Community College of Vermont, I specialized in Computer Systems. I balanced a full course load with part-time work, developing time management skills essential for my future career.</p><p class="mt-2"><strong>Course Highlights:</strong></p><ul class="list-disc pl-5"><li>Intro to Programming (Python)</li><li>Database Management Systems</li><li>Networking Fundamentals</li></ul>`
+                },
+                { 
+                    id: 3, 
+                    date: 'May 2023', 
+                    title: 'Graduated CCV', 
+                    description: 'Associates Degree in STEM Studies. GPA: 3.9.', 
+                    icon: 'graduation-cap', 
+                    color: 'bg-green-500', 
+                    align: 'left',
+                    details: `<p>I graduated Summa Cum Laude with an Associate of Science in STEM Studies. My capstone project involved creating a database system for a local non-profit library.</p><p class="mt-2"><strong>Awards:</strong></p><ul class="list-disc pl-5"><li>Dean's List (All Semesters)</li><li>STEM Excellence Award</li></ul>`
+                },
+                { 
+                    id: 4, 
+                    date: 'Sept 2024', 
+                    title: 'Transferred to UVM', 
+                    description: 'Matriculated into BS Computer Science program.', 
+                    icon: 'school', 
+                    color: 'bg-purple-500', 
+                    align: 'right', 
+                    active: true,
+                    details: `<p>I am currently a junior at the University of Vermont. The transition has been seamless thanks to the strong foundation built at CCV. I am now focusing on advanced data structures, algorithms, and software engineering principles.</p><p class="mt-2"><strong>Current Goals:</strong></p><ul class="list-disc pl-5"><li>Secure a Summer Internship</li><li>Contribute to Open Source Projects</li><li>Maintain 3.8+ GPA</li></ul>`
+                }
+            ],
 
-            // --- 6. MODAL MANAGEMENT ---
-            const modalManager = {
-                /**
-                 * Opens a modal window with content determined by a unique key.
-                 * @param {string} key - The identifier for the content to display.
-                 * @param {boolean} isFromHistory - True if the call is from a popstate event (back/forward button).
-                 */
-                open(key, isFromHistory = false) {
-                    if (!key) return;
-
-                    let data;
-                    let isWeeklyDetail = false;
-                    let parentCourseId = '';
-
-                    // Logic for nested course week modals (e.g., "course-week-int-1050-1").
-                    if (key.startsWith('course-week-')) {
-                        isWeeklyDetail = true;
-                        const parts = key.split('-');
-                        const weekNum = parts.pop();
-                        parts.shift(); // remove 'course'
-                        parts.shift(); // remove 'week'
-                        const courseId = parts.join('-');
-                        parentCourseId = courseId;
-
-                        const course = portfolioData.courses.find(c => c.id === courseId);
-                        if (course && course.weeks) {
-                            const weekData = course.weeks.find(w => w.week == weekNum);
-                            if (weekData && weekData.content) {
-                                // Generate tabbed interface for weekly content.
-                                const tabs = Object.keys(weekData.content);
-                                const tabButtons = tabs.map((tab, index) => {
-                                    const tabName = tab.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-                                    // Use the standardized active/inactive classes for consistent styling
-                                    const activeClasses = 'bg-primary-100 text-primary-700 dark:bg-slate-600 dark:text-primary-300';
-                                    const inactiveClasses = 'text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700';
-                                    return `<button data-tab="${tab}" class="tab-button px-4 py-2 text-sm font-medium rounded-md ${index === 0 ? activeClasses : inactiveClasses}">${tabName}</button>`;
-                                }).join('');
-
-                                const tabContents = tabs.map((tab, index) => {
-                                    return `<div data-tab-content="${tab}" class="tab-content mt-4 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg ${index === 0 ? '' : 'hidden'}">${weekData.content[tab]}</div>`;
-                                }).join('');
-
-                                const tabbedHtml = `
-                                <div class="border-b border-slate-200 dark:border-slate-600 mb-4">
-                                    <nav class="flex space-x-2" aria-label="Tabs">${tabButtons}</nav>
-                                </div>
-                                <div>${tabContents}</div>
-                            `;
-                                data = { title: `${course.id.toUpperCase()}: Week ${weekData.week} - ${weekData.title}`, content: tabbedHtml };
+            courses: [
+                {
+                    id: 'cis-2230',
+                    semester: 'Fall 2024',
+                    title: 'Web Development I',
+                    description: 'Modern frontend development using HTML5, CSS3, and JavaScript ES6+.',
+                    icon: 'layout',
+                    color: 'text-blue-500',
+                    weeks: [
+                        {
+                            week: 1,
+                            title: 'HTML Semantics & Structure',
+                            content: {
+                                notes: '<p>Focus on accessibility and the document object model (DOM). Key tags discussed: &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;.</p><ul class="list-disc pl-5 mt-2"><li>Semantic HTML importance</li><li>ARIA roles intro</li></ul>',
+                                quiz: '<p class="font-bold">Score: 10/10</p><p>Topics: Block vs Inline elements, Attributes.</p>',
+                                assignment: '<p>Built a resume page using only semantic HTML tags. Validated using W3C validator.</p>'
+                            }
+                        },
+                        {
+                            week: 2,
+                            title: 'CSS Box Model & Flexbox',
+                            content: {
+                                notes: '<p>Understanding margin, border, padding, and content. The <code>box-sizing: border-box</code> reset.</p>',
+                                assignment: '<p>Recreated a classic magazine layout using Flexbox.</p>',
+                                quiz: '<p class="font-bold">Score: 9/10</p><p>Missed one question on flex-basis vs width.</p>'
                             }
                         }
-                        // Logic for top-level modals (e.g., a course overview).
-                    } else {
-                        data = portfolioData.modals[key] || portfolioData.projects.find(i => i.id === key);
-                        const courseData = portfolioData.courses.find(i => i.id === key);
-                        if (courseData && courseData.weeks) {
-                            // Generate the list of weeks for a course.
-                            const weeksHtml = courseData.weeks.map(week => `
-                            <a href="#course-week-${courseData.id}-${week.week}" data-modal-key="course-week-${courseData.id}-${week.week}" class="block p-3 bg-slate-100 rounded-lg dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
-                                <p class="font-semibold text-slate-900 dark:text-slate-100">Week ${week.week}: ${week.title}</p>
-                            </a>
-                        `).join('');
-                            data = { title: `${courseData.title} - Weekly Assignments`, content: `<div class="space-y-2">${weeksHtml}</div>` };
-                        }
-                    }
-
-                    // Special handling for individual notes.
-                    if (key.startsWith('note-')) {
-                        const noteId = key.replace('note-', '');
-                        const noteData = portfolioData.notes.find(n => n.id === noteId);
-                        if (noteData) {
-                            // Since notes don't have dedicated 'content' fields in the JSON, we use the fallback.
-                            // If you want full note content, add a 'content' field to each note in the JSON.
-                            data = { 
-                                title: `Note: ${noteData.title}`, 
-                                content: `<p>${noteData.summary}</p><p class='mt-4 text-sm italic'>Detailed content for this note is currently an excerpt. Please add a 'content' field to the note object in the JSON data for the full text.</p>` 
-                            };
-                        }
-                    }
-
-                    if (!data) {
-                        console.error('Modal content not found for key:', key);
-                        data = { title: "Content Not Found", content: "Sorry, the details for this item could not be loaded." };
-                    }
-
-                    // Populate and show the modal.
-                    doc.modal.title.textContent = data.title;
-                    doc.modal.contentBody.innerHTML = data.content || data.description;
-
-                    // Show or hide the "Back" button.
-                    if (isWeeklyDetail) {
-                        doc.modal.backBtn.classList.remove('hidden');
-                        // The parent key for the back button must be the course ID
-                        doc.modal.backBtn.dataset.modalKey = parentCourseId;
-                    } else {
-                        doc.modal.backBtn.classList.add('hidden');
-                        delete doc.modal.backBtn.dataset.modalKey;
-                    }
-
-                    if (!state.isModalOpen) {
-                        doc.modal.container.style.display = 'flex';
-                        doc.html.style.overflow = 'hidden'; // Prevent background scrolling
-                        state.isModalOpen = true;
-                    }
-
-                    doc.modal.container.focus(); // For accessibility
-                    lucide.createIcons(); // Re-render any new icons in the modal
-
-                    // Update URL for permalink unless it's a history navigation.
-                    if (!isFromHistory && window.location.hash !== `#${key}`) {
-                        const hash = `#${key}`;
-                        // Use pushState to create a new entry in browser history.
-                        history.pushState({ modalKey: key }, "", hash);
-                    }
+                    ]
                 },
-                close(isFromHistory = false) {
-                    if (!state.isModalOpen) return;
-
-                    doc.modal.container.style.display = 'none';
-                    doc.html.style.overflow = '';
-                    state.isModalOpen = false;
-
-                    // When closing manually (not via back button), we need to update the history state.
-                    if (!isFromHistory && window.location.hash) {
-                        // This pushes a new state representing the "closed" modal state (the base URL).
-                        history.pushState({ modalKey: null }, "", window.location.pathname + window.location.search);
-                    }
+                {
+                    id: 'cs-1210',
+                    semester: 'Fall 2024',
+                    title: 'Computer Organization',
+                    description: 'Introduction to computer hardware, assembly language, and memory management.',
+                    icon: 'cpu',
+                    color: 'text-red-500',
+                    weeks: [
+                        {
+                            week: 1,
+                            title: 'Binary & Hexadecimal',
+                            content: {
+                                notes: '<p>Conversion algorithms between Base-2, Base-10, and Base-16. Two\'s complement for negative numbers.</p>',
+                                quiz: '<p class="font-bold">Score: 100%</p>'
+                            }
+                        },
+                        {
+                            week: 3,
+                            title: 'MIPS Assembly Intro',
+                            content: {
+                                notes: '<p>Load and Store architecture. Registers $t0-$t9 usage conventions.</p>',
+                                assignment: '<p>Write a MIPS program to calculate the Fibonacci sequence.</p>'
+                            }
+                        }
+                    ]
                 },
-                // Sets up all event listeners for the modal.
-                init() {
-                    // Close button, "Got It" button, and Escape key trigger history.back()
-                    const closeAction = () => {
-                        if (window.location.hash) {
-                            history.back();
-                        } else {
-                            this.close(true);
+                {
+                    id: 'math-2050',
+                    semester: 'Fall 2024',
+                    title: 'Discrete Mathematics',
+                    description: 'Logic, set theory, combinatorics, and graph theory fundamentals.',
+                    icon: 'sigma',
+                    color: 'text-green-500',
+                    weeks: [
+                        {
+                            week: 1,
+                            title: 'Propositional Logic',
+                            content: {
+                                notes: '<p>Truth tables, implication, and logical equivalence.</p>'
+                            }
                         }
-                    };
-
-                    doc.modal.closeBtn.addEventListener('click', closeAction);
-                    doc.modal.gotItBtn.addEventListener('click', closeAction);
-
-                    document.addEventListener('keydown', (e) => {
-                        if (e.key === 'Escape' && state.isModalOpen) {
-                            closeAction();
-                        }
-                    });
-
-                    // The back button uses the open function to navigate to its parent modal.
-                    doc.modal.backBtn.addEventListener('click', (e) => {
-                        const parentKey = e.currentTarget.dataset.modalKey;
-                        // Use history.back() if the current state has a child hash, otherwise rely on manual open.
-                        if (window.location.hash.startsWith('#course-week-') && parentKey) {
-                            // Because the previous state in history should be the parent course modal,
-                            // calling history.back() is the correct, cleaner approach here.
-                            history.back();
-                        } else if (parentKey) {
-                             // If history state is broken or missing, fallback to manually opening parent.
-                            this.open(parentKey);
-                        }
-                    });
-
-                    // Clicking the modal backdrop closes it.
-                    doc.modal.container.addEventListener('click', (e) => {
-                        if (e.target === doc.modal.container) closeAction();
-                    });
-
-                    // Event delegation for general tab switching inside the modal (now simplified).
-                    doc.modal.contentBody.addEventListener('click', (e) => {
-                        const tabButton = e.target.closest('.tab-button');
-                        if (!tabButton) return;
-
-                        const activeTab = tabButton.dataset.tab;
-                        const contentContainer = tabButton.closest('.modal-content');
-
-                        // Define consistent active and inactive class groups
-                        const activeClasses = ['bg-primary-100', 'text-primary-700', 'dark:bg-slate-600', 'dark:text-primary-300'];
-                        const inactiveClasses = ['text-slate-500', 'hover:bg-slate-100', 'dark:text-slate-400', 'dark:hover:bg-slate-700'];
-
-                        // Update button styles: Deactivate all, then activate the clicked one.
-                        contentContainer.querySelectorAll('.tab-button').forEach(btn => {
-                            btn.classList.remove(...activeClasses);
-                            btn.classList.add(...inactiveClasses);
-                        });
-
-                        tabButton.classList.remove(...inactiveClasses);
-                        tabButton.classList.add(...activeClasses);
-
-                        // Show the active tab's content and hide others.
-                        contentContainer.querySelectorAll('.tab-content').forEach(content => {
-                            content.classList.toggle('hidden', content.dataset.tabContent !== activeTab);
-                        });
-                    });
+                    ]
                 }
-            };
+            ],
 
-            // --- 7. EVENT LISTENERS ---
-            // Mobile Menu Toggle
-            document.getElementById('mobile-menu-button').addEventListener('click', () => {
-                const isHidden = doc.mobileMenu.classList.toggle('hidden');
-                doc.menuIcon.setAttribute('data-lucide', isHidden ? 'menu' : 'x');
+            projects: [
+                { 
+                    id: 'p1', 
+                    title: 'Portfolio Site', 
+                    description: 'This website! Built with vanilla JS and Tailwind to demonstrate DOM manipulation.', 
+                    icon: 'monitor', 
+                    tags: ['HTML', 'Tailwind', 'JS'], 
+                    color: 'text-indigo-500',
+                    details: `<p>This portfolio is a single-page application built without any heavy frameworks like React or Vue, to demonstrate mastery of the DOM APIs and JavaScript fundamentals.</p><h4 class="font-bold mt-4">Key Features</h4><ul class="list-disc pl-5 mt-2"><li>Dynamic JSON-driven content</li><li>Custom Modal System</li><li>History API integration for deep linking</li><li>Dark Mode persistence</li></ul><p class="mt-4"><a href="#" class="text-primary-600 hover:underline">View Source Code</a></p>`
+                },
+                { 
+                    id: 'p2', 
+                    title: 'Weather Dashboard', 
+                    description: 'Fetches real-time weather data from OpenWeatherMap API with city search history.', 
+                    icon: 'cloud-rain', 
+                    tags: ['API', 'Async/Await'], 
+                    color: 'text-sky-500',
+                    details: `<p>A responsive weather dashboard that allows users to search for any city and see current conditions along with a 5-day forecast.</p><h4 class="font-bold mt-4">Technical Challenges</h4><p>Handling asynchronous fetch requests and managing API keys securely. Implemented local storage to save user's search history.</p>`
+                },
+                { 
+                    id: 'p3', 
+                    title: 'Task Manager CLI', 
+                    description: 'Python-based command line tool for managing todos with file persistence.', 
+                    icon: 'terminal', 
+                    tags: ['Python', 'File I/O'], 
+                    color: 'text-yellow-500',
+                    details: `<p>A productivity tool for the terminal. Supports adding, completing, and deleting tasks. Stores data in a JSON file for persistence.</p><h4 class="font-bold mt-4">Learnings</h4><p>Improved understanding of Python's <code>argparse</code> library and file handling/exception safety.</p>`
+                },
+                { 
+                    id: 'p4', 
+                    title: 'CCV Library System', 
+                    description: 'Database design project modeling a library lending system using SQL.', 
+                    icon: 'database', 
+                    tags: ['SQL', 'Database'], 
+                    color: 'text-green-500',
+                    details: `<p>A complete schema design for a library, including tables for Books, Members, Loans, and Fines. Included normalization up to 3NF.</p><h4 class="font-bold mt-4">Scope</h4><p>Wrote complex SQL queries to generate reports on overdue books and popular genres.</p>`
+                }
+            ],
+
+            notes: [
+                { 
+                    id: 1, 
+                    title: 'CSS Grid vs Flexbox', 
+                    summary: 'Grid is 2D, Flex is 1D. Use Grid for layout, Flex for alignment.', 
+                    keywords: 'css layout frontend',
+                    fullContent: `<p><strong>Flexbox</strong> is designed for one-dimensional layouts (row or column). It excels at distributing space between items and aligning them.</p><p><strong>CSS Grid</strong> is designed for two-dimensional layouts (rows AND columns). It is better for defining the overall layout structure of a page.</p><h3>When to use which?</h3><ul><li>Use Flexbox for navigation bars, aligning buttons, or centering elements.</li><li>Use Grid for the main page layout, photo galleries, or complex card grids.</li></ul>`
+                },
+                { 
+                    id: 2, 
+                    title: 'JavaScript Array Methods', 
+                    summary: 'Map, Filter, Reduce cheat sheet with examples.', 
+                    keywords: 'javascript js coding',
+                    fullContent: `<p>A quick reference for modern JS array methods:</p><pre class="bg-slate-100 p-2 rounded mt-2"><code>// Map: Transform elements
+const doubled = arr.map(x => x * 2);
+
+// Filter: Select elements
+const evens = arr.filter(x => x % 2 === 0);
+
+// Reduce: Aggregate elements
+const sum = arr.reduce((acc, curr) => acc + curr, 0);</code></pre>`
+                },
+                { 
+                    id: 3, 
+                    title: 'Git Workflow', 
+                    summary: 'Standard commands: clone, branch, commit, push, merge.', 
+                    keywords: 'git version control',
+                    fullContent: `<p><strong>1. Start</strong>: <code>git checkout -b feature-name</code></p><p><strong>2. Work</strong>: Edit files...</p><p><strong>3. Save</strong>: <code>git add .</code> then <code>git commit -m "Message"</code></p><p><strong>4. Share</strong>: <code>git push origin feature-name</code></p><p><strong>5. Merge</strong>: Create a Pull Request.</p>`
+                },
+                { 
+                    id: 4, 
+                    title: 'Big O Notation', 
+                    summary: 'Time complexity basics. O(1) vs O(n) vs O(log n).', 
+                    keywords: 'algorithms cs theory',
+                    fullContent: `<p>Big O describes the performance of an algorithm as input size grows.</p><ul><li><strong>O(1)</strong>: Constant time (Array access)</li><li><strong>O(log n)</strong>: Logarithmic (Binary Search)</li><li><strong>O(n)</strong>: Linear (Simple loop)</li><li><strong>O(n^2)</strong>: Quadratic (Nested loops)</li></ul>`
+                },
+                { 
+                    id: 5, 
+                    title: 'Accessibility (a11y)', 
+                    summary: 'Semantic HTML, ARIA labels, and color contrast ratios.', 
+                    keywords: 'accessibility html design',
+                    fullContent: `<p>Web accessibility ensures people with disabilities can use your site.</p><h4>Checklist:</h4><ul><li>Use semantic tags (nav, main, footer)</li><li>Alt text for images</li><li>Sufficient color contrast</li><li>Keyboard navigability</li></ul>`
+                },
+                { 
+                    id: 6, 
+                    title: 'Python List Comprehension', 
+                    summary: 'Writing cleaner loops in a single line of code.', 
+                    keywords: 'python coding syntax',
+                    fullContent: `<p>Pythonic way to create lists.</p><p>Instead of:</p><pre class="bg-slate-100 p-2 rounded"><code>squares = []
+for x in range(10):
+    squares.append(x**2)</code></pre><p>Use:</p><pre class="bg-slate-100 p-2 rounded"><code>squares = [x**2 for x in range(10)]</code></pre>`
+                },
+                { 
+                    id: 7, 
+                    title: 'REST API Principles', 
+                    summary: 'Statelessness, Client-Server, Cacheability.', 
+                    keywords: 'web api backend',
+                    fullContent: `<p><strong>Stateless:</strong> Server doesn't store client context between requests.</p><p><strong>Resource-Based:</strong> URLs represent resources (nouns), HTTP methods represent actions (verbs).</p><p><strong>Standard Methods:</strong> GET (Read), POST (Create), PUT (Update), DELETE (Remove).</p>`
+                },
+                { 
+                    id: 8, 
+                    title: 'React Hooks Intro', 
+                    summary: 'useState and useEffect basics.', 
+                    keywords: 'react javascript frontend',
+                    fullContent: `<p>Hooks allow functional components to have state.</p><p><code>useState</code>: Returns a stateful value and a function to update it.</p><p><code>useEffect</code>: Performs side effects (data fetching, subscriptions) in functional components.</p>`
+                },
+            ]
+        };
+    </script>
+
+    <!-- CORE LOGIC -->
+    <script>
+        // --- State Management ---
+        const state = {
+            notesVisibleCount: 6,
+            notesIncrement: 3,
+            isModalOpen: false,
+            currentTheme: localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        };
+
+        // --- Theme Manager ---
+        const themeManager = {
+            init() {
+                if (state.currentTheme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+                this.updateIcons();
+            },
+            toggle() {
+                state.currentTheme = state.currentTheme === 'dark' ? 'light' : 'dark';
+                localStorage.setItem('theme', state.currentTheme);
+                document.documentElement.classList.toggle('dark');
+                this.updateIcons();
+            },
+            updateIcons() {
+                // Lucide icons handled automatically on re-render
+            }
+        };
+
+        // --- Render Functions ---
+        const render = {
+            init() {
+                this.timeline();
+                this.courses();
+                this.projects();
+                this.notes();
                 lucide.createIcons();
-            });
+                this.observeAnimations();
+            },
 
-            document.querySelectorAll('.mobile-nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    doc.mobileMenu.classList.add('hidden');
-                    doc.menuIcon.setAttribute('data-lucide', 'menu');
-                    lucide.createIcons();
+            timeline() {
+                const container = document.getElementById('timeline-container');
+                portfolioData.timeline.forEach((item, index) => {
+                    const isLeft = index % 2 === 0;
+                    const alignClass = isLeft ? 'md:flex-row-reverse' : '';
+                    const textClass = isLeft ? 'md:text-right' : 'md:text-left';
+                    const offsetClass = isLeft ? 'md:pr-12' : 'md:pl-12';
+                    
+                    const html = `
+                        <div class="flex items-center justify-between md:justify-center w-full mb-8 ${alignClass} fade-in-section">
+                            <div class="hidden md:block w-5/12"></div>
+                            
+                            <div class="z-10 flex items-center justify-center w-8 h-8 rounded-full ${item.color} shadow-lg shrink-0 border-2 border-white dark:border-slate-800">
+                                <i data-lucide="${item.icon}" class="w-4 h-4 text-white"></i>
+                            </div>
+                            
+                            <div class="w-[calc(100%-4rem)] md:w-5/12 pl-4 md:pl-0 ${offsetClass} ${textClass}">
+                                <div data-modal-key="timeline-${item.id}" class="interactive-card bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg-2 border border-slate-100 dark:border-slate-700 hover:shadow-xl-2 hover:border-primary-300 dark:hover:border-primary-700 group">
+                                    <span class="text-xs font-bold uppercase tracking-wider text-primary-600 dark:text-primary-400 mb-1 block">${item.date}</span>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">${item.title}</h3>
+                                    <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">${item.description}</p>
+                                    <div class="mt-3 flex items-center ${isLeft ? 'md:justify-end' : ''} text-xs text-primary-500 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                                        View Details <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', html);
                 });
+            },
+
+            courses() {
+                const container = document.getElementById('courses-grid');
+                portfolioData.courses.forEach(course => {
+                    // Note: Changed to have the whole card clickable, removing individual week buttons from the main view
+                    const html = `
+                        <div data-modal-key="course-${course.id}" class="interactive-card bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg-2 border border-slate-100 dark:border-slate-700 hover:-translate-y-1 hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300 fade-in-section group">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="p-3 bg-slate-50 dark:bg-slate-700 rounded-xl">
+                                    <i data-lucide="${course.icon}" class="w-6 h-6 ${course.color}"></i>
+                                </div>
+                                <span class="text-xs font-medium px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-slate-600 dark:text-slate-300">${course.semester}</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">${course.title}</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 h-10 line-clamp-2">${course.description}</p>
+                            
+                            <div class="pt-4 border-t border-slate-100 dark:border-slate-700 flex justify-between items-center">
+                                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">${course.weeks.length} Active Modules</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 text-primary-500 transform group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', html);
+                });
+            },
+
+            projects() {
+                const container = document.getElementById('projects-grid');
+                portfolioData.projects.forEach(project => {
+                    const html = `
+                        <div data-modal-key="project-${project.id}" class="interactive-card group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl-2 hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300 fade-in-section">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-700 group-hover:bg-primary-50 dark:group-hover:bg-primary-900/20 transition-colors">
+                                        <i data-lucide="${project.icon}" class="w-6 h-6 ${project.color}"></i>
+                                    </div>
+                                    <i data-lucide="maximize-2" class="w-5 h-5 text-slate-300 group-hover:text-primary-500 transition-colors"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary-600 transition-colors">${project.title}</h3>
+                                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">${project.description}</p>
+                                <div class="flex flex-wrap gap-2">
+                                    ${project.tags.map(tag => `<span class="text-xs px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', html);
+                });
+            },
+
+            notes(filterText = '') {
+                const container = document.getElementById('notes-grid');
+                container.innerHTML = '';
+                const loadMoreBtn = document.getElementById('load-more-container');
+                
+                let filtered = portfolioData.notes.filter(note => {
+                    const search = filterText.toLowerCase();
+                    return note.title.toLowerCase().includes(search) || 
+                           note.keywords.toLowerCase().includes(search);
+                });
+
+                if (filtered.length === 0) {
+                    container.innerHTML = `<div class="col-span-full text-center py-8 text-slate-500">No notes found matching "${filterText}"</div>`;
+                    loadMoreBtn.classList.add('hidden');
+                    return;
+                }
+
+                const displaySet = filtered.slice(0, state.notesVisibleCount);
+                
+                displaySet.forEach(note => {
+                    const html = `
+                        <div data-modal-key="note-${note.id}" class="interactive-card bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary-300 dark:hover:border-primary-700 shadow-sm hover:shadow-md transition-all fade-in-section group">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-3">
+                                    <i data-lucide="file-text" class="w-5 h-5 text-primary-500"></i>
+                                    <h4 class="font-bold text-slate-900 dark:text-white group-hover:text-primary-600 transition-colors">${note.title}</h4>
+                                </div>
+                                <i data-lucide="eye" class="w-4 h-4 text-slate-300 group-hover:text-primary-500 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            </div>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">${note.summary}</p>
+                            <div class="text-xs text-slate-400 italic">#${note.keywords.split(' ').join(' #')}</div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', html);
+                });
+
+                // Re-init icons for new content
+                lucide.createIcons();
+
+                if (filtered.length > state.notesVisibleCount) {
+                    loadMoreBtn.classList.remove('hidden');
+                } else {
+                    loadMoreBtn.classList.add('hidden');
+                }
+            },
+
+            observeAnimations() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+            }
+        };
+
+        // --- Modal Manager ---
+        const modalManager = {
+            backdrop: document.getElementById('modal-backdrop'),
+            container: document.getElementById('modal-container'),
+            title: document.getElementById('modal-title'),
+            body: document.getElementById('modal-body'),
+
+            open(key, isHistoryNav = false) {
+                let title = '';
+                let content = '';
+
+                // 1. Static Modals
+                if (portfolioData.modals[key]) {
+                    title = portfolioData.modals[key].title;
+                    content = portfolioData.modals[key].content;
+                }
+                // 2. Timeline Items
+                else if (key.startsWith('timeline-')) {
+                    const id = parseInt(key.split('-')[1]);
+                    const item = portfolioData.timeline.find(t => t.id === id);
+                    if (item) {
+                        title = `${item.date} - ${item.title}`;
+                        content = `
+                            <div class="prose dark:prose-invert max-w-none">
+                                <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100 dark:border-slate-700">
+                                    <div class="p-3 rounded-full ${item.color} text-white">
+                                        <i data-lucide="${item.icon}" class="w-6 h-6"></i>
+                                    </div>
+                                    <h3 class="text-2xl font-bold m-0">${item.title}</h3>
+                                </div>
+                                <p class="lead text-lg">${item.description}</p>
+                                ${item.details || ''}
+                            </div>
+                        `;
+                    }
+                }
+                // 3. Project Items
+                else if (key.startsWith('project-')) {
+                    const id = key.substring(8); // 'project-p1' -> 'p1'
+                    const item = portfolioData.projects.find(p => p.id === id);
+                    if (item) {
+                        title = item.title;
+                        content = `
+                            <div class="prose dark:prose-invert max-w-none">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex gap-2">
+                                        ${item.tags.map(t => `<span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-sm font-medium">${t}</span>`).join('')}
+                                    </div>
+                                </div>
+                                <p class="text-lg text-slate-600 dark:text-slate-300 font-medium">${item.description}</p>
+                                <hr class="my-6 border-slate-100 dark:border-slate-700">
+                                ${item.details || ''}
+                            </div>
+                        `;
+                    }
+                }
+                // 4. Note Items
+                else if (key.startsWith('note-')) {
+                    const id = parseInt(key.split('-')[1]);
+                    const item = portfolioData.notes.find(n => n.id === id);
+                    if (item) {
+                        title = item.title;
+                        content = `
+                            <div class="prose dark:prose-invert max-w-none">
+                                <div class="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700">
+                                    <strong>Summary:</strong> ${item.summary}
+                                </div>
+                                ${item.fullContent || '<p>Content coming soon...</p>'}
+                                <div class="mt-8 text-sm text-slate-400">
+                                    Keywords: ${item.keywords}
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+                // 5. Course Items (Main Course Modal)
+                else if (key.startsWith('course-')) {
+                    const courseId = key.substring(7); // 'course-cis-2230' -> 'cis-2230'
+                    const item = portfolioData.courses.find(c => c.id === courseId);
+                    
+                    if (item) {
+                        title = item.title;
+                        // Construct tabs content
+                        const tabsContent = {};
+                        
+                        // Tab 1: Overview
+                        tabsContent['Overview'] = `
+                            <p class="text-lg">${item.description}</p>
+                            <div class="mt-4 grid grid-cols-2 gap-4">
+                                <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded">
+                                    <span class="text-xs uppercase text-slate-400">Semester</span><br>
+                                    <span class="font-medium">${item.semester}</span>
+                                </div>
+                                <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded">
+                                    <span class="text-xs uppercase text-slate-400">Modules</span><br>
+                                    <span class="font-medium">${item.weeks.length} Weeks</span>
+                                </div>
+                            </div>
+                        `;
+
+                        // Tabs 2+: Weeks
+                        item.weeks.forEach(w => {
+                            // Combine all content types for a week into one view for simplicity
+                            let weekHtml = `<h4 class="text-xl font-bold mb-4">${w.title}</h4>`;
+                            if (w.content.notes) weekHtml += `<div class="mb-6"><h5>Class Notes</h5>${w.content.notes}</div>`;
+                            if (w.content.assignment) weekHtml += `<div class="mb-6"><h5>Assignment</h5>${w.content.assignment}</div>`;
+                            if (w.content.quiz) weekHtml += `<div class="mb-6"><h5>Quiz Results</h5>${w.content.quiz}</div>`;
+                            
+                            tabsContent[`Week ${w.week}`] = weekHtml;
+                        });
+
+                        content = this.generateTabs(tabsContent);
+                    }
+                }
+
+                if (!content) return;
+
+                // Render content
+                this.title.textContent = title;
+                this.body.innerHTML = content;
+                lucide.createIcons();
+
+                // Show Modal
+                this.backdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    this.backdrop.classList.remove('opacity-0', 'pointer-events-none');
+                    this.container.classList.remove('scale-95', 'opacity-0');
+                    this.container.classList.add('scale-100', 'opacity-100');
+                }, 10);
+                
+                document.body.style.overflow = 'hidden';
+                state.isModalOpen = true;
+
+                if (!isHistoryNav) {
+                    try { history.pushState({ modal: key }, '', `#${key}`); } catch (e) {}
+                }
+
+                this.setupTabs();
+            },
+
+            close(isHistoryNav = false) {
+                this.backdrop.classList.add('opacity-0', 'pointer-events-none');
+                this.container.classList.remove('scale-100', 'opacity-100');
+                this.container.classList.add('scale-95', 'opacity-0');
+
+                setTimeout(() => {
+                    this.backdrop.classList.add('hidden');
+                    this.body.innerHTML = '';
+                }, 300);
+
+                document.body.style.overflow = '';
+                state.isModalOpen = false;
+
+                if (!isHistoryNav && window.location.hash) {
+                    try { history.pushState(null, '', window.location.pathname); } 
+                    catch (e) { try { window.location.hash = ''; } catch (e2) {} }
+                }
+            },
+
+            generateTabs(contentObj) {
+                const keys = Object.keys(contentObj);
+                if (keys.length === 0) return '<p>No content available.</p>';
+
+                const tabsHeader = `
+                    <div class="flex border-b border-slate-200 dark:border-slate-700 mb-4 overflow-x-auto no-scrollbar">
+                        ${keys.map((k, i) => `
+                            <button class="tab-btn px-4 py-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap capitalize ${i === 0 ? 'border-primary-600 text-primary-600 dark:text-primary-400' : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200'}" data-tab="${k}">
+                                ${k}
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+
+                const tabsBody = `
+                    <div class="tab-content-container min-h-[200px]">
+                        ${keys.map((k, i) => `
+                            <div class="tab-pane prose dark:prose-invert max-w-none ${i === 0 ? 'block' : 'hidden'}" data-pane="${k}">
+                                ${contentObj[k]}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                return tabsHeader + tabsBody;
+            },
+
+            setupTabs() {
+                const btns = this.body.querySelectorAll('.tab-btn');
+                const panes = this.body.querySelectorAll('.tab-pane');
+
+                btns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        btns.forEach(b => {
+                            b.classList.remove('border-primary-600', 'text-primary-600', 'dark:text-primary-400');
+                            b.classList.add('border-transparent', 'text-slate-500');
+                        });
+                        btn.classList.remove('border-transparent', 'text-slate-500');
+                        btn.classList.add('border-primary-600', 'text-primary-600', 'dark:text-primary-400');
+
+                        const target = btn.dataset.tab;
+                        panes.forEach(p => {
+                            p.classList.add('hidden');
+                            if (p.dataset.pane === target) p.classList.remove('hidden');
+                        });
+                    });
+                });
+            }
+        };
+
+        // --- Event Listeners ---
+        document.addEventListener('DOMContentLoaded', () => {
+            themeManager.init();
+            render.init();
+
+            // Mobile Menu
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
             });
 
-            // Notes Search functionality
-            doc.notes.searchInput.addEventListener('input', () => {
-                const filter = doc.notes.searchInput.value.toLowerCase().trim();
-                doc.notes.clearSearchBtn.classList.toggle('hidden', filter.length === 0);
-                render.notes(filter);
-            });
+            // Theme Toggle
+            document.getElementById('theme-toggle').addEventListener('click', () => themeManager.toggle());
 
-            doc.notes.clearSearchBtn.addEventListener('click', () => {
-                doc.notes.searchInput.value = '';
-                doc.notes.clearSearchBtn.classList.add('hidden');
-                state.notesVisibleCount = 6; // Reset note visibility
+            // Search Logic
+            const searchInput = document.getElementById('notes-search');
+            const clearBtn = document.getElementById('clear-search');
+            
+            searchInput.addEventListener('input', (e) => {
+                render.notes(e.target.value);
+                if(e.target.value) clearBtn.classList.remove('hidden');
+                else clearBtn.classList.add('hidden');
+            });
+            
+            clearBtn.addEventListener('click', () => {
+                searchInput.value = '';
                 render.notes();
+                clearBtn.classList.add('hidden');
+                searchInput.focus();
             });
 
-            // "Load More" button for notes
-            doc.notes.loadMoreBtn.addEventListener('click', () => {
+            // Load More Notes
+            document.getElementById('load-more-btn').addEventListener('click', () => {
                 state.notesVisibleCount += state.notesIncrement;
-                render.notes();
+                render.notes(searchInput.value);
             });
 
-            // Main Modal Trigger using Event Delegation for the whole page.
-            document.body.addEventListener('click', (e) => {
+            // Modal Triggers (Delegation)
+            document.addEventListener('click', (e) => {
                 const trigger = e.target.closest('[data-modal-key]');
                 if (trigger) {
-                    e.preventDefault();
-                    modalManager.open(trigger.dataset.modalKey);
-                }
-            });
-            document.body.addEventListener('keydown', (e) => {
-                const trigger = e.target.closest('[data-modal-key]');
-                if (trigger && (e.key === 'Enter' || e.key === ' ')) {
-                    e.preventDefault();
-                    modalManager.open(trigger.dataset.modalKey);
+                    const key = trigger.dataset.modalKey;
+                    modalManager.open(key);
                 }
             });
 
-            // Browser History (Back/Forward) event listener for permalinks.
+            // Modal Close Triggers
+            document.getElementById('modal-close').addEventListener('click', () => modalManager.close());
+            document.getElementById('modal-backdrop').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('modal-backdrop')) modalManager.close();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && state.isModalOpen) modalManager.close();
+            });
+
+            // History API / Deep Linking Support
             window.addEventListener('popstate', (event) => {
-                const key = event.state?.modalKey || window.location.hash.substring(1);
-                if (key) {
-                    modalManager.open(key, true);
+                if (event.state && event.state.modal) {
+                    modalManager.open(event.state.modal, true);
                 } else {
                     modalManager.close(true);
                 }
             });
 
-            // Intersection Observer for fade-in-on-scroll animations.
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('faded-in');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.section-animate').forEach(section => observer.observe(section));
-
-            // --- 8. INITIAL PAGE LOAD ---
-            function initializePage() {
-                themeManager.init();
-                modalManager.init();
-                render.timeline();
-                render.courses();
-                render.portfolio();
-                render.notes();
-                lucide.createIcons();
-
-                // Check for a permalink in the URL on initial load.
-                const initialKey = window.location.hash.substring(1);
-                if (initialKey) {
-                    // Use a small timeout to ensure the page is fully rendered before opening the modal.
-                    setTimeout(() => {
-                        modalManager.open(initialKey, true);
-                    }, 100);
-                }
-
-                // The hero section is faded in immediately for a nice loading effect.
-                document.getElementById('hero').classList.add('faded-in');
+            // Check URL on load
+            if (window.location.hash) {
+                const key = window.location.hash.substring(1);
+                modalManager.open(key, true);
             }
-
-            initializePage();
         });
+
     </script>
 </body>
-
 </html>
