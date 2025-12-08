@@ -1,3 +1,199 @@
+<!--
+================================================================================
+| HESTEN'S ACADEMIC PORTFOLIO & JOURNEY - FULL DOCUMENTATION
+================================================================================
+
+PROJECT OVERVIEW:
+A responsive, fully interactive single-page academic portfolio website built with
+Tailwind CSS and Lucide Icons. The site showcases Hesten's educational path from
+high school through Community College of Vermont (CCV) to the University of Vermont
+(UVM), including coursework, projects, research, and a searchable digital notebook.
+
+KEY FEATURES:
+1. Dark/Light Theme Toggle - Persistent across sessions via localStorage
+2. Dynamic Content Management - All content driven by JSON data structure
+3. Interactive Modal System - Detailed views with tabbed interfaces and navigation
+4. Browser History Support - Full back/forward functionality and shareable permalinks
+5. Responsive Design - Mobile-first approach with Tailwind CSS breakpoints
+6. Accessibility - ARIA labels, semantic HTML, keyboard navigation support
+7. Animated Sections - Intersection Observer for fade-in-on-scroll effects
+8. Searchable Notes - Real-time filtering with "Load More" pagination
+
+================================================================================
+| TECHNICAL ARCHITECTURE
+================================================================================
+
+HTML STRUCTURE:
+- Header with sticky navigation and theme toggle
+- Hero section with animated gradient background
+- About section with modal-triggered degree plan overview
+- Timeline section showing education milestones (clickable for details)
+- Current coursework grid with expandable weekly assignments
+- Portfolio section showcasing academic projects and work
+- Digital notebook with searchable notes and filtering
+- Contact section with modal for contact information
+- Footer with social links
+- Hidden modal container for dynamic content display
+
+STYLING & THEMING:
+- Tailwind CSS v3 with custom config for colors, fonts, and shadows
+- Custom Inter font from Google Fonts for consistent typography
+- Dark mode support with 'dark' class on root HTML element
+- Primary color scheme: Sky Blue (#0284c7 - primary-600)
+- Custom shadows: 'lg-2', 'xl-2', 'dark-xl-2' for depth
+- Lucide Icons integration for scalable, crisp iconography
+- Smooth animations: fade-in, fade-in-scale, and scroll-triggered reveals
+
+================================================================================
+| DATA STRUCTURE (JSON)
+================================================================================
+
+The portfolio data is centralized in a single JSON object with five main sections:
+
+1. MODALS OBJECT:
+    - Stores detailed content for various clickable triggers
+    - Keys: 'studies-overview', 'full-degree-plan', 'transcripts', 'hs-diploma',
+      'ccv-studies', 'contact-info'
+    - Content includes HTML with tabs for multi-section displays
+
+2. TIMELINE ARRAY:
+    - Objects representing educational milestones
+    - Fields: id, date, title, description, icon, color, align (left/right)
+    - Used to generate the alternating timeline visualization
+    - Marks current status with 'active: true' property
+
+3. COURSES ARRAY:
+    - Course objects with weekly assignments nested inside
+    - Fields: id, semester, title, description, icon, color, weeks[]
+    - Each week contains: week number, title, and content (notes, essay, quiz, etc.)
+    - Supports expandable tabbed interfaces for rich content display
+
+4. PROJECTS ARRAY:
+    - Portfolio project cards with metadata
+    - Fields: id, title, description, icon, color, tags[], linkText
+    - Tags support color-coded styling for categorization
+
+5. NOTES ARRAY:
+    - Searchable digital notebook entries
+    - Fields: id, title, summary, icon, keywords
+    - Keywords support fuzzy filtering across multiple terms
+    - Supports pagination with "Load More" functionality
+
+================================================================================
+| JAVASCRIPT FUNCTIONALITY
+================================================================================
+
+STATE MANAGEMENT (state object):
+- notesVisibleCount: Tracks how many notes are displayed (initial: 6)
+- notesIncrement: How many notes to load per "Load More" click (3)
+- isModalOpen: Boolean flag for modal visibility state
+
+THEME MANAGER (themeManager):
+- init(): Detects OS dark mode preference and loads stored preference
+- toggle(): Switches between light/dark modes
+- setTheme(theme): Applies theme class, updates localStorage, and re-renders icons
+
+RENDER FUNCTIONS:
+- render.timeline(): Generates alternating left/right timeline items
+- render.courses(): Creates course cards with semester and description
+- render.portfolio(): Builds project cards with tags and hover effects
+- render.notes(filter): Generates searchable notes with optional text filtering
+
+MODAL MANAGER (modalManager):
+- open(key, isFromHistory): Displays modal with dynamic content based on key
+  * Handles nested course-week modals with tab interfaces
+  * Generates on-the-fly tab HTML for week content
+  * Updates browser URL hash for shareable permalinks
+- close(isFromHistory): Hides modal and restores page scrollability
+- init(): Binds all modal event listeners including close, escape, backdrop click
+  * Implements simplified tab-switching with class management
+  * Supports back button navigation between parent and child modals
+
+BROWSER HISTORY:
+- Uses History API (pushState/popstate) for deep linking
+- Modal permalinks are shareable: example.com#course-week-int-1050-1
+- Back/forward buttons seamlessly navigate between modals
+- Prevents duplicate history entries for manual opens vs. history navigation
+
+EVENT LISTENERS:
+1. Mobile Menu Toggle - Hamburger menu with icon animation
+2. Theme Toggle - Desktop and mobile dark mode switches
+3. Notes Search - Real-time filtering with clear button
+4. Load More Notes - Pagination for large note collections
+5. Modal Triggers - Event delegation on all [data-modal-key] elements
+6. Keyboard Support - Enter/Space to open modals, Escape to close
+7. Scroll Animations - Intersection Observer for fade-in effects
+8. Backdrop Click - Closes modal when clicking outside content
+
+================================================================================
+| ACCESSIBILITY FEATURES
+================================================================================
+
+- ARIA Labels: All interactive elements have descriptive aria-label attributes
+- Role Attributes: Proper roles for buttons, dialogs, and navigation
+- Semantic HTML: <header>, <nav>, <main>, <section>, <footer> for structure
+- Keyboard Navigation: Tab order, Enter/Space for activation, Escape to close
+- Focus Management: Modal container receives focus when opened
+- Color Contrast: WCAG AA compliant throughout light and dark modes
+- Focus Visible Styles: Custom 3px outline on focused interactive elements
+- Alt Text: Icons have proper descriptions via aria-label
+
+================================================================================
+| RESPONSIVE DESIGN BREAKPOINTS
+================================================================================
+
+- Mobile (default): Single column, full-width layouts
+- Tablet (md: 768px): Two-column grids, adjusted padding, hidden desktop nav
+- Desktop (lg: 1024px): Three-column grids, full navigation, optimized spacing
+
+================================================================================
+| CUSTOMIZATION GUIDE
+================================================================================
+
+To update portfolio content:
+1. Edit the JSON data in the <script id="portfolio-data"> block
+2. Add/remove/modify modals, timeline events, courses, projects, and notes
+3. For new course weeks, add objects to the weeks[] array with content fields
+4. Icons use Lucide icon names (e.g., 'book-open', 'graduation-cap')
+5. Colors use Tailwind class names (e.g., 'primary', 'green', 'purple')
+6. Changes are instantly reflected—no rebuild required
+
+ADDING A NEW NOTE:
+{
+  "id": "unique-id",
+  "title": "Note Title",
+  "summary": "Brief description",
+  "icon": "lucide-icon-name",
+  "keywords": "searchable keywords space separated"
+}
+
+ADDING A NEW COURSE WEEK:
+{
+  "week": 1,
+  "title": "Week Title",
+  "content": {
+     "notes": "HTML content for notes tab",
+     "essay": "HTML content for essay tab",
+     "story": "HTML content for story tab",
+     "quiz": "HTML content for quiz tab",
+     "classWork": "HTML content for classWork tab"
+  }
+}
+
+================================================================================
+| BROWSER COMPATIBILITY
+================================================================================
+
+- Modern browsers with ES6 support (Chrome, Firefox, Safari, Edge)
+- CSS Grid and Flexbox for layout
+- CSS custom properties and modern CSS animations
+- Intersection Observer API for scroll animations
+- LocalStorage for theme persistence
+- History API for browser back/forward support
+
+================================================================================
+-->
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
