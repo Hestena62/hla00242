@@ -193,19 +193,23 @@ AUTHOR: Hesten's Portfolio
 
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hesten's Academic Portfolio & Journey</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/icon.jpg" type="image/x-icon">
 
     <!-- Tailwind Config & Custom Styles -->
     <script>
@@ -247,23 +251,55 @@ AUTHOR: Hesten's Portfolio
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
-        
+
         /* Hide scrollbar for clean modal content */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
 
         /* Animation Classes */
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
         .fade-in-section {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
             will-change: opacity, visibility;
         }
+
         .fade-in-section.is-visible {
             opacity: 1;
             transform: none;
@@ -273,55 +309,68 @@ AUTHOR: Hesten's Portfolio
         .modal-backdrop {
             transition: opacity 0.3s ease;
         }
+
         .modal-content {
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
         }
-        
+
         /* Clickable Cards */
         .interactive-card {
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
         }
+
         .interactive-card:active {
             transform: scale(0.98);
         }
     </style>
 </head>
+
 <body class="bg-slate-50 text-slate-800 dark:bg-dark-bg dark:text-slate-100 transition-colors duration-300">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 transition-colors duration-300">
+    <nav
+        class="fixed w-full z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-indigo-600 dark:from-primary-500 dark:to-indigo-400">
+                    <span
+                        class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-indigo-600 dark:from-primary-500 dark:to-indigo-400">
                         Hesten.
                     </span>
                 </div>
-                
+
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#about" class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
-                        <a href="#timeline" class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Timeline</a>
-                        <a href="#courses" class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Coursework</a>
-                        <a href="#projects" class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Portfolio</a>
-                        <a href="#notes" class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Notebook</a>
+                        <a href="#about"
+                            class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                        <a href="#timeline"
+                            class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Timeline</a>
+                        <a href="#courses"
+                            class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Coursework</a>
+                        <a href="#projects"
+                            class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Portfolio</a>
+                        <a href="#notes"
+                            class="hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Notebook</a>
                     </div>
                 </div>
 
                 <!-- Right Side Actions -->
                 <div class="flex items-center gap-4">
                     <!-- Theme Toggle -->
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle Dark Mode">
+                    <button id="theme-toggle"
+                        class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+                        aria-label="Toggle Dark Mode">
                         <i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
                         <i data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
                     </button>
 
                     <!-- Mobile Menu Button -->
                     <div class="-mr-2 flex md:hidden">
-                        <button id="mobile-menu-btn" class="p-2 rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800">
+                        <button id="mobile-menu-btn"
+                            class="p-2 rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800">
                             <i data-lucide="menu" class="w-6 h-6"></i>
                         </button>
                     </div>
@@ -330,46 +379,66 @@ AUTHOR: Hesten's Portfolio
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#about" class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">About</a>
-                <a href="#timeline" class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">Timeline</a>
-                <a href="#courses" class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">Coursework</a>
-                <a href="#projects" class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">Portfolio</a>
-                <a href="#notes" class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">Notebook</a>
+                <a href="#about"
+                    class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#timeline"
+                    class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">Timeline</a>
+                <a href="#courses"
+                    class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">Coursework</a>
+                <a href="#projects"
+                    class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">Portfolio</a>
+                <a href="#notes"
+                    class="block hover:bg-slate-100 dark:hover:bg-slate-800 px-3 py-2 rounded-md text-base font-medium">Notebook</a>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main class="pt-16">
-        
+
         <!-- Hero Section -->
         <section id="hero" class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
             <div class="absolute inset-0 z-0">
-                <div class="absolute inset-0 bg-gradient-to-br from-primary-50 to-indigo-100 dark:from-slate-900 dark:to-slate-800 opacity-90"></div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-primary-50 to-indigo-100 dark:from-slate-900 dark:to-slate-800 opacity-90">
+                </div>
                 <!-- Animated blob background simulation -->
-                <div class="absolute top-20 left-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
-                <div class="absolute top-20 right-20 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
-                <div class="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
+                <div
+                    class="absolute top-20 left-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob">
+                </div>
+                <div
+                    class="absolute top-20 right-20 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000">
+                </div>
+                <div
+                    class="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000">
+                </div>
             </div>
 
             <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section">
-                <div class="inline-block p-2 px-4 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 mb-6 shadow-sm">
-                    <span class="text-primary-600 dark:text-primary-400 font-medium text-sm">Welcome to my Academic Journey</span>
+                <div
+                    class="inline-block p-2 px-4 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700 mb-6 shadow-sm">
+                    <span class="text-primary-600 dark:text-primary-400 font-medium text-sm">Welcome to my Academic
+                        Journey</span>
                 </div>
                 <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white">
-                    Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-indigo-600 dark:from-primary-400 dark:to-indigo-400">Hesten</span>.
+                    Hi, I'm <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-indigo-600 dark:from-primary-400 dark:to-indigo-400">Hesten</span>.
                 </h1>
                 <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300">
-                    A dedicated student transitioning from <strong>Community College of Vermont</strong> to the <strong>University of Vermont</strong>. 
+                    A dedicated student transitioning from <strong>Community College of Vermont</strong> to the
+                    <strong>University of Vermont</strong>.
                     Explore my coursework, research projects, and digital notebook.
                 </p>
                 <div class="mt-10 flex justify-center gap-4">
-                    <button onclick="document.getElementById('courses').scrollIntoView()" class="px-8 py-3 rounded-lg bg-primary-600 hover:bg-primary-700 text-white font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <button onclick="document.getElementById('courses').scrollIntoView()"
+                        class="px-8 py-3 rounded-lg bg-primary-600 hover:bg-primary-700 text-white font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
                         View Coursework
                     </button>
-                    <button data-modal-key="contact-info" class="px-8 py-3 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-medium shadow-sm transition-all duration-300">
+                    <button data-modal-key="contact-info"
+                        class="px-8 py-3 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-medium shadow-sm transition-all duration-300">
                         Contact Me
                     </button>
                 </div>
@@ -384,10 +453,14 @@ AUTHOR: Hesten's Portfolio
                         <h2 class="text-3xl font-bold mb-6 text-slate-900 dark:text-white">From CCV to UVM</h2>
                         <div class="space-y-4 text-lg text-slate-600 dark:text-slate-300">
                             <p>
-                                My academic path has been defined by curiosity and resilience. Starting at High School, I quickly realized my passion for technology and systematic problem solving.
+                                My academic path has been defined by curiosity and resilience. Starting at High School,
+                                I quickly realized my passion for technology and systematic problem solving.
                             </p>
                             <p>
-                                At the Community College of Vermont (CCV), I built a strong foundation in Computer Science, maintaining a 3.9 GPA while working part-time. Now, as I transition to the University of Vermont (UVM), I am focused on advanced software engineering and data science.
+                                At the Community College of Vermont (CCV), I built a strong foundation in Computer
+                                Science, maintaining a 3.9 GPA while working part-time. Now, as I transition to the
+                                University of Vermont (UVM), I am focused on advanced software engineering and data
+                                science.
                             </p>
                         </div>
                         <div class="mt-8 flex flex-wrap gap-4">
@@ -400,13 +473,15 @@ AUTHOR: Hesten's Portfolio
                                 <span>Junior Standing</span>
                             </div>
                         </div>
-                        <button data-modal-key="studies-overview" class="mt-8 text-primary-600 dark:text-primary-400 font-medium hover:underline inline-flex items-center">
+                        <a href="about/index.html"
+                            class="mt-8 text-primary-600 dark:text-primary-400 font-medium hover:underline inline-flex items-center">
                             Read detailed academic philosophy <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                        </button>
+                        </a>
                     </div>
                     <div class="relative">
                         <div class="absolute inset-0 bg-primary-600 rounded-2xl transform rotate-3 opacity-10"></div>
-                        <div class="relative bg-slate-50 dark:bg-slate-800 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-xl-2">
+                        <div
+                            class="relative bg-slate-50 dark:bg-slate-800 p-8 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-xl-2">
                             <h3 class="text-xl font-bold mb-4 dark:text-white">Current Focus</h3>
                             <ul class="space-y-3">
                                 <li class="flex items-start">
@@ -433,12 +508,15 @@ AUTHOR: Hesten's Portfolio
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16 fade-in-section">
                     <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Academic Milestones</h2>
-                    <p class="mt-2 text-slate-600 dark:text-slate-400">The path I've traveled so far (Click for details)</p>
+                    <p class="mt-2 text-slate-600 dark:text-slate-400">The path I've traveled so far (Click for details)
+                    </p>
                 </div>
-                
+
                 <div class="relative" id="timeline-container">
                     <!-- Vertical Line -->
-                    <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-700 transform md:-translate-x-1/2"></div>
+                    <div
+                        class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-700 transform md:-translate-x-1/2">
+                    </div>
                     <!-- JS will inject timeline items here -->
                 </div>
             </div>
@@ -449,7 +527,8 @@ AUTHOR: Hesten's Portfolio
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16 fade-in-section">
                     <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Current Coursework</h2>
-                    <p class="mt-2 text-slate-600 dark:text-slate-400">Click on any course to view weekly assignments and notes</p>
+                    <p class="mt-2 text-slate-600 dark:text-slate-400">Click on any course to view weekly assignments
+                        and notes</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="courses-grid">
@@ -466,7 +545,8 @@ AUTHOR: Hesten's Portfolio
                         <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Featured Projects</h2>
                         <p class="mt-2 text-slate-600 dark:text-slate-400">Practical application of theory</p>
                     </div>
-                    <a href="https://github.com" target="_blank" class="mt-4 md:mt-0 inline-flex items-center text-primary-600 dark:text-primary-400 hover:underline">
+                    <a href="https://github.com" target="_blank"
+                        class="mt-4 md:mt-0 inline-flex items-center text-primary-600 dark:text-primary-400 hover:underline">
                         View GitHub Profile <i data-lucide="external-link" class="w-4 h-4 ml-1"></i>
                     </a>
                 </div>
@@ -482,14 +562,17 @@ AUTHOR: Hesten's Portfolio
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="mb-12 fade-in-section">
                     <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Digital Notebook</h2>
-                    <p class="mt-2 text-slate-600 dark:text-slate-400 mb-8">Searchable notes, snippets, and study guides. Click to read.</p>
-                    
+                    <p class="mt-2 text-slate-600 dark:text-slate-400 mb-8">Searchable notes, snippets, and study
+                        guides. Click to read.</p>
+
                     <!-- Search Bar -->
                     <div class="relative max-w-xl">
                         <i data-lucide="search" class="absolute left-4 top-3.5 w-5 h-5 text-slate-400"></i>
-                        <input type="text" id="notes-search" placeholder="Search notes (e.g., 'react', 'algorithms', 'css')..." 
+                        <input type="text" id="notes-search"
+                            placeholder="Search notes (e.g., 'react', 'algorithms', 'css')..."
                             class="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-shadow">
-                        <button id="clear-search" class="hidden absolute right-4 top-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                        <button id="clear-search"
+                            class="hidden absolute right-4 top-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
                             <i data-lucide="x" class="w-5 h-5"></i>
                         </button>
                     </div>
@@ -498,9 +581,10 @@ AUTHOR: Hesten's Portfolio
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="notes-grid">
                     <!-- JS will inject notes here -->
                 </div>
-                
+
                 <div class="mt-12 text-center hidden" id="load-more-container">
-                    <button id="load-more-btn" class="px-6 py-2 border border-slate-300 dark:border-slate-600 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors dark:text-slate-300">
+                    <button id="load-more-btn"
+                        class="px-6 py-2 border border-slate-300 dark:border-slate-600 rounded-full text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors dark:text-slate-300">
                         Load More Notes
                     </button>
                 </div>
@@ -516,9 +600,12 @@ AUTHOR: Hesten's Portfolio
                         <p class="text-sm text-slate-500 mt-1">© 2024 Hesten Academic Portfolio.</p>
                     </div>
                     <div class="flex space-x-6">
-                        <a href="#" class="hover:text-white transition-colors" aria-label="Github"><i data-lucide="github" class="w-6 h-6"></i></a>
-                        <a href="#" class="hover:text-white transition-colors" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
-                        <a href="#" class="hover:text-white transition-colors" aria-label="Email"><i data-lucide="mail" class="w-6 h-6"></i></a>
+                        <a href="#" class="hover:text-white transition-colors" aria-label="Github"><i
+                                data-lucide="github" class="w-6 h-6"></i></a>
+                        <a href="#" class="hover:text-white transition-colors" aria-label="LinkedIn"><i
+                                data-lucide="linkedin" class="w-6 h-6"></i></a>
+                        <a href="#" class="hover:text-white transition-colors" aria-label="Email"><i data-lucide="mail"
+                                class="w-6 h-6"></i></a>
                     </div>
                 </div>
             </div>
@@ -527,13 +614,18 @@ AUTHOR: Hesten's Portfolio
     </main>
 
     <!-- Global Modal Container -->
-    <div id="modal-backdrop" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4 opacity-0 pointer-events-none" aria-hidden="true">
-        <div id="modal-container" role="dialog" aria-modal="true" class="bg-white dark:bg-slate-900 w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl flex flex-col transform scale-95 opacity-0 transition-all duration-300 relative overflow-hidden border border-slate-200 dark:border-slate-700">
-            
+    <div id="modal-backdrop"
+        class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden flex items-center justify-center p-4 opacity-0 pointer-events-none"
+        aria-hidden="true">
+        <div id="modal-container" role="dialog" aria-modal="true"
+            class="bg-white dark:bg-slate-900 w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl flex flex-col transform scale-95 opacity-0 transition-all duration-300 relative overflow-hidden border border-slate-200 dark:border-slate-700">
+
             <!-- Header -->
-            <div class="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-white dark:bg-slate-900 z-10">
+            <div
+                class="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-white dark:bg-slate-900 z-10">
                 <h3 id="modal-title" class="text-xl font-bold text-slate-900 dark:text-white truncate pr-4">Title</h3>
-                <button id="modal-close" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500">
+                <button id="modal-close"
+                    class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500">
                     <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
             </div>
@@ -595,46 +687,46 @@ AUTHOR: Hesten's Portfolio
                     `
                 }
             },
-            
+
             timeline: [
-                { 
-                    id: 1, 
-                    date: 'May 2020', 
-                    title: 'High School Diploma', 
-                    description: 'Graduated with Honors. Focus on Mathematics and Physics.', 
-                    icon: 'award', 
-                    color: 'bg-indigo-500', 
+                {
+                    id: 1,
+                    date: 'May 2020',
+                    title: 'High School Diploma',
+                    description: 'Graduated with Honors. Focus on Mathematics and Physics.',
+                    icon: 'award',
+                    color: 'bg-indigo-500',
                     align: 'left',
                     details: `<p>During my high school years, I developed a strong interest in STEM fields. I was president of the Robotics club and took AP Calculus and AP Physics. This period cemented my desire to pursue engineering and computer science.</p><p class="mt-2"><strong>Key Achievements:</strong></p><ul class="list-disc pl-5"><li>National Honor Society Member</li><li>Robotics Team Captain</li><li>GPA: 3.8</li></ul>`
                 },
-                { 
-                    id: 2, 
-                    date: 'Sept 2021', 
-                    title: 'Started at CCV', 
-                    description: 'Enrolled in Computer Systems Associate degree program.', 
-                    icon: 'book-open', 
-                    color: 'bg-primary-500', 
+                {
+                    id: 2,
+                    date: 'Sept 2021',
+                    title: 'Started at CCV',
+                    description: 'Enrolled in Computer Systems Associate degree program.',
+                    icon: 'book-open',
+                    color: 'bg-primary-500',
                     align: 'right',
                     details: `<p>At the Community College of Vermont, I specialized in Computer Systems. I balanced a full course load with part-time work, developing time management skills essential for my future career.</p><p class="mt-2"><strong>Course Highlights:</strong></p><ul class="list-disc pl-5"><li>Intro to Programming (Python)</li><li>Database Management Systems</li><li>Networking Fundamentals</li></ul>`
                 },
-                { 
-                    id: 3, 
-                    date: 'May 2023', 
-                    title: 'Graduated CCV', 
-                    description: 'Associates Degree in STEM Studies. GPA: 3.9.', 
-                    icon: 'graduation-cap', 
-                    color: 'bg-green-500', 
+                {
+                    id: 3,
+                    date: 'May 2023',
+                    title: 'Graduated CCV',
+                    description: 'Associates Degree in STEM Studies. GPA: 3.9.',
+                    icon: 'graduation-cap',
+                    color: 'bg-green-500',
                     align: 'left',
                     details: `<p>I graduated Summa Cum Laude with an Associate of Science in STEM Studies. My capstone project involved creating a database system for a local non-profit library.</p><p class="mt-2"><strong>Awards:</strong></p><ul class="list-disc pl-5"><li>Dean's List (All Semesters)</li><li>STEM Excellence Award</li></ul>`
                 },
-                { 
-                    id: 4, 
-                    date: 'Sept 2024', 
-                    title: 'Transferred to UVM', 
-                    description: 'Matriculated into BS Computer Science program.', 
-                    icon: 'school', 
-                    color: 'bg-purple-500', 
-                    align: 'right', 
+                {
+                    id: 4,
+                    date: 'Sept 2024',
+                    title: 'Transferred to UVM',
+                    description: 'Matriculated into BS Computer Science program.',
+                    icon: 'school',
+                    color: 'bg-purple-500',
+                    align: 'right',
                     active: true,
                     details: `<p>I am currently a junior at the University of Vermont. The transition has been seamless thanks to the strong foundation built at CCV. I am now focusing on advanced data structures, algorithms, and software engineering principles.</p><p class="mt-2"><strong>Current Goals:</strong></p><ul class="list-disc pl-5"><li>Secure a Summer Internship</li><li>Contribute to Open Source Projects</li><li>Maintain 3.8+ GPA</li></ul>`
                 }
@@ -715,56 +807,83 @@ AUTHOR: Hesten's Portfolio
             ],
 
             projects: [
-                { 
-                    id: 'p1', 
-                    title: 'Portfolio Site', 
-                    description: 'This website! Built with vanilla JS and Tailwind to demonstrate DOM manipulation.', 
-                    icon: 'monitor', 
-                    tags: ['HTML', 'Tailwind', 'JS'], 
+                {
+                    id: 'p1',
+                    title: 'Portfolio Site',
+                    description: 'This website! Built with vanilla JS and Tailwind to demonstrate DOM manipulation.',
+                    icon: 'monitor',
+                    tags: ['HTML', 'Tailwind', 'JS'],
                     color: 'text-indigo-500',
                     details: `<p>This portfolio is a single-page application built without any heavy frameworks like React or Vue, to demonstrate mastery of the DOM APIs and JavaScript fundamentals.</p><h4 class="font-bold mt-4">Key Features</h4><ul class="list-disc pl-5 mt-2"><li>Dynamic JSON-driven content</li><li>Custom Modal System</li><li>History API integration for deep linking</li><li>Dark Mode persistence</li></ul><p class="mt-4"><a href="#" class="text-primary-600 hover:underline">View Source Code</a></p>`
                 },
-                { 
-                    id: 'p2', 
-                    title: 'Weather Dashboard', 
-                    description: 'Fetches real-time weather data from OpenWeatherMap API with city search history.', 
-                    icon: 'cloud-rain', 
-                    tags: ['API', 'Async/Await'], 
+                {
+                    id: 'p2',
+                    title: 'Weather Dashboard',
+                    description: 'Fetches real-time weather data from OpenWeatherMap API with city search history.',
+                    icon: 'cloud-rain',
+                    tags: ['API', 'Async/Await'],
                     color: 'text-sky-500',
                     details: `<p>A responsive weather dashboard that allows users to search for any city and see current conditions along with a 5-day forecast.</p><h4 class="font-bold mt-4">Technical Challenges</h4><p>Handling asynchronous fetch requests and managing API keys securely. Implemented local storage to save user's search history.</p>`
                 },
-                { 
-                    id: 'p3', 
-                    title: 'Task Manager CLI', 
-                    description: 'Python-based command line tool for managing todos with file persistence.', 
-                    icon: 'terminal', 
-                    tags: ['Python', 'File I/O'], 
+                {
+                    id: 'p3',
+                    title: 'Task Manager CLI',
+                    description: 'Python-based command line tool for managing todos with file persistence.',
+                    icon: 'terminal',
+                    tags: ['Python', 'File I/O'],
                     color: 'text-yellow-500',
                     details: `<p>A productivity tool for the terminal. Supports adding, completing, and deleting tasks. Stores data in a JSON file for persistence.</p><h4 class="font-bold mt-4">Learnings</h4><p>Improved understanding of Python's <code>argparse</code> library and file handling/exception safety.</p>`
                 },
-                { 
-                    id: 'p4', 
-                    title: 'CCV Library System', 
-                    description: 'Database design project modeling a library lending system using SQL.', 
-                    icon: 'database', 
-                    tags: ['SQL', 'Database'], 
+                {
+                    id: 'p4',
+                    title: 'CCV Library System',
+                    description: 'Database design project modeling a library lending system using SQL.',
+                    icon: 'database',
+                    tags: ['SQL', 'Database'],
                     color: 'text-green-500',
                     details: `<p>A complete schema design for a library, including tables for Books, Members, Loans, and Fines. Included normalization up to 3NF.</p><h4 class="font-bold mt-4">Scope</h4><p>Wrote complex SQL queries to generate reports on overdue books and popular genres.</p>`
+                },
+                {
+                    id: 'p5',
+                    title: 'Economic Analysis: The Gilded Age',
+                    description: 'A research paper exploring the rapid social and economic shifts in 19th-century American cities.',
+                    icon: 'file-text',
+                    tags: ['History', 'Research'],
+                    color: 'text-indigo-500',
+                    details: `<p>A comprehensive research paper analyzing the economic stratification and industrial growth of the late 19th century.</p><p class="mt-4"><a href="#" class="text-primary-600 hover:underline">Read Paper</a></p>`
+                },
+                {
+                    id: 'p6',
+                    title: 'Bill of Rights Lesson Plan',
+                    description: 'A detailed, universally designed lesson plan for 10th-grade history.',
+                    icon: 'book-open-check',
+                    tags: ['Education', 'UDL'],
+                    color: 'text-orange-500',
+                    details: `<p>Includes differentiated activities and choice assessments designed to accommodate diverse learning styles. Focuses on the Bill of Rights and civil liberties.</p><p class="mt-4"><a href="#" class="text-primary-600 hover:underline">View Lesson Plan</a></p>`
+                },
+                {
+                    id: 'p7',
+                    title: 'Cultural Anthropology',
+                    description: 'A slide deck analyzing the cultural significance of rituals and symbols.',
+                    icon: 'presentation',
+                    tags: ['Anthropology', 'Research'],
+                    color: 'text-emerald-500',
+                    details: `<p>An analysis of modern rituals and their roots in ancient cultural practices. Presented as a capstone project.</p><p class="mt-4"><a href="#" class="text-primary-600 hover:underline">See Presentation</a></p>`
                 }
             ],
 
             notes: [
-                { 
-                    id: 1, 
-                    title: 'CSS Grid vs Flexbox', 
-                    summary: 'Grid is 2D, Flex is 1D. Use Grid for layout, Flex for alignment.', 
+                {
+                    id: 1,
+                    title: 'CSS Grid vs Flexbox',
+                    summary: 'Grid is 2D, Flex is 1D. Use Grid for layout, Flex for alignment.',
                     keywords: 'css layout frontend',
                     fullContent: `<p><strong>Flexbox</strong> is designed for one-dimensional layouts (row or column). It excels at distributing space between items and aligning them.</p><p><strong>CSS Grid</strong> is designed for two-dimensional layouts (rows AND columns). It is better for defining the overall layout structure of a page.</p><h3>When to use which?</h3><ul><li>Use Flexbox for navigation bars, aligning buttons, or centering elements.</li><li>Use Grid for the main page layout, photo galleries, or complex card grids.</li></ul>`
                 },
-                { 
-                    id: 2, 
-                    title: 'JavaScript Array Methods', 
-                    summary: 'Map, Filter, Reduce cheat sheet with examples.', 
+                {
+                    id: 2,
+                    title: 'JavaScript Array Methods',
+                    summary: 'Map, Filter, Reduce cheat sheet with examples.',
                     keywords: 'javascript js coding',
                     fullContent: `<p>A quick reference for modern JS array methods:</p><pre class="bg-slate-100 p-2 rounded mt-2"><code>// Map: Transform elements
 const doubled = arr.map(x => x * 2);
@@ -775,50 +894,62 @@ const evens = arr.filter(x => x % 2 === 0);
 // Reduce: Aggregate elements
 const sum = arr.reduce((acc, curr) => acc + curr, 0);</code></pre>`
                 },
-                { 
-                    id: 3, 
-                    title: 'Git Workflow', 
-                    summary: 'Standard commands: clone, branch, commit, push, merge.', 
+                {
+                    id: 3,
+                    title: 'Git Workflow',
+                    summary: 'Standard commands: clone, branch, commit, push, merge.',
                     keywords: 'git version control',
                     fullContent: `<p><strong>1. Start</strong>: <code>git checkout -b feature-name</code></p><p><strong>2. Work</strong>: Edit files...</p><p><strong>3. Save</strong>: <code>git add .</code> then <code>git commit -m "Message"</code></p><p><strong>4. Share</strong>: <code>git push origin feature-name</code></p><p><strong>5. Merge</strong>: Create a Pull Request.</p>`
                 },
-                { 
-                    id: 4, 
-                    title: 'Big O Notation', 
-                    summary: 'Time complexity basics. O(1) vs O(n) vs O(log n).', 
+                {
+                    id: 4,
+                    title: 'Big O Notation',
+                    summary: 'Time complexity basics. O(1) vs O(n) vs O(log n).',
                     keywords: 'algorithms cs theory',
                     fullContent: `<p>Big O describes the performance of an algorithm as input size grows.</p><ul><li><strong>O(1)</strong>: Constant time (Array access)</li><li><strong>O(log n)</strong>: Logarithmic (Binary Search)</li><li><strong>O(n)</strong>: Linear (Simple loop)</li><li><strong>O(n^2)</strong>: Quadratic (Nested loops)</li></ul>`
                 },
-                { 
-                    id: 5, 
-                    title: 'Accessibility (a11y)', 
-                    summary: 'Semantic HTML, ARIA labels, and color contrast ratios.', 
+                {
+                    id: 5,
+                    title: 'Accessibility (a11y)',
+                    summary: 'Semantic HTML, ARIA labels, and color contrast ratios.',
                     keywords: 'accessibility html design',
                     fullContent: `<p>Web accessibility ensures people with disabilities can use your site.</p><h4>Checklist:</h4><ul><li>Use semantic tags (nav, main, footer)</li><li>Alt text for images</li><li>Sufficient color contrast</li><li>Keyboard navigability</li></ul>`
                 },
-                { 
-                    id: 6, 
-                    title: 'Python List Comprehension', 
-                    summary: 'Writing cleaner loops in a single line of code.', 
+                {
+                    id: 6,
+                    title: 'Python List Comprehension',
+                    summary: 'Writing cleaner loops in a single line of code.',
                     keywords: 'python coding syntax',
                     fullContent: `<p>Pythonic way to create lists.</p><p>Instead of:</p><pre class="bg-slate-100 p-2 rounded"><code>squares = []
 for x in range(10):
     squares.append(x**2)</code></pre><p>Use:</p><pre class="bg-slate-100 p-2 rounded"><code>squares = [x**2 for x in range(10)]</code></pre>`
                 },
-                { 
-                    id: 7, 
-                    title: 'REST API Principles', 
-                    summary: 'Statelessness, Client-Server, Cacheability.', 
+                {
+                    id: 7,
+                    title: 'REST API Principles',
+                    summary: 'Statelessness, Client-Server, Cacheability.',
                     keywords: 'web api backend',
                     fullContent: `<p><strong>Stateless:</strong> Server doesn't store client context between requests.</p><p><strong>Resource-Based:</strong> URLs represent resources (nouns), HTTP methods represent actions (verbs).</p><p><strong>Standard Methods:</strong> GET (Read), POST (Create), PUT (Update), DELETE (Remove).</p>`
                 },
-                { 
-                    id: 8, 
-                    title: 'React Hooks Intro', 
-                    summary: 'useState and useEffect basics.', 
+                {
+                    id: 8,
+                    title: 'React Hooks Intro',
+                    summary: 'useState and useEffect basics.',
                     keywords: 'react javascript frontend',
                     fullContent: `<p>Hooks allow functional components to have state.</p><p><code>useState</code>: Returns a stateful value and a function to update it.</p><p><code>useEffect</code>: Performs side effects (data fetching, subscriptions) in functional components.</p>`
                 },
+                {
+                    id: 9,
+                    title: 'Essay: Dimensions of Self and Society',
+                    summary: 'Analysis of Lawrence Hill\'s "So, What are You, Anyway?" and racial identity.',
+                    keywords: 'essay society identity',
+                    fullContent: `<p class="italic text-sm text-slate-500 mb-4">Date: 9/13/25 | Class: Dimensions of Self and Society</p>
+                    <p>Lawrence Hill's story, "So, What are You, Anyway?", serves as a poignant allegory for the experiences of a mixed-race child. The story stood out to me from what I normally read, but my prior knowledge of the time and context of Lawrence Hill's childhood made it less jarring. I believe Hill's purpose was to convey a personal experience, either of his own or that of someone close to him, using the story to illustrate what daily life was like for him as a child.</p>
+                    <p class="mt-4">This essay will argue that using character interactions and a realistic setting, Hill effectively explores how racial prejudice shapes a person's identity and sense of self. Furthermore, by understanding Hill's background as the son of civil rights activists, we can see how his real-life experiences with race and identity directly influence his writing.</p>
+                    <p class="mt-4">The story's power lies in its ability to evoke a strong personal reaction, even before the author's full intent becomes clear. The narrative ultimately reveals itself to be about an event from a long time ago, involving "cruel people with closed minds filled with hatred". This theme resonates deeply with me because I was raised not to focus on a person's race or skin color, but rather to see them for who they are using their character and actions.</p>
+                    <p class="mt-4">My mother taught me this lesson through her own actions. She once told me a story about my younger brother, who has a dark-skinned friend in grade school. One day, my brother saw a boy riding his bike and thought it was his friend, but it wasn't. My mom was about to say it wasn't him because the boy on the bike was white, but she stopped herself. Instead, she simply said, "I don't think that is your friend". When my brother asked why, she replied, "I just don't think he is". This interaction demonstrates her commitment to raising us to see a person for who they are, not their skin color. This personal anecdote, like the story's theme, reinforces the idea that racism and hatred are learned behaviors, not innate qualities.</p>
+                    <p class="mt-4">In conclusion, Lawrence Hill's "So, What are You, Anyway?" is an impactful story that leverages personal experience to illuminate the complexities of racial identity. Drawing on my existing knowledge of the time, I found the story's unusual nature to be thought-provoking rather than bothersome. The story, and Hill's work, underscores a simple yet vital truth: racism is never acceptable, and it must be addressed and eliminated.</p>`
+                }
             ]
         };
     </script>
@@ -872,7 +1003,7 @@ for x in range(10):
                     const alignClass = isLeft ? 'md:flex-row-reverse' : '';
                     const textClass = isLeft ? 'md:text-right' : 'md:text-left';
                     const offsetClass = isLeft ? 'md:pr-12' : 'md:pl-12';
-                    
+
                     const html = `
                         <div class="flex items-center justify-between md:justify-center w-full mb-8 ${alignClass} fade-in-section">
                             <div class="hidden md:block w-5/12"></div>
@@ -950,11 +1081,11 @@ for x in range(10):
                 const container = document.getElementById('notes-grid');
                 container.innerHTML = '';
                 const loadMoreBtn = document.getElementById('load-more-container');
-                
+
                 let filtered = portfolioData.notes.filter(note => {
                     const search = filterText.toLowerCase();
-                    return note.title.toLowerCase().includes(search) || 
-                           note.keywords.toLowerCase().includes(search);
+                    return note.title.toLowerCase().includes(search) ||
+                        note.keywords.toLowerCase().includes(search);
                 });
 
                 if (filtered.length === 0) {
@@ -964,7 +1095,7 @@ for x in range(10):
                 }
 
                 const displaySet = filtered.slice(0, state.notesVisibleCount);
-                
+
                 displaySet.forEach(note => {
                     const html = `
                         <div data-modal-key="note-${note.id}" class="interactive-card bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary-300 dark:hover:border-primary-700 shadow-sm hover:shadow-md transition-all fade-in-section group">
@@ -1085,12 +1216,12 @@ for x in range(10):
                 else if (key.startsWith('course-')) {
                     const courseId = key.substring(7); // 'course-cis-2230' -> 'cis-2230'
                     const item = portfolioData.courses.find(c => c.id === courseId);
-                    
+
                     if (item) {
                         title = item.title;
                         // Construct tabs content
                         const tabsContent = {};
-                        
+
                         // Tab 1: Overview
                         tabsContent['Overview'] = `
                             <p class="text-lg">${item.description}</p>
@@ -1113,7 +1244,7 @@ for x in range(10):
                             if (w.content.notes) weekHtml += `<div class="mb-6"><h5>Class Notes</h5>${w.content.notes}</div>`;
                             if (w.content.assignment) weekHtml += `<div class="mb-6"><h5>Assignment</h5>${w.content.assignment}</div>`;
                             if (w.content.quiz) weekHtml += `<div class="mb-6"><h5>Quiz Results</h5>${w.content.quiz}</div>`;
-                            
+
                             tabsContent[`Week ${w.week}`] = weekHtml;
                         });
 
@@ -1135,12 +1266,12 @@ for x in range(10):
                     this.container.classList.remove('scale-95', 'opacity-0');
                     this.container.classList.add('scale-100', 'opacity-100');
                 }, 10);
-                
+
                 document.body.style.overflow = 'hidden';
                 state.isModalOpen = true;
 
                 if (!isHistoryNav) {
-                    try { history.pushState({ modal: key }, '', `#${key}`); } catch (e) {}
+                    try { history.pushState({ modal: key }, '', `#${key}`); } catch (e) { }
                 }
 
                 this.setupTabs();
@@ -1160,8 +1291,8 @@ for x in range(10):
                 state.isModalOpen = false;
 
                 if (!isHistoryNav && window.location.hash) {
-                    try { history.pushState(null, '', window.location.pathname); } 
-                    catch (e) { try { window.location.hash = ''; } catch (e2) {} }
+                    try { history.pushState(null, '', window.location.pathname); }
+                    catch (e) { try { window.location.hash = ''; } catch (e2) { } }
                 }
             },
 
@@ -1233,13 +1364,13 @@ for x in range(10):
             // Search Logic
             const searchInput = document.getElementById('notes-search');
             const clearBtn = document.getElementById('clear-search');
-            
+
             searchInput.addEventListener('input', (e) => {
                 render.notes(e.target.value);
-                if(e.target.value) clearBtn.classList.remove('hidden');
+                if (e.target.value) clearBtn.classList.remove('hidden');
                 else clearBtn.classList.add('hidden');
             });
-            
+
             clearBtn.addEventListener('click', () => {
                 searchInput.value = '';
                 render.notes();
@@ -1289,4 +1420,5 @@ for x in range(10):
 
     </script>
 </body>
+
 </html>
